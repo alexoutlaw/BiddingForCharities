@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bidding For Charities</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="logo">Bidding For Charities</string>
+    <string name="background">Background Image</string>
+
+    <string name="type_button">Types</string>
+    <string name="fact_button">Facts About Sharks</string>
+    <string name="attack_button">Recent Shark Attacks</string>
+    <string name="search_button">Search Your Beach</string>
+    <string name="howto_button">How To Avoid Shark Attacks</string>
+    <string name="save_button">Save The Shark</string>
+    <string name="wallpaper_button">Wallpapers</string>
+    <string name="puzzle_button">Puzzle</string>
+
+    <string name="country_button">Search By Country</string>
+    <string name="area_button">Search By Area</string>
+    <string name="location_button">Search By Location</string>
+    <string name="searchTextHint">Country Name</string>
+    <string name="search_instruct_country">Enter or Select a Country</string>
+    <string name="search_instruct_area">Enter or Select an Area</string>
+    <string name="search_instruct_location">Enter or Select a Location</string>
+    <string name="search_error">Problem retreiving information</string>
+    <string name="search_submit">Search Now</string>
+
+</resources>
