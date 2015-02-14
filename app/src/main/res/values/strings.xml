@@ -2,15 +2,16 @@
 <resources>
 
     <string name="app_name">Bidding For Charities</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-    <string name="banner_text">Bidding For Charities</string>
-    <string name="background">Background Image</string>
-
+    <string name="home_text">HOME</string>
     <string name="login_text">LOGIN</string>
     <string name="register_text">SIGN UP</string>
     <string name="remember_me">Remember Me</string>
 
+    <string name="login_uname">Email address Or Username</string>
+    <string name="login_pass">Password</string>
+
+    <string name="background">Background Image</string>
     <string name="generic_error">Problem retrieving data</string>
 </resources>
