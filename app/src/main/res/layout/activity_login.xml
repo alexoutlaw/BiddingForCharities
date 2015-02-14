@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/american-flags"
+    android:background="@drawable/american_flags"
     android:orientation="vertical" >
 
     <ImageView
@@ -10,10 +10,21 @@
         android:layout_height="fill_parent"
         android:scaleType="centerCrop"
         android:contentDescription="@string/background"
-        android:src="@drawable/american-flags" />
+        android:src="@drawable/american_flags" />
+
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:gravity="center"
+        android:background="@color/grey_trans"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:text="@string/banner_text" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
@@ -22,91 +33,46 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/logo"
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@color/black_trans"
+            android:text="@string/register_text" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@color/black_trans"
+            android:text="@string/login_text" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10px">
+
+        <CheckBox
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/logo"
-            android:scaleType="fitXY"
-            android:src="@drawable/logo" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"/>
 
-        <Button
-            android:id="@+id/buttonType"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/blue1"
-            android:text="@string/type_button" />
-
-        <Button
-            android:id="@+id/buttonFacts"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/blue2"
-            android:text="@string/fact_button" />
-
-        <Button
-            android:id="@+id/buttonAttacks"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/blue3"
-            android:text="@string/attack_button" />
-
-        <ImageView
-            android:id="@+id/buttonSearch"
+        <TextView
+            android:text="@string/remember_me"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            android:layout_weight="3"
-            android:contentDescription="@string/search_button"
-            android:src="@drawable/searchbutton" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/black"/>
 
-        <Button
-            android:id="@+id/buttonHowTo"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/blue4"
-            android:text="@string/howto_button" />
-
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/blue5"
-            android:text="@string/save_button" />
-
-        <Button
-            android:id="@+id/buttonWallpaper"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/blue6"
-            android:text="@string/wallpaper_button" />
-
-        <Button
-            android:id="@+id/buttonPuzzle"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/blue7"
-            android:text="@string/puzzle_button" />
+        </LinearLayout>
 
     </LinearLayout>
 

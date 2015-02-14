@@ -1,0 +1,26 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_trans">#cc000000</color>
+    <color name="white_trans">#ccffffff</color>
+    <color name="grey">#999999</color>
+    <color name="dark_grey">#222222</color>
+    <color name="grey_trans">#cc222222</color>
+    <color name="red">#FF0000</color>
+    <color name="gold">#ffcc00</color>
+    <color name="gold_trans">#ccffcc00</color>
+    <color name="cyan">#00ccff</color>
+    <color name="blue_trans">#cc66ffff</color>
+
+    <color name="blue_background">#5CADFF</color>
+    <color name="blue1">#cc0099CC</color>
+    <color name="blue2">#cc0099FF</color>
+    <color name="blue3">#cc006699</color>
+    <color name="blue4">#cc0066CC</color>
+    <color name="blue6">#cc003399</color>
+    <color name="blue5">#cc0066FF</color>
+    <color name="blue7">#cc3333FF</color>
+
+</resources>
