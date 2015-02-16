@@ -1,4 +1,4 @@
-package com.vie.biddingforcharities;
+package com.vie.biddingforcharities.ui;
 
 public class NavDrawerItem {
 

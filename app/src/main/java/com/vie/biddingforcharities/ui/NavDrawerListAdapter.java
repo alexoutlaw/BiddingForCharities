@@ -1,4 +1,4 @@
-package com.vie.biddingforcharities;
+package com.vie.biddingforcharities.ui;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.vie.biddingforcharities.R;
 
 public class NavDrawerListAdapter extends BaseAdapter {
 

@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.vie.biddingforcharities.netcode.GetInfoTask;
+
+import org.json.JSONObject;
 
 public class AuctionFormActivity extends Activity {
     DrawerLayout NavLayout;
@@ -45,5 +50,25 @@ public class AuctionFormActivity extends Activity {
                 finish();
             }
         });
+    }
+
+    public void onTaskFinish(GetInfoTask task, String data) {
+        try {
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+            int UserId = json.getInt("UserId");
+            if(UserId > 0) {
+                //Navigate to Home
+                startActivity(new Intent(AuctionFormActivity.this, HomeActivity.class));
+                finish();
+            }
+            else {
+                Toast.makeText(this, "Invalid Login", Toast.LENGTH_LONG);
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Problem retrieving data", Toast.LENGTH_LONG).show();
+        }
     }
 }

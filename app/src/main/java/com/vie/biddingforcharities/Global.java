@@ -1,4 +1,5 @@
 package com.vie.biddingforcharities;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -6,8 +7,11 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.vie.biddingforcharities.ui.FontsOverride;
+import com.vie.biddingforcharities.ui.NavDrawerItem;
+import com.vie.biddingforcharities.ui.NavDrawerListAdapter;
 
 import java.util.ArrayList;
 
