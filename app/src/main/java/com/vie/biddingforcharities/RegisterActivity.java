@@ -2,19 +2,19 @@ package com.vie.biddingforcharities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class RegisterActivity extends Activity {
     Button LoginButton, RegisterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
 
         LoginButton = (Button) findViewById(R.id.login_button);
         RegisterButton = (Button) findViewById(R.id.register_button);
@@ -22,8 +22,7 @@ public class MainActivity extends Activity {
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Navigate to Login
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 finish();
             }
         });
@@ -31,9 +30,15 @@ public class MainActivity extends Activity {
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Navigate to Registration
-                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-                finish();
+                String password = ((EditText) findViewById(R.id.password_input)).getText().toString();
+                String confirm = ((EditText) findViewById(R.id.confirm_input)).getText().toString();
+
+                if(password == confirm) {
+                    Toast.makeText(RegisterActivity.this, "Passwords Do Not Match", Toast.LENGTH_LONG).show();
+                } else {
+                    startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+                    finish();
+                }
             }
         });
     }

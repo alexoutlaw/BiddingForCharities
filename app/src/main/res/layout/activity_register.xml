@@ -47,14 +47,14 @@
                         layout="@layout/vertical_seperator" />
 
                     <Button
-                        android:id="@+id/register_button"
+                        android:id="@+id/login_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:text="@string/register_text"
+                        android:text="@string/login_text"
                         style="@style/CustomTitleTextStyle"/>
 
-                    </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -68,59 +68,80 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:text="@string/login_uname"
+                    android:text="@string/register_email"
                     style="@style/FormLabelStyle"/>
 
                 <EditText
-                    android:id="@+id/uname_input"
+                    android:id="@+id/email_input"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:background="@drawable/glass_input" />
 
                 <TextView
-                    android:text="@string/login_pass"
+                    android:text="@string/register_pass"
                     style="@style/FormLabelStyle"/>
 
                 <EditText
-                    android:id="@+id/pass_input"
+                    android:id="@+id/password_input"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/glass_input" />
+
+                <TextView
+                    android:text="@string/register_confirm"
+                    style="@style/FormLabelStyle"/>
+
+                <EditText
+                    android:id="@+id/confirm_input"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/glass_input" />
+
+                <TextView
+                    android:text="@string/register_first"
+                    style="@style/FormLabelStyle"/>
+
+                <EditText
+                    android:id="@+id/first_input"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/glass_input" />
+
+                <TextView
+                    android:text="@string/register_last"
+                    style="@style/FormLabelStyle"/>
+
+                <EditText
+                    android:id="@+id/last_input"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/glass_input" />
+
+                <TextView
+                    android:text="@string/register_code"
+                    style="@style/FormLabelStyle"/>
+
+                <EditText
+                    android:id="@+id/code_input"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:layout_marginBottom="20dp"
-                    android:password="true"
                     android:background="@drawable/glass_input" />
 
                 <Button
-                    android:id="@+id/login_button"
+                    android:id="@+id/register_button"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:padding="10dp"
                     android:background="@drawable/glass_button"
-                    android:text="@string/login_text" />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="10px">
-
-                    <CheckBox
-                        android:id="@+id/remember_me_select"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/remember_me"/>
-
-                </LinearLayout>
+                    android:text="@string/register_text" />
 
             </LinearLayout>
 

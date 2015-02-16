@@ -25,12 +25,11 @@
                 android:id="@+id/banner"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:padding="25dp"
+                android:padding="15dp"
                 android:gravity="center"
                 android:background="@drawable/glass_button"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                android:text="@string/app_name" />
+                android:text="@string/app_name"
+                style="@style/CustomTitleTextStyle"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -58,28 +57,6 @@
                     android:padding="10dp"
                     android:background="@drawable/glass_button"
                     android:text="@string/login_text" />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="10px">
-
-                    <CheckBox
-                        android:id="@+id/remember_me_select"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/remember_me"/>
-
-                </LinearLayout>
 
             </LinearLayout>
 

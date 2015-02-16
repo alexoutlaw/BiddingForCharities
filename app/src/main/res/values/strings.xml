@@ -4,13 +4,52 @@
     <string name="app_name">Bidding For Charities</string>
     <string name="action_settings">Settings</string>
 
-    <string name="home_text">HOME</string>
-    <string name="login_text">LOGIN</string>
-    <string name="register_text">SIGN UP</string>
+    <string name="home_text">Home</string>
+    <string name="login_text">Login</string>
+    <string name="register_text">Sign Up</string>
     <string name="remember_me">Remember Me</string>
 
     <string name="login_uname">Email address Or Username</string>
     <string name="login_pass">Password</string>
+    <string name="login_forgot">forgot my password</string>
+
+    <string name="register_email">Email Address</string>
+    <string name="register_pass">Password</string>
+    <string name="register_confirm">Confirm Password</string>
+    <string name="register_first">First Name</string>
+    <string name="register_last">Last Name</string>
+    <string name="register_code">Enter security code</string>
+
+    <string-array name="nav_menu_items">
+        <item name="nav_account">My Info</item>
+        <item name="nav_watchlist">My Watchlist</item>
+        <item name="nav_bids">My Bids</item>
+        <item name="nav_auctions">My Auctions</item>
+        <item name="nav_create">Create an Auction</item>
+        <item name="nav_search">Search Auctions</item>
+        <item name="nav_request">Request Charity</item>
+    </string-array>
+
+    <string-array name="nav_menu_icons">
+        <item>@drawable/ic_action_user</item>
+        <item>@drawable/ic_visibility_white_48dp</item>
+        <item>@drawable/ic_shopping_cart_white_48dp</item>
+        <item>@drawable/ic_description_white_48dp</item>
+        <item>@drawable/ic_note_add_white_48dp</item>
+        <item>@drawable/ic_search_white_48dp</item>
+        <item>@drawable/ic_action_mail</item>
+    </string-array>
+
+    <string name="desc_list_item_icon">Item Icon</string>
+
+    <string name="home_items_to_checkout_negative">There are no items to be checked out.</string>
+    <string name="home_items_to_checkout_positive">You have items to be checked out!</string>
+    <string name="home_invoice_to_pay_negative">You have no unpaid invoices.</string>
+    <string name="home_invoice_to_pay_positive">You have unpaid invoices!</string>
+    <string name="home_messages_to_read_negative">You have no unread messages.</string>
+    <string name="home_messages_to_read_positive">You have unread messages!</string>
+    <string name="home_bidding_on_items_negative">You have no active bids.</string>
+    <string name="home_bidding_on_items_positive">You have active bids!</string>
 
     <string name="background">Background Image</string>
     <string name="generic_error">Problem retrieving data</string>
