@@ -81,32 +81,33 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
 
     @Override
     protected void onPostExecute(String data) {
-        if(!(this.isCancelled())){
+        if(!(this.isCancelled())) {
+            data = data.substring(data.indexOf("{"));
             //Tell parent
             switch(type){
                 case checkLogin:
-                    ((LoginActivity) parent).onTaskFinish(this, data);
+                    ((LoginActivity) parent).onTaskFinish(data);
                     break;
                 case registerUser:
-                    ((RegisterActivity) parent).onTaskFinish(this, data);
+                    ((RegisterActivity) parent).onTaskFinish(data);
                     break;
                 case getUserBids:
-                    ((BidListActivity) parent).onTaskFinish(this, data);
+                    ((BidListActivity) parent).onTaskFinish(data);
                     break;
                 case getUserWatchList:
-                    ((WatchListActivity) parent).onTaskFinish(this, data);
+                    ((WatchListActivity) parent).onTaskFinish(data);
                     break;
                 case getUserInfo:
-                    ((AccountActivity) parent).onTaskFinish(this, data);
+                    ((AccountActivity) parent).onTaskFinish(data);
                     break;
                 case updateAuction:
-                    ((AuctionFormActivity) parent).onTaskFinish(this, data);
+                    ((AuctionFormActivity) parent).onTaskFinish(data);
                     break;
                 case searchAuctions:
-                    ((AuctionSearchActivity) parent).onTaskFinish(this, data);
+                    ((AuctionSearchActivity) parent).onTaskFinish(data);
                     break;
                 case requestCharity:
-                    ((CharityRequestActivity) parent).onTaskFinish(this, data);
+                    ((CharityRequestActivity) parent).onTaskFinish(data);
                     break;
                 default:
                     break;

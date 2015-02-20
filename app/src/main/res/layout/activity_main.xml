@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:gravity="center"
-                android:background="@drawable/glass_button"
+                android:background="@color/glass_background"
                 android:text="@string/app_name"
                 style="@style/CustomTitleTextStyle"/>
 

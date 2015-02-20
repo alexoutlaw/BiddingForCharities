@@ -31,7 +31,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:background="@drawable/glass_button"
+                    android:background="@color/glass_background"
                     android:paddingRight="15dp"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp">
@@ -80,13 +80,196 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
                     android:layout_margin="10dp"
-                    android:gravity="center"
+                    android:padding="10dp"
+                    android:gravity="left"
+                    android:background="@drawable/glass_button"
                     android:orientation="vertical" >
 
-                    <TextView
+                    <ImageView
+                        android:id="@+id/item_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Account Item Activity"/>
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:layout_gravity="center"
+                        android:src="@drawable/logo"/>
+
+                    <include
+                        layout="@layout/horizontal_seperator" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="@string/item_seller_label"/>
+
+                        <TextView
+                            android:id="@+id/seller_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/item_seller_default"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/item_description"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="@string/item_description_default"/>
+
+                    <include
+                        layout="@layout/horizontal_seperator" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="@string/item_time_label"/>
+
+                        <TextView
+                            android:id="@+id/remaining_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/item_time_default"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="@string/item_endtime_label"/>
+
+                        <TextView
+                            android:id="@+id/end_timestamp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/item_endtime_default"/>
+
+                    </LinearLayout>
+
+                    <include
+                        layout="@layout/horizontal_seperator" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="@string/item_bid_label"/>
+
+                        <TextView
+                            android:id="@+id/current_bid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/item_bid_default"/>
+
+                        <TextView
+                            android:id="@+id/total_bids"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="@string/item_totalbids_default"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/place_bid_button"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:padding="10dp"
+                        android:background="@drawable/highlighted_glass_button"
+                        android:text="@string/item_placebid_button"/>
+
+                    <include
+                        layout="@layout/horizontal_seperator" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="@string/item_shipping_label"/>
+
+                        <TextView
+                            android:id="@+id/shipping_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/item_shipping_default"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/add_watchlist_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/glass_button"
+                            android:text="@string/item_watchlist_button"/>
+
+                        <Button
+                            android:id="@+id/share_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/glass_button"
+                            android:text="@string/item_share_button"/>
+
+                        <Button
+                            android:id="@+id/contact_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/glass_button"
+                            android:text="@string/item_contact_button"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

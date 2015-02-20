@@ -15,6 +15,8 @@ import com.vie.biddingforcharities.netcode.GetInfoTask;
 
 import org.json.JSONObject;
 
+import java.util.UUID;
+
 public class LoginActivity extends Activity {
     public static final String PREFS_NAME = "General_Prefs";
 
@@ -70,16 +72,28 @@ public class LoginActivity extends Activity {
         });
     }
 
-    public void onTaskFinish(GetInfoTask task, String data) {
+    public void onTaskFinish(String data) {
         try {
             //Deserialize
             JSONObject json = new JSONObject(data);
-            int UserId = json.getInt("UserId");
-            if(UserId > 0) {
+            int loggedIn = json.getInt("login");
+            if(loggedIn > 0) {
+                //Store User
+                //TODO: save in application
+                String user_email = json.getString("Email");
+                int user_id = Integer.getInteger(json.getString("UserId"));
+                UUID user_guid = UUID.fromString(json.getString("UserGuid"));
+                int user_type = Integer.getInteger(json.getString("UserType"));
+                int user_name_id = Integer.getInteger(json.getString("UserNameId"));
+                String user_name = json.getString("UserName");
+                int user_address_id = Integer.getInteger(json.getString("AddressId"));
+                boolean user_has_invoice = Boolean.getBoolean(json.getString("HasSellerInvoiceDefaults"));
+
+
+
                 String uname = UserNameInput.getText().toString();
                 String pass = PasswordInput.getText().toString();
                 boolean remember = RememberMeSelect.isChecked();
-
                 if(remember) {
                     //Save choice
                     SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -89,8 +103,6 @@ public class LoginActivity extends Activity {
                     editor.putBoolean("RememberMeSelect", remember);
                     editor.commit();
                 }
-
-                //TODO: save user vars
 
                 //Navigate to Home
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));

@@ -16,5 +16,6 @@
     <color name="glass_border">#22222222</color>
     <color name="glass_textfield">#44888888</color>
     <color name="tinted_glass">#44ff0000</color>
+    <color name="highlighted_glass">#882cc340</color>
 
 </resources>

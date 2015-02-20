@@ -66,7 +66,7 @@ public class RegisterActivity extends Activity {
         });
     }
 
-    public void onTaskFinish(GetInfoTask task, String data) {
+    public void onTaskFinish(String data) {
         try {
             JSONObject json = new JSONObject(data);
             int error = json.getInt("signup_error");

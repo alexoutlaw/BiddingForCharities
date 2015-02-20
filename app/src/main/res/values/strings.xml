@@ -51,6 +51,23 @@
     <string name="home_bidding_on_items_negative">You have no active bids.</string>
     <string name="home_bidding_on_items_positive">You have active bids!</string>
 
+    <string name="item_seller_label">Seller:\u0020</string>
+    <string name="item_seller_default">seler_name</string>
+    <string name="item_description_default">item_description</string>
+    <string name="item_time_label">Time Left:\u0020</string>
+    <string name="item_time_default">remaining_time</string>
+    <string name="item_endtime_label">\@\u0020</string>
+    <string name="item_endtime_default">end_timestamp</string>
+    <string name="item_bid_label">Current Bid:\u0020</string>
+    <string name="item_bid_default">current_bid</string>
+    <string name="item_totalbids_default">total_bids</string>
+    <string name="item_placebid_button">Place Bid</string>
+    <string name="item_shipping_label">Shipping:\u0020</string>
+    <string name="item_shipping_default">shipping_price</string>
+    <string name="item_watchlist_button">Add to Watchlist</string>
+    <string name="item_share_button">Email a Friend</string>
+    <string name="item_contact_button">Contact Seller</string>
+
     <string name="background">Background Image</string>
     <string name="generic_error">Problem retrieving data</string>
 </resources>
