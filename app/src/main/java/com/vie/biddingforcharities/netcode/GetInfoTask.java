@@ -17,20 +17,24 @@ import org.apache.http.params.HttpParams;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.vie.biddingforcharities.AccountActivity;
 import com.vie.biddingforcharities.AuctionFormActivity;
 import com.vie.biddingforcharities.AuctionSearchActivity;
 import com.vie.biddingforcharities.BidListActivity;
 import com.vie.biddingforcharities.CharityRequestActivity;
+import com.vie.biddingforcharities.HomeActivity;
 import com.vie.biddingforcharities.LoginActivity;
 import com.vie.biddingforcharities.RegisterActivity;
 import com.vie.biddingforcharities.WatchListActivity;
 
 public class GetInfoTask extends AsyncTask<String, Void, String>{
+    private static final String BASE_URL = "http://www.biddingforcharities.com/mobile/";
     public enum SourceType {
         checkLogin,
         registerUser,
+        getWelcome,
         getUserBids,
         getUserWatchList,
         getUserInfo,
@@ -82,7 +86,13 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
     @Override
     protected void onPostExecute(String data) {
         if(!(this.isCancelled())) {
-            data = data.substring(data.indexOf("{"));
+            //Crop out misc error messages and pull JSON
+            if(data.indexOf("{") > 0) {
+                data = data.substring(data.indexOf("{"));
+            }
+
+            Log.d("test", "GetInfoTask onPostExecute: data = " + data);
+
             //Tell parent
             switch(type){
                 case checkLogin:
@@ -90,6 +100,9 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                     break;
                 case registerUser:
                     ((RegisterActivity) parent).onTaskFinish(data);
+                    break;
+                case getWelcome:
+                    ((HomeActivity) parent).onTaskFinish(data);
                     break;
                 case getUserBids:
                     ((BidListActivity) parent).onTaskFinish(data);
@@ -120,33 +133,38 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
 
         switch(type) {
             case checkLogin:
-                str = "http://www.biddingforcharities.com/mobile/mlogin.php" + queryStr;
+                str = BASE_URL + "mlogin.php" + queryStr;
                 break;
             case registerUser:
-                str = "http://www.biddingforcharities.com/mobile/mregister.php" + queryStr;
+                str = BASE_URL + "mregister.php" + queryStr;
+                break;
+            case getWelcome:
+                str = BASE_URL + "mwelcome.php" + queryStr;
                 break;
             case getUserBids:
-                str = "http://www.biddingforcharities.com/mobile/mmybids.php" + queryStr;
+                str = BASE_URL + "mmybids.php" + queryStr;
                 break;
             case getUserWatchList:
-                str = "http://www.biddingforcharities.com/mobile/mwatchlist.php" + queryStr;
+                str = BASE_URL + "mwatchlist.php" + queryStr;
                 break;
             case getUserInfo:
-                str = "http://www.biddingforcharities.com/mobile/mmyinfo.php" + queryStr;
+                str = BASE_URL + "mmyinfo.php" + queryStr;
                 break;
             case updateAuction:
-                str = "http://www.biddingforcharities.com/mobile/madd_update_item.php" + queryStr;
+                str = BASE_URL + "madd_update_item.php" + queryStr;
                 break;
             case searchAuctions:
-                str = "http://www.biddingforcharities.com/mobile/msearch.php" + queryStr;
+                str = BASE_URL + "msearch.php" + queryStr;
                 break;
             case requestCharity:
-                str = "http://www.biddingforcharities.com/mobile/mnew_vendor.php" + queryStr;
+                str = BASE_URL + "mnewvendor.php" + queryStr;
                 break;
             default:
                 str = "";
                 break;
         }
+
+        Log.d("test", "GetInfoTask getServiceLoc: url = " + str);
 
         try {
             URL url = new URL(str);

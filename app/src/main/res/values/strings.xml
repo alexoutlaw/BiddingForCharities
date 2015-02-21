@@ -8,6 +8,7 @@
     <string name="login_text">Login</string>
     <string name="register_text">Sign Up</string>
     <string name="remember_me">Remember Me</string>
+    <string name="welcome_message">Welcome To BFC!</string>
 
     <string name="login_uname">Email address Or Username</string>
     <string name="login_pass">Password</string>
@@ -25,7 +26,7 @@
         <item name="nav_watchlist">My Watchlist</item>
         <item name="nav_bids">My Bids</item>
         <item name="nav_auctions">My Auctions</item>
-        <item name="nav_create">Create an Auction</item>
+        <item name="nav_create">New Auction</item>
         <item name="nav_search">Search Auctions</item>
         <item name="nav_request">Request Charity</item>
     </string-array>

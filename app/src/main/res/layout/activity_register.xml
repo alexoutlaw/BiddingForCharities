@@ -87,6 +87,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:password="true"
                     android:background="@drawable/glass_input" />
 
                 <TextView
@@ -98,6 +99,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:password="true"
                     android:background="@drawable/glass_input" />
 
                 <TextView
@@ -120,18 +122,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:background="@drawable/glass_input" />
-
-                <TextView
-                    android:text="@string/register_code"
-                    style="@style/FormLabelStyle"/>
-
-                <EditText
-                    android:id="@+id/code_input"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/glass_input" />
 
                 <Button
@@ -140,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:padding="10dp"
-                    android:background="@drawable/glass_button"
+                    android:background="@drawable/highlighted_glass_button"
                     android:text="@string/register_text" />
 
             </LinearLayout>

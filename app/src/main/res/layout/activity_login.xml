@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:padding="10dp"
-                    android:background="@drawable/glass_button"
+                    android:background="@drawable/highlighted_glass_button"
                     android:text="@string/login_text" />
 
                 <LinearLayout
@@ -121,6 +121,15 @@
                         android:text="@string/remember_me"/>
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/login_forget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="20dp"
+                    android:textColor="@color/red"
+                    android:text="@string/login_forgot"/>
 
             </LinearLayout>
 

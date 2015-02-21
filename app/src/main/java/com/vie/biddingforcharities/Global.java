@@ -8,7 +8,9 @@ import android.content.res.TypedArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.vie.biddingforcharities.netcode.User;
 import com.vie.biddingforcharities.ui.FontsOverride;
 import com.vie.biddingforcharities.ui.NavDrawerItem;
 import com.vie.biddingforcharities.ui.NavDrawerListAdapter;
@@ -16,6 +18,8 @@ import com.vie.biddingforcharities.ui.NavDrawerListAdapter;
 import java.util.ArrayList;
 
 public class Global extends Application {
+    public User user;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -49,27 +53,35 @@ public class Global extends Application {
     }
 
     private void Navigate(Context cxt, int position) {
+        //TODO: switch back as implemented
         switch(position) {
             case 0:
-                cxt.startActivity(new Intent(cxt, AccountActivity.class));
+                Toast.makeText(this, "My Info, Coming Soon!", Toast.LENGTH_LONG).show();
+                //cxt.startActivity(new Intent(cxt, AccountActivity.class));
                 break;
             case 1:
-                cxt.startActivity(new Intent(cxt, WatchListActivity.class));
+                Toast.makeText(this, "My Watchlist, Coming Soon!", Toast.LENGTH_LONG).show();
+                //cxt.startActivity(new Intent(cxt, WatchListActivity.class));
                 break;
             case 2:
-                cxt.startActivity(new Intent(cxt, BidListActivity.class));
+                Toast.makeText(this, "My Bids, Coming Soon!", Toast.LENGTH_LONG).show();
+                //cxt.startActivity(new Intent(cxt, BidListActivity.class));
                 break;
             case 3:
-                cxt.startActivity(new Intent(cxt, AuctionListActivity.class));
+                Toast.makeText(this, "My Auctions, Coming Soon!", Toast.LENGTH_LONG).show();
+                //cxt.startActivity(new Intent(cxt, AuctionListActivity.class));
                 break;
             case 4:
-                cxt.startActivity(new Intent(cxt, AuctionFormActivity.class));
+                Toast.makeText(this, "Create Auction, Coming Soon!", Toast.LENGTH_LONG).show();
+                //cxt.startActivity(new Intent(cxt, AuctionFormActivity.class));
                 break;
             case 5:
-                cxt.startActivity(new Intent(cxt, AuctionSearchActivity.class));
+                Toast.makeText(this, "Search Auctions, Coming Soon!", Toast.LENGTH_LONG).show();
+                //cxt.startActivity(new Intent(cxt, AuctionSearchActivity.class));
                 break;
             case 6:
-                cxt.startActivity(new Intent(cxt, CharityRequestActivity.class));
+                Toast.makeText(this, "Request Fundraiser, Coming Soon!", Toast.LENGTH_LONG).show();
+                //cxt.startActivity(new Intent(cxt, CharityRequestActivity.class));
                 break;
         }
 
