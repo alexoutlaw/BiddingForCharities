@@ -1,6 +1,4 @@
-package com.vie.biddingforcharities.netcode;
-
-import java.util.UUID;
+package com.vie.biddingforcharities.logic;
 
 /**
  * Created by Alex Outlaw on 2/19/2015.
@@ -14,6 +12,8 @@ public final class User {
     UserTypes UserType;
     int UserNameId;
     String UserName;
+    String FirstName;
+    String LastName;
     int AddressId;
     boolean HasSellerInvoiceDefaults;
 
@@ -60,10 +60,30 @@ public final class User {
     public String getUserName() {
         return UserName;
     }
+    public String getFirstName() { return FirstName; }
+    public String getLastName() { return LastName; }
     public int getAddressId() {
         return AddressId;
     }
     public boolean getHasInvoiceDefaults() {
         return HasSellerInvoiceDefaults;
+    }
+
+    public void updateFullName(String first, String last) {
+        FirstName = first;
+        LastName = last;
+    }
+
+    public void updateUserName(String userName, int userNameId) {
+        UserName = userName;
+        UserNameId = userNameId;
+    }
+
+    public void updateEmail(String newEmail) {
+        Email = newEmail;
+    }
+
+    public void updateAddressId(int addressId) {
+        AddressId = addressId;
     }
 }

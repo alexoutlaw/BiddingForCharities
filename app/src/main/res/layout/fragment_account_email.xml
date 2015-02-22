@@ -1,0 +1,69 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/account_current_email"
+            style="@style/FormLabelStyle"/>
+
+        <EditText
+            android:id="@+id/account_current_email"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@drawable/glass_input" />
+
+        <TextView
+            android:text="@string/account_new_email"
+            style="@style/FormLabelStyle"/>
+
+        <EditText
+            android:id="@+id/account_new_email"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@drawable/glass_input" />
+
+        <TextView
+            android:text="@string/account_confirm_email"
+            style="@style/FormLabelStyle"/>
+
+        <EditText
+            android:id="@+id/account_confirm_email"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@drawable/glass_input" />
+
+        <TextView
+            android:text="@string/account_password"
+            style="@style/FormLabelStyle"/>
+
+        <EditText
+            android:id="@+id/account_password"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp"
+            android:password="true"
+            android:background="@drawable/glass_input" />
+
+        <Button
+            android:id="@+id/update_email_button"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@drawable/highlighted_glass_button"
+            android:text="@string/update_button" />
+
+    </LinearLayout>
+
+</ScrollView>

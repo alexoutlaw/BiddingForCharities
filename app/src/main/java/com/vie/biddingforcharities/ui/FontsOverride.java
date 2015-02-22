@@ -1,8 +1,9 @@
 package com.vie.biddingforcharities.ui;
 
-import java.lang.reflect.Field;
 import android.content.Context;
 import android.graphics.Typeface;
+
+import java.lang.reflect.Field;
 
 /* Allows for the user of an app-wide standard font
  *  Used by the application class */

@@ -12,13 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.vie.biddingforcharities.netcode.GetInfoTask;
+import com.vie.biddingforcharities.logic.GetInfoTask;
+import com.vie.biddingforcharities.logic.Utilities;
 
 import org.json.JSONObject;
 
 public class RegisterActivity extends Activity {
-    public static final String PREFS_NAME = "General_Prefs";
-
     Button LoginButton, RegisterButton;
     EditText EmailInput, PassInput, ConfirmInput, FirstInput, LastInput;
 
@@ -67,7 +66,13 @@ public class RegisterActivity extends Activity {
                         spinner.show();
 
                         //Register with Server
-                        String queryStr = "?email=" + Email + "&pwd=" + Password + " &first=" + first + "&last=" + last;
+                        String queryStr = Utilities.BuildQueryParams(
+                                new String[][]{
+                                        new String[]{"email", Email},
+                                        new String[]{"pwd", Password},
+                                        new String[]{"first", first},
+                                        new String[]{"last", last}
+                                });
                         new GetInfoTask(RegisterActivity.this).execute("registerUser", queryStr);
                     }
                     else  {
@@ -89,7 +94,7 @@ public class RegisterActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //Save presets
-                                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                                SharedPreferences settings = getSharedPreferences(((Global)getApplication()).getPrefsName(), 0);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("LoginUserName", Email);
                                 editor.putString("LoginPassword", Password);

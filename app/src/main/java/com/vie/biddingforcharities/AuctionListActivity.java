@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.vie.biddingforcharities.netcode.GetInfoTask;
+import com.vie.biddingforcharities.logic.GetInfoTask;
 
 import org.json.JSONObject;
 
@@ -63,7 +63,7 @@ public class AuctionListActivity extends Activity {
                 finish();
             }
             else {
-                Toast.makeText(this, "Invalid Login", Toast.LENGTH_LONG);
+                Toast.makeText(this, "Invalid Login", Toast.LENGTH_LONG).show();
             }
         }
         catch(Exception e) {

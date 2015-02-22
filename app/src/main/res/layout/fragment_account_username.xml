@@ -1,0 +1,35 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/account_username"
+            style="@style/FormLabelStyle"/>
+
+        <EditText
+            android:id="@+id/username_input"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/glass_input" />
+
+        <Button
+            android:id="@+id/update_username_button"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@drawable/highlighted_glass_button"
+            android:text="@string/update_button" />
+
+    </LinearLayout>
+
+</ScrollView>

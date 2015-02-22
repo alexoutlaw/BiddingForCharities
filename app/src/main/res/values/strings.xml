@@ -52,6 +52,33 @@
     <string name="home_bidding_on_items_negative">You have no active bids.</string>
     <string name="home_bidding_on_items_positive">You have active bids!</string>
 
+    <string-array name="account_tab_items">
+        <item name="account_name">My Name</item>
+        <item name="account_username">My Username</item>
+        <item name="account_email">My Email</item>
+        <item name="account_address">My Address</item>
+    </string-array>
+
+    <string name="account_first_name">First Name</string>
+    <string name="account_last_name">Last Name</string>
+    <string name="account_username">User Name</string>
+    <string name="account_current_email">Current email</string>
+    <string name="account_new_email">New email</string>
+    <string name="account_confirm_email">Confirm new email</string>
+    <string name="account_password">Enter password</string>
+    <string name="account_address_email">Email</string>
+    <string name="account_address_company">Company</string>
+    <string name="account_address_first">First</string>
+    <string name="account_address_last">Last</string>
+    <string name="account_address_street1">Street</string>
+    <string name="account_address_street2">Street (Extra)</string>
+    <string name="account_address_city">City</string>
+    <string name="account_address_country">Country</string>
+    <string name="account_address_state">State</string>
+    <string name="account_address_zip">Zip</string>
+    <string name="account_address_phone">Phone</string>
+    <string name="update_button">UPDATE</string>
+
     <string name="item_seller_label">Seller:\u0020</string>
     <string name="item_seller_default">seler_name</string>
     <string name="item_description_default">item_description</string>

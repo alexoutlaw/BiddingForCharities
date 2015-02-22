@@ -2,7 +2,6 @@ package com.vie.biddingforcharities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
@@ -11,8 +10,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.vie.biddingforcharities.netcode.GetInfoTask;
 
 import org.json.JSONObject;
 
@@ -64,7 +61,7 @@ public class WatchListActivity extends Activity {
                 finish();
             }
             else {
-                Toast.makeText(this, "Invalid Login", Toast.LENGTH_LONG);
+                Toast.makeText(this, "Invalid Login", Toast.LENGTH_LONG).show();
             }
         }
         catch(Exception e) {

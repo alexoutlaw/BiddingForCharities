@@ -16,8 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vie.biddingforcharities.netcode.GetInfoTask;
-import com.vie.biddingforcharities.netcode.User;
+import com.vie.biddingforcharities.logic.GetInfoTask;
+import com.vie.biddingforcharities.logic.User;
+import com.vie.biddingforcharities.logic.Utilities;
 
 import org.json.JSONObject;
 
@@ -59,12 +60,12 @@ public class HomeActivity extends Activity {
         super.onStart();
 
         // Set Top banner
-        User user = ((Global)getApplication()).user;
+        User user = ((Global)getApplication()).getUser();
         WelcomeBanner.setText("Welcome to BFC, " + user.getUserName() + "!");
 
         // Show Spinner
         spinner = new ProgressDialog(HomeActivity.this);
-        spinner.setMessage("Logging In...");
+        spinner.setMessage("Getting Updates...");
         spinner.setCanceledOnTouchOutside(false);
         spinner.show();
     }
@@ -74,9 +75,19 @@ public class HomeActivity extends Activity {
         super.onResume();
 
         // Update Tiles
-        User user = ((Global)getApplication()).user;
-        String queryStr = "?user_guid=" + user.getUserGuid();
+        User user = ((Global)getApplication()).getUser();
+        String queryStr = Utilities.BuildQueryParams(
+                new String[][]{
+                        new String[]{"user_guid", user.getUserGuid()}
+                });
         new GetInfoTask(HomeActivity.this).execute("getWelcome", queryStr);
+    }
+
+    @Override
+    public void onDestroy() {
+        // HomeActivity should always be on the stack if user is logged in, chain destroy up to Application
+        ((Global) getApplication()).onDestroy();
+        super.onDestroy();
     }
 
     //Adds a second button click to fully exit the app

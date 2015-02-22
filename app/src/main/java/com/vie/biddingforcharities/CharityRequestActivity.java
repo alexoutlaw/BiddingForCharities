@@ -11,8 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.vie.biddingforcharities.netcode.GetInfoTask;
-
 import org.json.JSONObject;
 
 public class CharityRequestActivity extends Activity {
@@ -63,7 +61,7 @@ public class CharityRequestActivity extends Activity {
                 finish();
             }
             else {
-                Toast.makeText(this, "Invalid Login", Toast.LENGTH_LONG);
+                Toast.makeText(this, "Invalid Login", Toast.LENGTH_LONG).show();
             }
         }
         catch(Exception e) {
