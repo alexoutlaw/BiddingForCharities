@@ -72,7 +72,7 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 InputStream is = entity.getContent();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
                 StringBuilder sb = new StringBuilder();
-                String line = null;
+                String line;
                 while((line = reader.readLine()) != null) {
                     sb.append(line + "\n");
                 }

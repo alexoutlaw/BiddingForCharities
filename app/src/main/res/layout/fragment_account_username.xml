@@ -15,19 +15,13 @@
 
         <EditText
             android:id="@+id/username_input"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="textPersonName"
+            android:maxLength="45" />
 
         <Button
             android:id="@+id/update_username_button"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:background="@drawable/highlighted_glass_button"
+            style="@style/FormSubmitStyle"
             android:text="@string/update_button" />
 
     </LinearLayout>

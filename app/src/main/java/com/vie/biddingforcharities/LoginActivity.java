@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -43,7 +44,10 @@ public class LoginActivity extends Activity {
         ForgetPassword = (TextView) findViewById(R.id.login_forget);
         RememberMeSelect = (CheckBox) findViewById(R.id.remember_me_select);
 
-        //Set saved "Remember Me"
+        // Prevent automatic keyboard
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        // Set saved "Remember Me"
         if(settings.getBoolean("RememberMeSelect", false)) {
             UserNameInput.setText(settings.getString("LoginUserName", ""));
             PasswordInput.setText(settings.getString("LoginPassword", ""));

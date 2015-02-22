@@ -6,7 +6,7 @@
     android:layout_centerVertical="true"
     android:layout_gravity="start"
     android:choiceMode="singleChoice"
-    android:divider="@android:color/white"
-    android:dividerHeight="0dp"
-    android:background="@drawable/glass_button"
+    android:divider="@color/white_trans"
+    android:dividerHeight="1dp"
+    android:background="@color/glass_background"
     xmlns:android="http://schemas.android.com/apk/res/android" />

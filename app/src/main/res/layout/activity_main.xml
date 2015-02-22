@@ -22,42 +22,38 @@
             android:orientation="vertical">
 
             <!-- Title Banner -->
-            <TextView
-                android:id="@+id/banner"
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:background="@color/glass_background"
-                android:text="@string/app_name"
-                style="@style/CustomTitleTextStyle"/>
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/banner"
+                    style="@style/CustomTitleTextStyle"
+                    android:text="@string/app_name" />
+
+            </LinearLayout>
 
             <!-- Main Content -->
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:orientation="vertical" >
 
                 <Button
                     android:id="@+id/register_button"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:background="@drawable/glass_button"
+                    style="@style/FormSubmitStyle"
                     android:text="@string/register_text" />
 
                 <Button
                     android:id="@+id/login_button"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
+                    style="@style/FormSubmitStyle"
                     android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:background="@drawable/glass_button"
                     android:text="@string/login_text" />
 
             </LinearLayout>

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.vie.biddingforcharities.logic.User;
+
 public class AccountAddressFragment extends Fragment {
     SubmitAddressUpdateListener AddressListener;
 
@@ -31,6 +33,13 @@ public class AccountAddressFragment extends Fragment {
         ZipInput = (EditText) fragmentView.findViewById(R.id.account_address_zip);
         PhoneInput = (EditText) fragmentView.findViewById(R.id.account_address_phone);
         UpdateAddressButton = (Button) fragmentView.findViewById(R.id.update_address_button);
+
+        // Preset Values
+        User user = ((Global)getActivity().getApplication()).getUser();
+        EmailInput.setText(user.getEmail());
+        //different than account name
+        //FirstInput.setText(user.getFirstName());
+        //LastInput.setText(user.getLastName());
 
         UpdateAddressButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,7 +18,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <!-- Title Banner -->
@@ -31,29 +31,21 @@
 
                 <TextView
                     android:id="@+id/banner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:gravity="left"
-                    android:padding="5dp"
-                    android:textSize="30dp"
-                    android:textStyle="bold"
+                    style="@style/CustomTitleTextStyle"
                     android:text="@string/app_name" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:gravity="right">
+                    android:gravity="end">
 
                     <include
                         layout="@layout/vertical_seperator" />
 
                     <Button
                         android:id="@+id/login_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:text="@string/login_text"
-                        style="@style/CustomTitleTextStyle"/>
+                        style="@style/CustomTitleTextStyle"
+                        android:text="@string/login_text" />
 
                 </LinearLayout>
 
@@ -63,8 +55,6 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:orientation="vertical" >
@@ -75,10 +65,9 @@
 
                 <EditText
                     android:id="@+id/email_input"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:background="@drawable/glass_input" />
+                    style="@style/FormInputStyle"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="100" />
 
                 <TextView
                     android:text="@string/register_pass"
@@ -86,11 +75,10 @@
 
                 <EditText
                     android:id="@+id/password_input"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    style="@style/FormInputStyle"
                     android:password="true"
-                    android:background="@drawable/glass_input" />
+                    android:inputType="textPassword"
+                    android:maxLength="20" />
 
                 <TextView
                     android:text="@string/register_confirm"
@@ -98,11 +86,10 @@
 
                 <EditText
                     android:id="@+id/confirm_input"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    style="@style/FormInputStyle"
                     android:password="true"
-                    android:background="@drawable/glass_input" />
+                    android:inputType="textPassword"
+                    android:maxLength="20" />
 
                 <TextView
                     android:text="@string/register_first"
@@ -110,10 +97,9 @@
 
                 <EditText
                     android:id="@+id/first_input"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:background="@drawable/glass_input" />
+                    style="@style/FormInputStyle"
+                    android:inputType="textPersonName"
+                    android:maxLength="45" />
 
                 <TextView
                     android:text="@string/register_last"
@@ -121,19 +107,13 @@
 
                 <EditText
                     android:id="@+id/last_input"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/glass_input" />
+                    style="@style/FormInputStyle"
+                    android:inputType="textPersonName"
+                    android:maxLength="45" />
 
                 <Button
                     android:id="@+id/register_button"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:background="@drawable/highlighted_glass_button"
+                    style="@style/FormSubmitStyle"
                     android:text="@string/register_text" />
 
             </LinearLayout>

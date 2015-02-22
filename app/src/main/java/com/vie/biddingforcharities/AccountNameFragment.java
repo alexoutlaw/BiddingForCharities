@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.vie.biddingforcharities.logic.User;
+
 public class AccountNameFragment extends Fragment {
     SubmitNameUpdateListener NameListener;
 
@@ -22,6 +24,11 @@ public class AccountNameFragment extends Fragment {
         FirstNameInput = (EditText) fragmentView.findViewById(R.id.first_name_input);
         LastNameInput = (EditText) fragmentView.findViewById(R.id.last_name_input);
         UpdateNameButton = (Button) fragmentView.findViewById(R.id.update_name_button);
+
+        // Preset Values
+        User user = ((Global)getActivity().getApplication()).getUser();
+        FirstNameInput.setText(user.getFirstName());
+        LastNameInput.setText(user.getLastName());
 
         UpdateNameButton.setOnClickListener(new View.OnClickListener() {
             @Override

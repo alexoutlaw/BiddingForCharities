@@ -8,9 +8,9 @@
     <string name="login_text">Login</string>
     <string name="register_text">Sign Up</string>
     <string name="remember_me">Remember Me</string>
-    <string name="welcome_message">Welcome To BFC!</string>
+    <string name="welcome_message">Welcome To Bidding For Charities!</string>
 
-    <string name="login_uname">Email address Or Username</string>
+    <string name="login_uname">Email Address or Username</string>
     <string name="login_pass">Password</string>
     <string name="login_forgot">forgot my password</string>
 
@@ -77,7 +77,7 @@
     <string name="account_address_state">State</string>
     <string name="account_address_zip">Zip</string>
     <string name="account_address_phone">Phone</string>
-    <string name="update_button">UPDATE</string>
+    <string name="update_button">Update</string>
 
     <string name="item_seller_label">Seller:\u0020</string>
     <string name="item_seller_default">seler_name</string>

@@ -41,12 +41,7 @@
 
                 <TextView
                     android:id="@+id/banner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:gravity="left"
-                    android:padding="5dp"
-                    android:textSize="30dp"
-                    android:textStyle="bold"
+                    style="@style/CustomTitleTextStyle"
                     android:text="@string/app_name" />
 
                 <LinearLayout
@@ -59,11 +54,8 @@
 
                     <Button
                         android:id="@+id/home_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:text="@string/home_text"
-                        style="@style/CustomTitleTextStyle"/>
+                        style="@style/CustomTitleTextStyle"
+                        android:text="@string/home_text"/>
 
                 </LinearLayout>
 

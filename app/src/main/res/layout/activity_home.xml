@@ -37,12 +37,7 @@
 
             <TextView
                 android:id="@+id/banner"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:gravity="left"
-                android:padding="5dp"
-                android:textSize="30dp"
-                android:textStyle="bold"
+                style="@style/CustomTitleTextStyle"
                 android:text="@string/app_name" />
 
         </LinearLayout>
@@ -70,6 +65,9 @@
                     android:gravity="center"
                     android:background="@drawable/highlighted_glass_button"
                     android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:typeface="sans"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/welcome_message"
                     />
 
@@ -84,7 +82,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
+                        android:padding="10dp"
                         android:layout_weight="1"
+                        android:lineSpacingMultiplier="1.3"
                         android:text="@string/home_items_to_checkout_negative"
                         android:background="@drawable/glass_button" />
 
@@ -93,7 +93,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
+                        android:padding="10dp"
                         android:layout_weight="1"
+                        android:lineSpacingMultiplier="1.3"
                         android:text="@string/home_invoice_to_pay_negative"
                         android:background="@drawable/glass_button"/>
 
@@ -110,7 +112,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
+                        android:padding="10dp"
                         android:layout_weight="1"
+                        android:lineSpacingMultiplier="1.3"
                         android:text="@string/home_messages_to_read_negative"
                         android:background="@drawable/glass_button"/>
 
@@ -119,7 +123,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
+                        android:padding="10dp"
                         android:layout_weight="1"
+                        android:lineSpacingMultiplier="1.3"
                         android:text="@string/home_bidding_on_items_negative"
                         android:background="@drawable/glass_button"/>
 

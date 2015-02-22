@@ -61,7 +61,7 @@ public class HomeActivity extends Activity {
 
         // Set Top banner
         User user = ((Global)getApplication()).getUser();
-        WelcomeBanner.setText("Welcome to BFC, " + user.getUserName() + "!");
+        WelcomeBanner.setText("Welcome to Bidding For Charities, " + user.getUserName() + "!");
 
         // Show Spinner
         spinner = new ProgressDialog(HomeActivity.this);

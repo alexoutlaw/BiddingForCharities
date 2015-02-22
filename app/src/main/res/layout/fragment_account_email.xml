@@ -13,12 +13,9 @@
             android:text="@string/account_current_email"
             style="@style/FormLabelStyle"/>
 
-        <EditText
+        <TextView
             android:id="@+id/account_current_email"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle" />
 
         <TextView
             android:text="@string/account_new_email"
@@ -26,10 +23,9 @@
 
         <EditText
             android:id="@+id/account_new_email"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="textEmailAddress"
+            android:maxLength="100"/>
 
         <TextView
             android:text="@string/account_confirm_email"
@@ -37,10 +33,9 @@
 
         <EditText
             android:id="@+id/account_confirm_email"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="textEmailAddress"
+            android:maxLength="100"/>
 
         <TextView
             android:text="@string/account_password"
@@ -48,20 +43,13 @@
 
         <EditText
             android:id="@+id/account_password"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginBottom="20dp"
-            android:password="true"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="textPassword"
+            android:maxLength="20" />
 
         <Button
             android:id="@+id/update_email_button"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:background="@drawable/highlighted_glass_button"
+            style="@style/FormSubmitStyle"
             android:text="@string/update_button" />
 
     </LinearLayout>

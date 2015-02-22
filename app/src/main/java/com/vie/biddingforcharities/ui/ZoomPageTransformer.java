@@ -11,8 +11,8 @@ import android.view.View;
  * Most of the source code was taken from developer.android.com/training/animation/screen-slide.html
  */
 public class ZoomPageTransformer implements ViewPager.PageTransformer {
-    private static float MIN_SCALE = 0.85f;
-    private static float MIN_ALPHA = 0.5f;
+    private final static float MIN_SCALE = 0.85f;
+    private final static float MIN_ALPHA = 0.5f;
 
     public void transformPage(View view, float position) {
         int pageWidth = view.getWidth();

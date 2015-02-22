@@ -8,10 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.vie.biddingforcharities.logic.User;
 
 public class AccountEmailFragment extends Fragment {
     SubmitEmailUpdateListener EmailListener;
 
+    TextView CurrentEmailText;
     EditText NewEmailInput, ConfirmEmailInput, PasswordInput;
     Button UpdateEmailButton;
 
@@ -19,10 +23,15 @@ public class AccountEmailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_account_email, container, false);
 
+        CurrentEmailText = (TextView) fragmentView.findViewById(R.id.account_current_email);
         NewEmailInput = (EditText) fragmentView.findViewById(R.id.account_new_email);
         ConfirmEmailInput = (EditText) fragmentView.findViewById(R.id.account_confirm_email);
         PasswordInput = (EditText) fragmentView.findViewById(R.id.account_password);
         UpdateEmailButton = (Button) fragmentView.findViewById(R.id.update_email_button);
+
+        // Preset Values
+        User user = ((Global)getActivity().getApplication()).getUser();
+        CurrentEmailText.setText(user.getEmail());
 
         UpdateEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,9 +39,6 @@ public class AccountEmailFragment extends Fragment {
                 EmailListener.SubmitEmailUpdate(NewEmailInput.getText().toString(), PasswordInput.getText().toString());
             }
         });
-
-        //TODO: form validation
-        //TODO: preset values
 
         return fragmentView;
     }

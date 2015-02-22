@@ -15,10 +15,9 @@
 
         <EditText
             android:id="@+id/account_address_email"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="textEmailAddress"
+            android:maxLength="100" />
 
         <TextView
             android:text="@string/account_address_company"
@@ -26,10 +25,8 @@
 
         <EditText
             android:id="@+id/account_address_company"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:maxLength="50" />
 
         <TextView
             android:text="@string/account_address_first"
@@ -37,10 +34,9 @@
 
         <EditText
             android:id="@+id/account_address_first"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="textPersonName"
+            android:maxLength="45" />
 
         <TextView
             android:text="@string/account_address_last"
@@ -48,10 +44,9 @@
 
         <EditText
             android:id="@+id/account_address_last"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="textPersonName"
+            android:maxLength="45" />
 
         <TextView
             android:text="@string/account_address_street1"
@@ -59,10 +54,9 @@
 
         <EditText
             android:id="@+id/account_address_street1"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="textPostalAddress"
+            android:maxLength="100" />
 
         <TextView
             android:text="@string/account_address_street2"
@@ -70,10 +64,9 @@
 
         <EditText
             android:id="@+id/account_address_street2"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="textPostalAddress"
+            android:maxLength="100" />
 
         <TextView
             android:text="@string/account_address_city"
@@ -81,10 +74,8 @@
 
         <EditText
             android:id="@+id/account_address_city"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:maxLength="75" />
 
         <TextView
             android:text="@string/account_address_country"
@@ -92,10 +83,8 @@
 
         <EditText
             android:id="@+id/account_address_country"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:maxLength="100" />
 
         <TextView
             android:text="@string/account_address_state"
@@ -103,10 +92,8 @@
 
         <EditText
             android:id="@+id/account_address_state"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:maxLength="50" />
 
         <TextView
             android:text="@string/account_address_zip"
@@ -114,10 +101,9 @@
 
         <EditText
             android:id="@+id/account_address_zip"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="number"
+            android:maxLength="20" />
 
         <TextView
             android:text="@string/account_address_phone"
@@ -125,19 +111,13 @@
 
         <EditText
             android:id="@+id/account_address_phone"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/glass_input" />
+            style="@style/FormInputStyle"
+            android:inputType="phone"
+            android:maxLength="20" />
 
         <Button
             android:id="@+id/update_address_button"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:background="@drawable/highlighted_glass_button"
+            style="@style/FormSubmitStyle"
             android:text="@string/update_button" />
 
     </LinearLayout>
