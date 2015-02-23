@@ -79,6 +79,13 @@
     <string name="account_address_phone">Phone</string>
     <string name="update_button">Update</string>
 
+    <string name="list_title_default">item_title</string>
+    <string name="list_end_time_label">Ends:\u0020</string>
+    <string name="list_end_time_default">00:00:00</string>
+    <string name="list_high_bid_default">$0.00</string>
+    <string name="list_image_description">Auction Item</string>
+    <string name="list_bidder_description">Highest Bidder</string>
+
     <string name="item_seller_label">Seller:\u0020</string>
     <string name="item_seller_default">seler_name</string>
     <string name="item_description_default">item_description</string>
@@ -97,5 +104,5 @@
     <string name="item_contact_button">Contact Seller</string>
 
     <string name="background">Background Image</string>
-    <string name="generic_error">Problem retrieving data</string>
+    <string name="generic_error">Could not connect to server</string>
 </resources>

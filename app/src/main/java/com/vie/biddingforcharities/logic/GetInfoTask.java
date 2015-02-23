@@ -108,7 +108,7 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                     ((HomeActivity) parent).onTaskFinish(data);
                     break;
                 case getUserBids:
-                    ((BidListActivity) parent).onTaskFinish(data);
+                    ((BidListActivity) parent).onTaskFinish(this, data);
                     break;
                 case getUserWatchList:
                     ((WatchListActivity) parent).onTaskFinish(data);

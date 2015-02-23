@@ -68,7 +68,7 @@ public class AuctionListActivity extends Activity {
         }
         catch(Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Problem retrieving data", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
         }
     }
 }

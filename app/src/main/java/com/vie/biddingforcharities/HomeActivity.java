@@ -183,9 +183,7 @@ public class HomeActivity extends Activity {
                 ItemsBidButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //TODO: Navigate to My Bids
-                        //startActivity(new Intent(HomeActivity.this, BidListActivity.class));
-                        Toast.makeText(HomeActivity.this, "My Bids, Coming Soon!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(HomeActivity.this, BidListActivity.class));
                     }
                 });
             }
@@ -197,7 +195,7 @@ public class HomeActivity extends Activity {
         }
         catch(Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Problem retrieving data", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
         }
 
         //Dismiss Spinner
