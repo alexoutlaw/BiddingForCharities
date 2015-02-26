@@ -126,8 +126,7 @@ public class Global extends Application {
                 cxt.startActivity(new Intent(cxt, AccountActivity.class));
                 break;
             case 1:
-                Toast.makeText(this, "My Watchlist, Coming Soon!", Toast.LENGTH_LONG).show();
-                //cxt.startActivity(new Intent(cxt, WatchListActivity.class));
+                cxt.startActivity(new Intent(cxt, WatchListActivity.class));
                 break;
             case 2:
                 cxt.startActivity(new Intent(cxt, BidListActivity.class));

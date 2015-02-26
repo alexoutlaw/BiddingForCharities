@@ -10,7 +10,7 @@
 
     <style name="CustomTextViewStyle" parent="android:Widget.TextView">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/label_text_size</item>
         <item name="android:typeface">sans</item>
     </style>
 
@@ -19,13 +19,13 @@
         <item name="android:lines">1</item>
         <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/input_text_size</item>
         <item name="android:typeface">normal</item>
     </style>
 
     <style name="CustomButtonStyle" parent="android:Widget.Button">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/label_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:typeface">serif</item>
     </style>
@@ -36,13 +36,13 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:padding">5dp</item>
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:textSize">30dp</item>
+        <item name="android:textSize">@dimen/header_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:typeface">serif</item>
     </style>
 
     <style name="FormLabelStyle">
-        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_width">@dimen/form_width</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingLeft">10dp</item>
@@ -51,14 +51,14 @@
     </style>
 
     <style name="FormInputStyle">
-        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_width">@dimen/form_width</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">10dp</item>
         <item name="android:background">@drawable/glass_input</item>
     </style>
 
     <style name="FormSubmitStyle">
-        <item name="android:layout_width">350dp</item>*
+        <item name="android:layout_width">@dimen/form_width</item>*
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">30dp</item>
         <item name="android:layout_margin">35dp</item>

@@ -56,8 +56,6 @@ public class AuctionGridAdapter extends BaseAdapter {
 
         AuctionItem item = items.get(position);
 
-        itemImage.setAdjustViewBounds(true);
-        itemImage.setScaleType(ImageView.ScaleType.FIT_XY);
         new GetBitmapTask(activity, itemImage, 0, 200).execute(item.itemImageUrl);
 
         titleText.setText(item.itemTitle);
