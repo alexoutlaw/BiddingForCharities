@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp"
     android:background="@drawable/glass_button">
 
     <LinearLayout
@@ -9,6 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:paddingTop="5dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:background="@color/banner_blue">
@@ -17,7 +17,6 @@
             android:id="@+id/item_end_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:text="@string/list_end_time_default" />
 
         <include
@@ -27,30 +26,39 @@
             android:id="@+id/item_high_bid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:text="@string/list_high_bid_default" />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/item_image"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:id="@+id/image_holder"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@id/item_details"
-        android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/bfc_icon" />
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bfc_icon" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/item_title"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:layout_below="@id/item_image"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/image_holder"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_gravity="left"
-        android:layout_margin="10dp"
         android:ellipsize="marquee"
         android:maxLines="2"
         android:textSize="@dimen/input_text_size"

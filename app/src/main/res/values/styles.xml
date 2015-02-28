@@ -8,6 +8,13 @@
         <item name="android:buttonStyle">@style/CustomButtonStyle</item>
     </style>
 
+    <style name="DialogTheme" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowBackground">@color/black_trans</item>
+        <item name="android:textViewStyle">@style/CustomTextViewStyle</item>
+        <item name="android:editTextStyle">@style/CustomEditTextStyle</item>
+        <item name="android:buttonStyle">@style/CustomButtonStyle</item>
+    </style>
+
     <style name="CustomTextViewStyle" parent="android:Widget.TextView">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/label_text_size</item>
@@ -54,6 +61,14 @@
         <item name="android:layout_width">@dimen/form_width</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/glass_input</item>
+    </style>
+
+    <style name="FormSpinnerStyle">
+        <item name="android:layout_width">@dimen/form_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginTop">20dp</item>
         <item name="android:background">@drawable/glass_input</item>
     </style>
 

@@ -56,7 +56,8 @@ public class AuctionGridAdapter extends BaseAdapter {
 
         AuctionItem item = items.get(position);
 
-        new GetBitmapTask(activity, itemImage, 0, 200).execute(item.itemImageUrl);
+        int imageWidth = activity.getResources().getDimensionPixelSize(R.dimen.image_width);
+        new GetBitmapTask(activity, itemImage, 0, imageWidth).execute(item.itemImageUrl);
 
         titleText.setText(item.itemTitle);
         endTimeText.setText(item.itemEndDate);

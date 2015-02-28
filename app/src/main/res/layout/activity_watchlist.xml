@@ -64,17 +64,8 @@
             android:layout_height="match_parent">
 
             <!-- Main Content -->
-            <GridView
-                android:id="@+id/watchlist_item_grid"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:verticalSpacing="10dp"
-                android:horizontalSpacing="5dp"
-                android:gravity="center"
-                android:padding="5dp"
-                android:columnWidth="200dp"
-                android:numColumns="auto_fit"
-                android:stretchMode="columnWidth"/>
+            <include
+                layout="@layout/grid_auction_items" />
 
             <!-- Side Navigation Drawer -->
             <include

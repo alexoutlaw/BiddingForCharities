@@ -2,11 +2,18 @@
 <resources>
 
     <string name="app_name">Bidding For Charities</string>
+    <string name="login_text">Login</string>
+    <string name="register_text">Sign Up</string>
+    <string name="account_text">My Info</string>
+    <string name="watchlist_text">My Watchlist</string>
+    <string name="bids_text">My Bids</string>
+    <string name="auctions_text">My Auctions</string>
+    <string name="create_text">New Auction</string>
+    <string name="search_text">Search Auctions</string>
+    <string name="request_text">Request Charity</string>
     <string name="action_settings">Settings</string>
 
     <string name="home_text">Home</string>
-    <string name="login_text">Login</string>
-    <string name="register_text">Sign Up</string>
     <string name="remember_me">Remember Me</string>
     <string name="welcome_message">Welcome To Bidding For Charities!</string>
 
@@ -22,13 +29,13 @@
     <string name="register_code">Enter security code</string>
 
     <string-array name="nav_menu_items">
-        <item name="nav_account">My Info</item>
-        <item name="nav_watchlist">My Watchlist</item>
-        <item name="nav_bids">My Bids</item>
-        <item name="nav_auctions">My Auctions</item>
-        <item name="nav_create">New Auction</item>
-        <item name="nav_search">Search Auctions</item>
-        <item name="nav_request">Request Charity</item>
+        <item>@string/account_text</item>
+        <item>@string/watchlist_text</item>
+        <item>@string/bids_text</item>
+        <item>@string/auctions_text</item>
+        <item>@string/create_text</item>
+        <item>@string/search_text</item>
+        <item>@string/request_text</item>
     </string-array>
 
     <string-array name="nav_menu_icons">
@@ -78,6 +85,36 @@
     <string name="account_address_zip">Zip</string>
     <string name="account_address_phone">Phone</string>
     <string name="update_button">Update</string>
+
+    <string name="search_title_hint">Search by Title</string>
+    <string name="search_category_label">Select Category</string>
+    <string name="search_page_label">Select Page</string>
+    <string name="search_srt_label">Select Sort</string>
+    <string name="search_button">Search</string>
+
+    <string-array name="search_category_items">
+        <item name="category_hint">Select Category</item>
+        <!--<item>Root Charity</item>-->
+        <!--<item>Root Charity</item>-->
+        <!--<item>Root San Diego Army</item>-->
+    </string-array>
+
+    <string-array name="search_page_items">
+        <item>25 items per Page</item>
+        <item>50 items per Page</item>
+        <item>100 items per Page</item>
+    </string-array>
+
+    <string-array name="search_sort_items">
+        <item name="sort_hint">Select Sort</item>
+        <item>Sort by Title</item>
+        <item>Time ending soonest</item>
+        <item>Time newly listed</item>
+        <item>Price + Shipping lowest first</item>
+        <item>Price + Shipping highest first</item>
+        <item>Price lowest first</item>
+        <item>Price highest first</item>
+    </string-array>
 
     <string name="list_title_default">item_title</string>
     <string name="list_end_time_label">Ends:\u0020</string>

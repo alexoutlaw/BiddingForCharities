@@ -4,4 +4,5 @@
     <dimen name="input_text_size">20sp</dimen>
 
     <dimen name="form_width">400dp</dimen>
+    <dimen name="image_width">400dp</dimen>
 </resources>

@@ -129,7 +129,7 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                     ((AuctionFormActivity) parent).onTaskFinish(data);
                     break;
                 case searchAuctions:
-                    ((AuctionSearchActivity) parent).onTaskFinish(data);
+                    ((AuctionSearchActivity) parent).onTaskFinish(this, data);
                     break;
                 case requestCharity:
                     ((CharityRequestActivity) parent).onTaskFinish(data);

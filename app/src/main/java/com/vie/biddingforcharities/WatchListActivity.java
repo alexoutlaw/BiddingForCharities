@@ -48,7 +48,7 @@ public class WatchListActivity extends Activity {
         NavLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavList = (ListView) findViewById(R.id.navList);
         NavDrawerButton = (ImageButton) findViewById(R.id.nav_drawer_expand);
-        ItemGrid = (GridView) findViewById(R.id.watchlist_item_grid);
+        ItemGrid = (GridView) findViewById(R.id.item_grid);
 
         // Build Side Nav Menu
         ((Global) getApplication()).BuildNavigationMenu(NavList);
