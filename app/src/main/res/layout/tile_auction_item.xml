@@ -39,18 +39,20 @@
         android:layout_below="@id/item_details"
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
-        android:adjustViewBounds="false"
+        android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:src="@drawable/bfc_icon" />
 
     <TextView
         android:id="@+id/item_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@id/item_image"
         android:layout_alignParentBottom="true"
         android:layout_gravity="left"
         android:layout_margin="10dp"
+        android:ellipsize="marquee"
+        android:maxLines="2"
         android:textSize="@dimen/input_text_size"
         android:typeface="serif"
         android:text="@string/list_title_default" />

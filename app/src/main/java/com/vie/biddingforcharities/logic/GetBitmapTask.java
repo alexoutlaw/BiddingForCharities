@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import org.apache.http.HttpEntity;
@@ -146,11 +145,6 @@ public class GetBitmapTask extends AsyncTask<String, Void, Bitmap> {
         if(imageViewRef != null) {
             ImageView imageView = imageViewRef.get();
             if(imageView != null) {
-                imageView.setAdjustViewBounds(true);
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                ViewGroup.LayoutParams params = imageView.getLayoutParams();
-                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                imageView.setLayoutParams(params);
                 imageView.setImageBitmap(bitmap);
             }
         }
