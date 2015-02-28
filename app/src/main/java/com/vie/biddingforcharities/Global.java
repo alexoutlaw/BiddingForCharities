@@ -143,8 +143,7 @@ public class Global extends Application {
                 cxt.startActivity(new Intent(cxt, AuctionSearchActivity.class));
                 break;
             case 6:
-                Toast.makeText(this, "Request Fundraiser, Coming Soon!", Toast.LENGTH_LONG).show();
-                //cxt.startActivity(new Intent(cxt, CharityRequestActivity.class));
+                cxt.startActivity(new Intent(cxt, CharityRequestActivity.class));
                 break;
         }
 

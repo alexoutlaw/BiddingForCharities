@@ -140,6 +140,17 @@
     <string name="item_share_button">Email a Friend</string>
     <string name="item_contact_button">Contact Seller</string>
 
+    <string name="request_description">Application to run charity auctions</string>
+    <string name="request_email_label">Email Address:</string>
+    <string name="request_name_label">Your Name:</string>
+    <string name="request_phone_label">Phone:</string>
+    <string name="request_company_label">Company:</string>
+    <string name="request_address_label">Address:</string>
+    <string name="request_city_label">City:</string>
+    <string name="request_state_label">State:</string>
+    <string name="request_zip_label">Zip:</string>
+    <string name="request_button">Send Request</string>
+
     <string name="background">Background Image</string>
     <string name="generic_error">Could not connect to server</string>
 </resources>

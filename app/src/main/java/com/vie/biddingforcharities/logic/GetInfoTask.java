@@ -93,6 +93,9 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
             if(data.indexOf("{") > 0) {
                 data = data.substring(data.indexOf("{"));
             }
+            if(data.indexOf("}") > data.length()) {
+                data = data.substring(0, data.indexOf("}"));
+            }
 
             Log.d("test", "GetInfoTask onPostExecute: data = " + data);
 
