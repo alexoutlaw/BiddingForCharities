@@ -124,7 +124,7 @@
     <string name="list_bidder_description">Highest Bidder</string>
 
     <string name="item_seller_label">Seller:\u0020</string>
-    <string name="item_seller_default">seler_name</string>
+    <string name="item_seller_default">seller_name</string>
     <string name="item_description_default">item_description</string>
     <string name="item_time_label">Time Left:\u0020</string>
     <string name="item_time_default">remaining_time</string>
@@ -132,7 +132,9 @@
     <string name="item_endtime_default">end_timestamp</string>
     <string name="item_bid_label">Current Bid:\u0020</string>
     <string name="item_bid_default">current_bid</string>
+    <string name="item_totalbids_label">\u0020Total Bids:\u0020</string>
     <string name="item_totalbids_default">total_bids</string>
+    <string name="bid_title_text">Bid Amount</string>
     <string name="item_placebid_button">Place Bid</string>
     <string name="item_shipping_label">Shipping:\u0020</string>
     <string name="item_shipping_default">shipping_price</string>
@@ -153,4 +155,6 @@
 
     <string name="background">Background Image</string>
     <string name="generic_error">Could not connect to server</string>
+    <string name="unimplemented_error">Feature Coming Soon!</string>
+    <string name="place_bid_error">Could not place bid</string>
 </resources>

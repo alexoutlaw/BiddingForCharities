@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/bid_title_text"
+            style="@style/FormLabelStyle" />
+
+        <EditText
+            android:id="@+id/dialog_bid_amount"
+            style="@style/FormInputStyle"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            android:maxLength="9" />
+
+        <Button
+            android:id="@+id/dialog_bid_button"
+            style="@style/FormSubmitStyle"
+            android:text="@string/item_placebid_button" />
+
+    </LinearLayout>
+
+</ScrollView>

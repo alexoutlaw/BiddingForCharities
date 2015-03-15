@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.vie.biddingforcharities.AccountActivity;
 import com.vie.biddingforcharities.AuctionFormActivity;
+import com.vie.biddingforcharities.AuctionItemActivity;
 import com.vie.biddingforcharities.AuctionSearchActivity;
 import com.vie.biddingforcharities.BidListActivity;
 import com.vie.biddingforcharities.CharityRequestActivity;
@@ -37,6 +38,8 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
         getWelcome,
         getUserBids,
         getUserWatchList,
+        getAuctionItem,
+        bidAuctionItem,
         updateAccountName,
         updateAccountUsername,
         updateAccountEmail,
@@ -45,7 +48,7 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
         searchAuctions,
         requestCharity
     }
-    SourceType type;
+    public SourceType type;
     Activity parent;
 
     public GetInfoTask(Activity parent) {
@@ -116,6 +119,10 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 case getUserWatchList:
                     ((WatchListActivity) parent).onTaskFinish(this, data);
                     break;
+                case getAuctionItem:
+                case bidAuctionItem:
+                    ((AuctionItemActivity) parent).onTaskFinish(this, data);
+                    break;
                 case updateAccountName:
                     ((AccountActivity) parent).onNameTaskFinish(data);
                     break;
@@ -161,6 +168,10 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 break;
             case getUserWatchList:
                 str = BASE_URL + "mwatchlist.php" + queryStr;
+                break;
+            case getAuctionItem:
+            case bidAuctionItem:
+                str = BASE_URL + "mitem.php" + queryStr;
                 break;
             case updateAccountName:
             case updateAccountUsername:
