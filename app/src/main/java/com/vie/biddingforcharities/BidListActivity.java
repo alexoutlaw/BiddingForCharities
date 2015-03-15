@@ -76,6 +76,9 @@ public class BidListActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
+        // Clear Previous
+        itemList.clear();
+
         //Show Spinner
         spinner = new ProgressDialog(this);
         spinner.setMessage("Loading Bids...");
