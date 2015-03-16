@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vie.biddingforcharities.logic.AuctionItem;
@@ -34,6 +35,7 @@ public class WatchListActivity extends Activity {
     ImageButton NavDrawerButton;
 
     GridView ItemGrid;
+    TextView EmptyWarningText;
     ProgressDialog spinner;
 
     ArrayList<GetInfoTask> jsonTasks = new ArrayList<GetInfoTask>();
@@ -49,6 +51,7 @@ public class WatchListActivity extends Activity {
         NavList = (ListView) findViewById(R.id.navList);
         NavDrawerButton = (ImageButton) findViewById(R.id.nav_drawer_expand);
         ItemGrid = (GridView) findViewById(R.id.item_grid);
+        EmptyWarningText = (TextView) findViewById(R.id.empty_warning_text);
 
         // Build Side Nav Menu
         ((Global) getApplication()).BuildNavigationMenu(NavList);
@@ -109,6 +112,11 @@ public class WatchListActivity extends Activity {
             //Deserialize
             JSONObject json = new JSONObject(data);
             JSONArray itemArray = (JSONArray) json.get("items");
+
+            // Show warning if no items returned
+            EmptyWarningText.setVisibility(itemArray.length() > 0
+                    ? View.GONE
+                    : View.VISIBLE);
 
             for(int i = 0; i < itemArray.length(); i++) {
                 final JSONObject item = (JSONObject) itemArray.get(i);

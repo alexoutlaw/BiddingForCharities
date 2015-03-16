@@ -157,4 +157,5 @@
     <string name="generic_error">Could not connect to server</string>
     <string name="unimplemented_error">Feature Coming Soon!</string>
     <string name="place_bid_error">Could not place bid</string>
+    <string name="empty_return_error">No Items Found</string>
 </resources>
