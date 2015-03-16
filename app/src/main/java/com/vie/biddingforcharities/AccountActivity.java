@@ -195,9 +195,11 @@ public class AccountActivity extends FragmentActivity implements AccountNameFrag
                         new String[]{"user_guid", user.getUserGuid()},
                         new String[]{"user_id", String.valueOf(user.getUserID())},
                         new String[]{"mode", "2"},
-                        new String[]{"new_email", newEmail},
-                        new String[]{"pwd", password},
                 });
+        // Must serialize email separately
+        queryStr += "&new_email=" + newEmail
+                + "&pwd=" + password;
+
         new GetInfoTask(this).execute("updateAccountEmail", queryStr);
     }
 
@@ -205,19 +207,20 @@ public class AccountActivity extends FragmentActivity implements AccountNameFrag
         try {
             //Deserialize
             JSONObject json = new JSONObject(data);
+            int was_updated = json.getInt("was_updated");
             int userAlreadyExists = json.getInt("user_already_exists");
-            if(userAlreadyExists > 0) {
-                int updated = json.getInt("was_updated");
-                if(updated > 0) {
-                    // Success, save and continue
-                    ((Global)getApplication()).getUser().updateEmail(tempEmail);
-                    Toast.makeText(this, "Email Successfully Updated!", Toast.LENGTH_LONG).show();
-                }
-                else {
+
+            if(was_updated > 0) {
+                // Success, save and continue
+                ((Global)getApplication()).getUser().updateEmail(tempEmail);
+                Toast.makeText(this, "Email Successfully Updated!", Toast.LENGTH_LONG).show();
+            }
+            else {
+                if(userAlreadyExists > 0) {
+                    Toast.makeText(this, "ERROR: Email Is Already In Use", Toast.LENGTH_LONG).show();
+                } else {
                     Toast.makeText(this, "ERROR: Could Not Update Email", Toast.LENGTH_LONG).show();
                 }
-            } else {
-                Toast.makeText(this, "ERROR: Email Is Already In Use", Toast.LENGTH_LONG).show();
             }
         }
         catch(Exception e) {
@@ -245,7 +248,7 @@ public class AccountActivity extends FragmentActivity implements AccountNameFrag
                 new String[][]{
                         new String[]{"user_guid", user.getUserGuid()},
                         new String[]{"user_id", String.valueOf(user.getUserID())},
-                        new String[]{"mode", "1"},
+                        new String[]{"mode", "3"},
                         new String[]{"address_email", email},
                         new String[]{"address_company", company},
                         new String[]{"address_first", first},

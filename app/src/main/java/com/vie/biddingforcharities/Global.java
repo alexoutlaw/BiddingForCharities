@@ -120,7 +120,6 @@ public class Global extends Application {
     }
 
     private void Navigate(Context cxt, int position) {
-        //TODO: switch back as implemented
         switch(position) {
             case 0:
                 cxt.startActivity(new Intent(cxt, AccountActivity.class));

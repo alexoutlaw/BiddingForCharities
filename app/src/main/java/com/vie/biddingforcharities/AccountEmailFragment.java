@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vie.biddingforcharities.logic.User;
 
@@ -36,7 +37,11 @@ public class AccountEmailFragment extends Fragment {
         UpdateEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EmailListener.SubmitEmailUpdate(NewEmailInput.getText().toString(), PasswordInput.getText().toString());
+                if(!NewEmailInput.getText().toString().equals(ConfirmEmailInput.getText().toString())) {
+                    Toast.makeText((getActivity()), "ERROR: Emails do not match", Toast.LENGTH_LONG).show();
+                } else {
+                    EmailListener.SubmitEmailUpdate(NewEmailInput.getText().toString(), PasswordInput.getText().toString());
+                }
             }
         });
 
