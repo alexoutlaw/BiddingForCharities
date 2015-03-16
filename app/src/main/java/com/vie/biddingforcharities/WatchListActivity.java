@@ -84,6 +84,7 @@ public class WatchListActivity extends Activity {
         //Show Spinner
         spinner = new ProgressDialog(this);
         spinner.setMessage("Loading Watchlist...");
+        spinner.setCanceledOnTouchOutside(false);
         spinner.show();
 
         // Get Bids

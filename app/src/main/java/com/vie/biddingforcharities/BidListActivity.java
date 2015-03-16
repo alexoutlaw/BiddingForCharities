@@ -85,6 +85,7 @@ public class BidListActivity extends Activity {
         //Show Spinner
         spinner = new ProgressDialog(this);
         spinner.setMessage("Loading Bids...");
+        spinner.setCanceledOnTouchOutside(false);
         spinner.show();
 
         // Get Bids

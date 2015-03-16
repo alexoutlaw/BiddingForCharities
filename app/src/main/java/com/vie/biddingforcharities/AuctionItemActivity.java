@@ -145,7 +145,8 @@ public class AuctionItemActivity extends Activity {
 
         //Show Spinner
         spinner = new ProgressDialog(this);
-        spinner.setMessage("Loading Bids...");
+        spinner.setMessage("Loading Details...");
+        spinner.setCanceledOnTouchOutside(false);
         spinner.show();
 
         // Get Item Info
