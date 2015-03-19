@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.text.Html;
@@ -42,6 +43,7 @@ public class AuctionItemActivity extends Activity {
     ProgressDialog spinner;
 
     Integer ItemID;
+    String SellersEmail, ItemTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,8 +118,7 @@ public class AuctionItemActivity extends Activity {
                     .append("<a href=\"http://biddingforcharities.com/auc_item.php?id=" + ItemID + "\">")
                     .append("Item Link</a></p>");
 
-                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                emailIntent.setType("message/rfc822");
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "", null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Bidding For Charities Shared Item");
                 emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(emailBody.toString()));
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
@@ -129,8 +130,9 @@ public class AuctionItemActivity extends Activity {
         ContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
-                Toast.makeText(AuctionItemActivity.this, getResources().getString(R.string.unimplemented_error), Toast.LENGTH_LONG).show();
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", SellersEmail, null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Contact Seller: " + ItemTitle );
+                startActivity(Intent.createChooser(emailIntent, "Send email..."));
             }
         });
 
@@ -175,6 +177,8 @@ public class AuctionItemActivity extends Activity {
                 double current_price = json.getDouble("current_price");
                 boolean is_featured = Boolean.getBoolean(json.getString("is_featured"));
                 int sellers_user_id = json.getInt("sellers_user_id");
+                String sellers_user_name = json.getString("sellers_user_name");
+                SellersEmail = json.getString("sellers_user_email");
                 boolean item_belongs_to_viewer = Boolean.getBoolean(json.getString("item_belongs_to_viewer"));
                 boolean auction_has_ended = Boolean.getBoolean(json.getString("auction_has_ended"));
                 double next_mandatory_bid = json.getDouble("next_mandatory_bid");
@@ -195,7 +199,7 @@ public class AuctionItemActivity extends Activity {
                 String photo13 = json.getString("photo13");
                 String photo14 = json.getString("photo14");
                 String photo15 = json.getString("photo15");
-                String title = json.getString("title");
+                ItemTitle = json.getString("title");
                 String time_left = json.getString("time_left");
                 String end_date_pt = json.getString("end_date_pt");
                 Date end_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(end_date_pt);
@@ -211,7 +215,7 @@ public class AuctionItemActivity extends Activity {
                 new GetBitmapTask(this, ItemImage, 0, 0).execute(photo1);
 
                 // Set Item Text
-                SellerNameText.setText(String.valueOf(sellers_user_id));
+                SellerNameText.setText(sellers_user_name);
                 ItemDescriptionText.setText(android.text.Html.fromHtml(description));
                 RemainingTimeText.setText(displayEndTime);
                 EndTimestampText.setText(end_date_pt);
