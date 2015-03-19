@@ -50,19 +50,65 @@ public class AuctionFormActivity extends Activity {
         });
     }
 
-    public void onTaskFinish(String data) {
+    public void onCategoryTaskFinish(String data) {
         try {
             //Deserialize
             JSONObject json = new JSONObject(data);
-            int UserId = json.getInt("UserId");
-            if(UserId > 0) {
-                //Navigate to Home
-                startActivity(new Intent(AuctionFormActivity.this, HomeActivity.class));
-                finish();
-            }
-            else {
-                Toast.makeText(this, "Invalid Login", Toast.LENGTH_LONG).show();
-            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onFolderTaskFinish(String data) {
+        try {
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onConsignorTaskFinish(String data) {
+        try {
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onReturnTaskFinish(String data) {
+        try {
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onPaymentTaskFinish(String data) {
+        try {
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onUpdateTaskFinish(String data) {
+        try {
+            //Deserialize
+            JSONObject json = new JSONObject(data);
         }
         catch(Exception e) {
             e.printStackTrace();

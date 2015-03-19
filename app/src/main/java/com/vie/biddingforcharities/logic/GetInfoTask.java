@@ -41,12 +41,18 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
         getUserWatchList,
         getUserAuctions,
         getAuctionItem,
+        getSellerCategories,
+        getSellerFolders,
+        getSellerConsignors,
+        getSellerReturnPolicy,
+        getSellerPaymentPolicy,
         bidAuctionItem,
         updateAccountName,
         updateAccountUsername,
         updateAccountEmail,
         updateAccountAddress,
         updateAuction,
+        getAllCategories,
         searchAuctions,
         requestCharity
     }
@@ -125,8 +131,28 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                     ((AuctionListActivity) parent).onTaskFinish(this, data);
                     break;
                 case getAuctionItem:
+                    ((AuctionItemActivity) parent).onItemTaskFinish(data);
+                    break;
                 case bidAuctionItem:
-                    ((AuctionItemActivity) parent).onTaskFinish(this, data);
+                    ((AuctionItemActivity) parent).onBidTaskFinish(data);
+                    break;
+                case getSellerCategories:
+                    ((AuctionFormActivity) parent).onCategoryTaskFinish(data);
+                    break;
+                case getSellerFolders:
+                    ((AuctionFormActivity) parent).onFolderTaskFinish(data);
+                    break;
+                case getSellerConsignors:
+                    ((AuctionFormActivity) parent).onConsignorTaskFinish(data);
+                    break;
+                case getSellerReturnPolicy:
+                    ((AuctionFormActivity) parent).onReturnTaskFinish(data);
+                    break;
+                case getSellerPaymentPolicy:
+                    ((AuctionFormActivity) parent).onPaymentTaskFinish(data);
+                    break;
+                case updateAuction:
+                    ((AuctionFormActivity) parent).onUpdateTaskFinish(data);
                     break;
                 case updateAccountName:
                     ((AccountActivity) parent).onNameTaskFinish(data);
@@ -140,11 +166,11 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 case updateAccountAddress:
                     ((AccountActivity) parent).onAddressTaskFinish(data);
                     break;
-                case updateAuction:
-                    ((AuctionFormActivity) parent).onTaskFinish(data);
+                case getAllCategories:
+                    ((AuctionSearchActivity) parent).onCategoryTaskFinish(data);
                     break;
                 case searchAuctions:
-                    ((AuctionSearchActivity) parent).onTaskFinish(this, data);
+                    ((AuctionSearchActivity) parent).onSearchTaskFinish(this, data);
                     break;
                 case requestCharity:
                     ((CharityRequestActivity) parent).onTaskFinish(data);
@@ -178,14 +204,30 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
             case bidAuctionItem:
                 str = BASE_URL + "mitem.php" + queryStr;
                 break;
+            case getAllCategories:
+            case getSellerCategories:
+                str = BASE_URL + "mlive_auction_categories.php" + queryStr;
+                break;
+            case getSellerFolders:
+                str = BASE_URL + "minventory_folder.php" + queryStr;
+                break;
+            case getSellerConsignors:
+                str = BASE_URL + "mconsignors.php" + queryStr;
+                break;
+            case getSellerReturnPolicy:
+                str = BASE_URL + "mreturnpolicy.php" + queryStr;
+                break;
+            case getSellerPaymentPolicy:
+                str = BASE_URL + "mpaymentpolicy.php" + queryStr;
+                break;
+            case updateAuction:
+                str = BASE_URL + "madd_update_item.php" + queryStr;
+                break;
             case updateAccountName:
             case updateAccountUsername:
             case updateAccountEmail:
             case updateAccountAddress:
                 str = BASE_URL + "mmyinfo.php" + queryStr;
-                break;
-            case updateAuction:
-                str = BASE_URL + "madd_update_item.php" + queryStr;
                 break;
             case getUserAuctions:
             case searchAuctions:

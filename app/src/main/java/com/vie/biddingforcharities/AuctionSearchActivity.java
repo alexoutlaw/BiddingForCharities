@@ -45,6 +45,8 @@ public class AuctionSearchActivity extends FragmentActivity {
     ArrayList<GetBitmapTask> downloadTasks = new ArrayList<GetBitmapTask>();
     ArrayList<AuctionItem> itemList = new ArrayList<AuctionItem>();
 
+    ArrayList<String[]> categoryItems = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +91,9 @@ public class AuctionSearchActivity extends FragmentActivity {
                 SearchDialog.show(getFragmentManager(), "test");
             }
         });
+
+        // Load Categories
+        startCategoryTask();
     }
 
     @Override
@@ -102,7 +107,51 @@ public class AuctionSearchActivity extends FragmentActivity {
         super.onPause();
     }
 
-    public void startSearchTask(String titleText,int categorySelect,int pageSelect,int sortSelect) {
+    public void startCategoryTask() {
+        //Show Spinner
+        spinner = new ProgressDialog(AuctionSearchActivity.this);
+        spinner.setMessage("Loading Categories...");
+        spinner.setCanceledOnTouchOutside(false);
+        spinner.show();
+
+        // Get Bids
+        String queryStr = Utilities.BuildQueryParams(
+                new String[][]{
+                        new String[]{"seller_id_to_get", "0"},
+                });
+        new GetInfoTask(AuctionSearchActivity.this).execute("getAllCategories", queryStr);
+    }
+
+    public void onCategoryTaskFinish(String data) {
+        try {
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+            JSONArray categoryArray = (JSONArray) json.get("cats");
+
+            ArrayList<String> categories = new ArrayList<>();
+            categories.add("Select Category");
+            categoryItems.add(new String[] { "0", "Select Category" });
+            for(int i = 0; i < categoryArray.length(); i++) {
+                JSONArray categoryDetails = (JSONArray) categoryArray.get(i);
+                categories.add(categoryDetails.getString(1));
+                categoryItems.add(new String[] { categoryDetails.getString(0), categoryDetails.getString(1) });
+            }
+
+            // Add to spinner
+            SearchDialog.UpdateCategories(categories);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+
+        //Dismiss Spinner
+        if(spinner != null && spinner.isShowing()) {
+            spinner.dismiss();
+        }
+    }
+
+    public void startSearchTask(String titleText, int categorySelect, int pageSelect, int sortSelect) {
         SearchDialog.dismiss();
 
         //Show Spinner
@@ -110,13 +159,16 @@ public class AuctionSearchActivity extends FragmentActivity {
         spinner.setMessage("Loading Results...");
         spinner.show();
 
+        // Get Category
+        String categoryId = categoryItems.get(categorySelect)[0];
+
         // Get Bids
         String queryStr = Utilities.BuildQueryParams(
                 new String[][]{
                         new String[]{"search_seller_id", "0"},
                         new String[]{"search_high_bidder_id", "0"},
                         new String[]{"search_title", titleText},
-                        new String[]{"search_category_id", String.valueOf(categorySelect)},
+                        new String[]{"search_category_id", categoryId},
                         new String[]{"search_consignor_id", "0"},
                         new String[]{"search_start_row", "0"},
                         new String[]{"search_items_per_page", String.valueOf((pageSelect + 1) * 25)},
@@ -126,7 +178,7 @@ public class AuctionSearchActivity extends FragmentActivity {
         jsonTasks.add((GetInfoTask) new GetInfoTask(AuctionSearchActivity.this).execute("searchAuctions", queryStr));
     }
 
-    public void onTaskFinish(GetInfoTask task ,String data) {
+    public void onSearchTaskFinish(GetInfoTask task, String data) {
         jsonTasks.remove(task);
         itemList.clear();
 

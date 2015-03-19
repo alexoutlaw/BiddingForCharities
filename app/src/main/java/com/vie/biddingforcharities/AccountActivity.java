@@ -147,7 +147,7 @@ public class AccountActivity extends FragmentActivity implements AccountNameFrag
                         new String[]{"user_id", String.valueOf(user.getUserID())},
                         new String[]{"mode", "4"},
                         new String[]{"user_name", userName},
-                        new String[]{"user_name_id", String.valueOf(user.getUserID())},
+                        new String[]{"user_name_id", String.valueOf(user.getUserNameId())},
                 });
         new GetInfoTask(this).execute("updateAccountUsername", queryStr);
     }
@@ -156,15 +156,17 @@ public class AccountActivity extends FragmentActivity implements AccountNameFrag
         try {
             //Deserialize
             JSONObject json = new JSONObject(data);
-            int updated = json.getInt("user_name_id");
-            if(updated > 0) {
+
+            int user_name_id = json.getInt("user_name_id");
+            String user_name = json.getString("user_name");
+            String message = json.getString("message");
+
+            if(user_name_id > 0) {
                 // Success, save and continue
-                ((Global)getApplication()).getUser().updateUserName(tempUserName, updated);
-                Toast.makeText(this, "Username Successfully Updated!", Toast.LENGTH_LONG).show();
+                ((Global) getApplication()).getUser().updateUserName(user_name, user_name_id);
             }
-            else {
-                Toast.makeText(this, "ERROR: Could Not Update Username", Toast.LENGTH_LONG).show();
-            }
+
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -208,7 +210,8 @@ public class AccountActivity extends FragmentActivity implements AccountNameFrag
             //Deserialize
             JSONObject json = new JSONObject(data);
             int was_updated = json.getInt("was_updated");
-            int userAlreadyExists = json.getInt("user_already_exists");
+            int user_already_exists = json.getInt("user_already_exists");
+            int bad_password = json.getInt("bad_password");
 
             if(was_updated > 0) {
                 // Success, save and continue
@@ -216,7 +219,9 @@ public class AccountActivity extends FragmentActivity implements AccountNameFrag
                 Toast.makeText(this, "Email Successfully Updated!", Toast.LENGTH_LONG).show();
             }
             else {
-                if(userAlreadyExists > 0) {
+                if(bad_password > 0) {
+                    Toast.makeText(this, "ERROR: Password Was Incorrect", Toast.LENGTH_LONG).show();
+                } else if(user_already_exists > 0) {
                     Toast.makeText(this, "ERROR: Email Is Already In Use", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(this, "ERROR: Could Not Update Email", Toast.LENGTH_LONG).show();

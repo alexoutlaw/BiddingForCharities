@@ -14,10 +14,14 @@ import android.widget.Spinner;
 import com.vie.biddingforcharities.AuctionSearchActivity;
 import com.vie.biddingforcharities.R;
 
+import java.util.ArrayList;
+
 public class SearchFormDialog extends DialogFragment {
     EditText SearchTitleInput;
     Spinner CategorySpinner, PageSpinner, SortSpinner;
     Button SearchFormButton;
+
+    public ArrayList<String> categories = new ArrayList<>();
 
     public SearchFormDialog() {
     }
@@ -35,7 +39,7 @@ public class SearchFormDialog extends DialogFragment {
 
         // Category Dropdown
         CategorySpinner = (Spinner) DialogView.findViewById(R.id.category_spinner);
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(activity, R.array.search_category_items, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter(activity, android.R.layout.simple_spinner_item, categories);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         CategorySpinner.setAdapter(categoryAdapter);
 
@@ -72,5 +76,9 @@ public class SearchFormDialog extends DialogFragment {
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         return DialogView;
+    }
+
+    public void UpdateCategories(ArrayList<String> categoryList) {
+        categories = categoryList;
     }
 }

@@ -161,78 +161,63 @@ public class AuctionItemActivity extends Activity {
         new GetInfoTask(this).execute("getAuctionItem", queryStr);
     }
 
-    public void onTaskFinish(GetInfoTask task, String data) {
+    public void onItemTaskFinish(String data) {
         try {
-            // Load Item Page
-            if(task.type == GetInfoTask.SourceType.getAuctionItem) {
-                if (data.startsWith("[")) {
-                    throw new Exception("Blank Request Return Value");
-                }
 
-                //Deserialize
-                JSONObject json = new JSONObject(data);
-
-                if (json.has("item_id") && !json.isNull("item_id")) {
-                    double current_price = json.getDouble("current_price");
-                    boolean is_featured = Boolean.getBoolean(json.getString("is_featured"));
-                    int sellers_user_id = json.getInt("sellers_user_id");
-                    boolean item_belongs_to_viewer = Boolean.getBoolean(json.getString("item_belongs_to_viewer"));
-                    boolean auction_has_ended = Boolean.getBoolean(json.getString("auction_has_ended"));
-                    double next_mandatory_bid = json.getDouble("next_mandatory_bid");
-                    boolean viewer_is_high_bidder = Boolean.getBoolean(json.getString("viewer_is_high_bidder"));
-                    double current_max_bid = json.getDouble("current_max_bid");
-                    String photo1 = json.getString("photo1");
-                    String photo2 = json.getString("photo2");
-                    String photo3 = json.getString("photo3");
-                    String photo4 = json.getString("photo4");
-                    String photo5 = json.getString("photo5");
-                    String photo6 = json.getString("photo6");
-                    String photo7 = json.getString("photo7");
-                    String photo8 = json.getString("photo8");
-                    String photo9 = json.getString("photo9");
-                    String photo10 = json.getString("photo10");
-                    String photo11 = json.getString("photo11");
-                    String photo12 = json.getString("photo12");
-                    String photo13 = json.getString("photo13");
-                    String photo14 = json.getString("photo14");
-                    String photo15 = json.getString("photo15");
-                    String title = json.getString("title");
-                    String time_left = json.getString("time_left");
-                    String end_date_pt = json.getString("end_date_pt");
-                    Date end_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(end_date_pt);
-                    String displayEndTime = Utilities.ConvertDateToCountdown(end_date);
-                    int total_bids = json.getInt("total_bids");
-                    int item_id = json.getInt("item_id");
-                    String item_guid = json.getString("item_guid");
-                    double shipping = json.getDouble("shipping");
-                    double shipping_additional = json.getDouble("shipping_additional");
-                    String description = json.getString("description");
-
-                    // Set Item Image
-                    new GetBitmapTask(this, ItemImage, 0, 0).execute(photo1);
-
-                    // Set Item Text
-                    SellerNameText.setText(String.valueOf(sellers_user_id));
-                    ItemDescriptionText.setText(android.text.Html.fromHtml(description));
-                    RemainingTimeText.setText(displayEndTime);
-                    EndTimestampText.setText(end_date_pt);
-                    CurrentBidText.setText("$" + String.valueOf(current_price));
-                    TotalBidsText.setText(String.valueOf(total_bids));
-                    ShippingPrice.setText("$" + String.valueOf(shipping) + (shipping_additional > 0 ? " Additional: $" + shipping_additional : ""));
-                }
+            if (data.startsWith("[")) {
+                throw new Exception("Blank Request Return Value");
             }
 
-            // Show Bid Return Message
-            if(task.type == GetInfoTask.SourceType.bidAuctionItem) {
-                //Deserialize
-                JSONObject json = new JSONObject(data);
+            //Deserialize
+            JSONObject json = new JSONObject(data);
 
-                if (json.has("return_bid_message") && !json.isNull("return_bid_message")) {
-                    Toast.makeText(this, json.getString("return_bid_message"), Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(this, getResources().getString(R.string.place_bid_error), Toast.LENGTH_LONG).show();
-                }
+            if (json.has("item_id") && !json.isNull("item_id")) {
+                double current_price = json.getDouble("current_price");
+                boolean is_featured = Boolean.getBoolean(json.getString("is_featured"));
+                int sellers_user_id = json.getInt("sellers_user_id");
+                boolean item_belongs_to_viewer = Boolean.getBoolean(json.getString("item_belongs_to_viewer"));
+                boolean auction_has_ended = Boolean.getBoolean(json.getString("auction_has_ended"));
+                double next_mandatory_bid = json.getDouble("next_mandatory_bid");
+                boolean viewer_is_high_bidder = Boolean.getBoolean(json.getString("viewer_is_high_bidder"));
+                double current_max_bid = json.getDouble("current_max_bid");
+                String photo1 = json.getString("photo1");
+                String photo2 = json.getString("photo2");
+                String photo3 = json.getString("photo3");
+                String photo4 = json.getString("photo4");
+                String photo5 = json.getString("photo5");
+                String photo6 = json.getString("photo6");
+                String photo7 = json.getString("photo7");
+                String photo8 = json.getString("photo8");
+                String photo9 = json.getString("photo9");
+                String photo10 = json.getString("photo10");
+                String photo11 = json.getString("photo11");
+                String photo12 = json.getString("photo12");
+                String photo13 = json.getString("photo13");
+                String photo14 = json.getString("photo14");
+                String photo15 = json.getString("photo15");
+                String title = json.getString("title");
+                String time_left = json.getString("time_left");
+                String end_date_pt = json.getString("end_date_pt");
+                Date end_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(end_date_pt);
+                String displayEndTime = Utilities.ConvertDateToCountdown(end_date);
+                int total_bids = json.getInt("total_bids");
+                int item_id = json.getInt("item_id");
+                String item_guid = json.getString("item_guid");
+                double shipping = json.getDouble("shipping");
+                double shipping_additional = json.getDouble("shipping_additional");
+                String description = json.getString("description");
+
+                // Set Item Image
+                new GetBitmapTask(this, ItemImage, 0, 0).execute(photo1);
+
+                // Set Item Text
+                SellerNameText.setText(String.valueOf(sellers_user_id));
+                ItemDescriptionText.setText(android.text.Html.fromHtml(description));
+                RemainingTimeText.setText(displayEndTime);
+                EndTimestampText.setText(end_date_pt);
+                CurrentBidText.setText("$" + String.valueOf(current_price));
+                TotalBidsText.setText(String.valueOf(total_bids));
+                ShippingPrice.setText("$" + String.valueOf(shipping) + (shipping_additional > 0 ? " Additional: $" + shipping_additional : ""));
             }
         }
         catch(Exception e) {
@@ -260,5 +245,23 @@ public class AuctionItemActivity extends Activity {
                         new String[]{"bid_value",bidAmountText}
                 });
         new GetInfoTask(AuctionItemActivity.this).execute("bidAuctionItem", queryStr);
+    }
+
+    public void onBidTaskFinish(String data) {
+        try {
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+
+            if (json.has("return_bid_message") && !json.isNull("return_bid_message")) {
+                Toast.makeText(this, json.getString("return_bid_message"), Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(this, getResources().getString(R.string.place_bid_error), Toast.LENGTH_LONG).show();
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
     }
 }

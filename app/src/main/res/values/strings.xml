@@ -92,13 +92,6 @@
     <string name="search_srt_label">Select Sort</string>
     <string name="search_button">Search</string>
 
-    <string-array name="search_category_items">
-        <item name="category_hint">Select Category</item>
-        <!--<item>Root Charity</item>-->
-        <!--<item>Root Charity</item>-->
-        <!--<item>Root San Diego Army</item>-->
-    </string-array>
-
     <string-array name="search_page_items">
         <item>25 items per Page</item>
         <item>50 items per Page</item>
@@ -154,7 +147,7 @@
     <string name="request_button">Send Request</string>
 
     <string name="background">Background Image</string>
-    <string name="generic_error">Could not connect to server</string>
+    <string name="generic_error">Error Receiving Data</string>
     <string name="unimplemented_error">Feature Coming Soon!</string>
     <string name="place_bid_error">Could not place bid</string>
     <string name="empty_return_error">No Items Found</string>
