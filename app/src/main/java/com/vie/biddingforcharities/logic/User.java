@@ -1,5 +1,7 @@
 package com.vie.biddingforcharities.logic;
 
+import java.util.ArrayList;
+
 /**
  * Created by Alex Outlaw on 2/19/2015.
  */
@@ -16,6 +18,13 @@ public final class User {
     String LastName;
     int AddressId;
     boolean HasSellerInvoiceDefaults;
+
+    // Unsaved Session Cache
+    ArrayList<String[]> Categories;
+    ArrayList<String[]> Folders;
+    ArrayList<String[]> Consignors;
+    ArrayList<String[]> ReturnPolicies;
+    ArrayList<String[]> PaymentPolicies;
 
     public User(String email, int userId, String userGuid, int type, int nameId, String name, int addressId, boolean hasInvoiceDefaults) throws Exception {
         Email = email;
@@ -40,6 +49,12 @@ public final class User {
         UserName = name;
         AddressId = addressId;
         HasSellerInvoiceDefaults = hasInvoiceDefaults;
+
+        ArrayList<String[]> Categories = new ArrayList<>();
+        ArrayList<String[]> Folders = new ArrayList<>();
+        ArrayList<String[]> Consignors = new ArrayList<>();
+        ArrayList<String[]> ReturnPolicies = new ArrayList<>();
+        ArrayList<String[]> PaymentPolicies = new ArrayList<>();
     }
 
     public String getEmail() {
@@ -68,6 +83,12 @@ public final class User {
     public boolean getHasInvoiceDefaults() {
         return HasSellerInvoiceDefaults;
     }
+    public ArrayList getCategories() { return Categories; }
+    public ArrayList getFolders() { return Folders; }
+    public ArrayList getConsignors() { return Consignors; }
+    public ArrayList getReturnPolicies() { return ReturnPolicies; }
+    public ArrayList getPaymentPolicies() { return PaymentPolicies; }
+
 
     public void updateFullName(String first, String last) {
         FirstName = first;
@@ -86,4 +107,10 @@ public final class User {
     public void updateAddressId(int addressId) {
         AddressId = addressId;
     }
+
+    public void updateCategories(ArrayList<String[]> categories) { Categories = categories; }
+    public void updateFolders(ArrayList<String[]> folders) { Folders = folders; }
+    public void updateConsignors(ArrayList<String[]> consignors) { Consignors = consignors; }
+    public void updateReturnPolicies(ArrayList<String[]> returnPolicies) { ReturnPolicies = returnPolicies; }
+    public void updatePaymentPolcies(ArrayList<String[]> paymentPolicies) { PaymentPolicies = paymentPolicies; }
 }

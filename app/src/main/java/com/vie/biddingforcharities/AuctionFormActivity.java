@@ -1,6 +1,8 @@
 package com.vie.biddingforcharities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -11,13 +13,23 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.vie.biddingforcharities.logic.User;
+
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class AuctionFormActivity extends Activity {
     DrawerLayout NavLayout;
     ListView NavList;
     Button HomeButton;
     ImageButton NavDrawerButton;
+
+    ArrayList<String[]> Categories = new ArrayList<>();
+    ArrayList<String[]> Folders = new ArrayList<>();
+    ArrayList<String[]> Consignors = new ArrayList<>();
+    ArrayList<String[]> ReturnPolicies = new ArrayList<>();
+    ArrayList<String[]> PaymentPolicies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +60,40 @@ public class AuctionFormActivity extends Activity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Get Cache
+        User user = ((Global) getApplication()).getUser();
+        Categories = user.getCategories();
+        Folders = user.getFolders();
+        Consignors = user.getConsignors();
+        ReturnPolicies = user.getReturnPolicies();
+        PaymentPolicies = user.getPaymentPolicies();
+
+        // If no Cache, grab from mobile call
+
+    }
+
+    //Adds a second button click to fully exit the app
+    //prevents accidental sign outs
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Closing...")
+                .setMessage("Reset Item Form?")
+                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Clear data, then exit
+                        AuctionFormActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     public void onCategoryTaskFinish(String data) {
