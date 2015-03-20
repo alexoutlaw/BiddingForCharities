@@ -23,9 +23,11 @@ import com.vie.biddingforcharities.logic.User;
 import com.vie.biddingforcharities.logic.Utilities;
 import com.vie.biddingforcharities.ui.BidFormDialog;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,13 +39,15 @@ public class AuctionItemActivity extends Activity {
 
     ImageView ItemImage;
     TextView SellerNameText, ItemDescriptionText, RemainingTimeText, EndTimestampText, CurrentBidText, TotalBidsText, ShippingPrice;
-    Button BidButton, WatchlistButton, ShareButton, ContactButton;
+    Button BidButton, WatchlistAddButton, WatchlistRemoveButton, ShareButton, ContactButton;
 
     BidFormDialog BidDialog;
     ProgressDialog spinner;
 
     Integer ItemID;
     String SellersEmail, ItemTitle;
+    ArrayList<Integer> WatchlistItemIds;
+    boolean FreezeWatchlistState = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,12 +101,42 @@ public class AuctionItemActivity extends Activity {
         });
 
         // Add to Watchlist
-        WatchlistButton = (Button) findViewById(R.id.add_watchlist_button);
-        WatchlistButton.setOnClickListener(new View.OnClickListener() {
+        WatchlistAddButton = (Button) findViewById(R.id.watchlist_add_button);
+        WatchlistAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
-                Toast.makeText(AuctionItemActivity.this, getResources().getString(R.string.unimplemented_error), Toast.LENGTH_LONG).show();
+                if(!FreezeWatchlistState) {
+                    User user = ((Global) getApplication()).getUser();
+                    String queryStr = Utilities.BuildQueryParams(
+                            new String[][]{
+                                    new String[]{"user_guid", user.getUserGuid()},
+                                    new String[]{"user_id", String.valueOf(user.getUserID())},
+                                    new String[]{"add_item_id", String.valueOf(ItemID)}
+                            });
+                    new GetInfoTask(AuctionItemActivity.this).execute("addWatchlist", queryStr);
+
+                    FreezeWatchlistState = true;
+                }
+            }
+        });
+
+        // Remove from Watchlist
+        WatchlistRemoveButton = (Button) findViewById(R.id.watchlist_remove_button);
+        WatchlistRemoveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!FreezeWatchlistState) {
+                    User user = ((Global) getApplication()).getUser();
+                    String queryStr = Utilities.BuildQueryParams(
+                            new String[][]{
+                                    new String[]{"user_guid", user.getUserGuid()},
+                                    new String[]{"user_id", String.valueOf(user.getUserID())},
+                                    new String[]{"remove_item_id", String.valueOf(ItemID)}
+                            });
+                    new GetInfoTask(AuctionItemActivity.this).execute("removeWatchlist", queryStr);
+
+                    FreezeWatchlistState = true;
+                }
             }
         });
 
@@ -144,6 +178,64 @@ public class AuctionItemActivity extends Activity {
         else {
             ItemID = 0;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Get Watchlist Cache
+        WatchlistItemIds = ((Global) getApplication()).getUser().getWatchlistItemIds();
+        if(WatchlistItemIds == null) {
+            // Get Watchlist Items
+            User user = ((Global) getApplication()).getUser();
+            String queryStr = Utilities.BuildQueryParams(
+                    new String[][]{
+                            new String[]{"user_guid", user.getUserGuid()},
+                            new String[]{"user_id", String.valueOf(user.getUserID())},
+                    });
+            new GetInfoTask(this).execute("updateWatchlistItems", queryStr);
+        } else {
+            StartItemTask();
+        }
+    }
+
+    public void onWatchlistGetTaskFinish(String data) {
+        try {
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+            JSONArray itemArray = (JSONArray) json.get("items");
+
+            // Add to local WL cache
+            WatchlistItemIds = new ArrayList<>();
+            for(int i = 0; i < itemArray.length(); i++) {
+                final JSONObject item = (JSONObject) itemArray.get(i);
+
+                if (item.has("item_id") && !item.isNull("item_id")) {
+                    WatchlistItemIds.add(item.getInt("item_id"));
+                }
+            }
+
+            // Update Cache
+            ((Global) getApplication()).getUser().updateWatchlistItemIds(WatchlistItemIds);
+
+            StartItemTask();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void StartItemTask() {
+        // Set Watchlist flag
+        if(WatchlistItemIds.contains(ItemID)) {
+            WatchlistAddButton.setVisibility(View.GONE);
+            WatchlistRemoveButton.setVisibility(View.VISIBLE);
+        } else {
+            WatchlistAddButton.setVisibility(View.VISIBLE);
+            WatchlistRemoveButton.setVisibility(View.GONE);
+        }
 
         //Show Spinner
         spinner = new ProgressDialog(this);
@@ -152,7 +244,7 @@ public class AuctionItemActivity extends Activity {
         spinner.show();
 
         // Get Item Info
-        User user =  ((Global) getApplication()).getUser();
+        User user = ((Global) getApplication()).getUser();
         String queryStr = Utilities.BuildQueryParams(
                 new String[][]{
                         new String[]{"user_id", String.valueOf(user.getUserID())},
@@ -182,6 +274,7 @@ public class AuctionItemActivity extends Activity {
                 boolean item_belongs_to_viewer = Boolean.getBoolean(json.getString("item_belongs_to_viewer"));
                 boolean auction_has_ended = Boolean.getBoolean(json.getString("auction_has_ended"));
                 double next_mandatory_bid = json.getDouble("next_mandatory_bid");
+                // TODO: use this
                 boolean viewer_is_high_bidder = Boolean.getBoolean(json.getString("viewer_is_high_bidder"));
                 double current_max_bid = json.getDouble("current_max_bid");
                 String photo1 = json.getString("photo1");
@@ -261,6 +354,60 @@ public class AuctionItemActivity extends Activity {
             }
             else {
                 Toast.makeText(this, getResources().getString(R.string.place_bid_error), Toast.LENGTH_LONG).show();
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onWatchlistAddTaskFinish(String data) {
+        try {
+            FreezeWatchlistState = false;
+
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+            int item_added = json.getInt("item_added");
+
+            if(item_added > 0) {
+                Toast.makeText(this, "Item added to watchlist", Toast.LENGTH_LONG).show();
+
+                WatchlistItemIds.add(ItemID);
+                ((Global) getApplication()).getUser().updateWatchlistItemIds(WatchlistItemIds);
+
+                WatchlistAddButton.setVisibility(View.GONE);
+                WatchlistRemoveButton.setVisibility(View.VISIBLE);
+            }
+            else {
+                Toast.makeText(this, "Error adding item to watchlist", Toast.LENGTH_LONG).show();
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onWatchlistRemoveTaskFinish(String data) {
+        try {
+            FreezeWatchlistState = false;
+
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+            int item_removed = json.getInt("item_removed");
+
+            if(item_removed > 0) {
+                Toast.makeText(this, "Item removed from watchlist", Toast.LENGTH_LONG).show();
+
+                WatchlistItemIds.remove(ItemID);
+                ((Global) getApplication()).getUser().updateWatchlistItemIds(WatchlistItemIds);
+
+                WatchlistAddButton.setVisibility(View.VISIBLE);
+                WatchlistRemoveButton.setVisibility(View.GONE);
+            }
+            else {
+                Toast.makeText(this, "Error removing item from watchlist", Toast.LENGTH_LONG).show();
             }
         }
         catch(Exception e) {

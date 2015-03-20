@@ -47,6 +47,9 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
         getSellerReturnPolicy,
         getSellerPaymentPolicy,
         bidAuctionItem,
+        addWatchlist,
+        removeWatchlist,
+        updateWatchlistItems,
         updateAccountName,
         updateAccountUsername,
         updateAccountEmail,
@@ -136,6 +139,15 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 case bidAuctionItem:
                     ((AuctionItemActivity) parent).onBidTaskFinish(data);
                     break;
+                case updateWatchlistItems:
+                    ((AuctionItemActivity) parent).onWatchlistGetTaskFinish(data);
+                    break;
+                case addWatchlist:
+                    ((AuctionItemActivity) parent).onWatchlistAddTaskFinish(data);
+                    break;
+                case removeWatchlist:
+                    ((AuctionItemActivity) parent).onWatchlistRemoveTaskFinish(data);
+                    break;
                 case getSellerCategories:
                     ((AuctionFormActivity) parent).onCategoryTaskFinish(data);
                     break;
@@ -198,6 +210,9 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 str = BASE_URL + "mmybids.php" + queryStr;
                 break;
             case getUserWatchList:
+            case updateWatchlistItems:
+            case addWatchlist:
+            case removeWatchlist:
                 str = BASE_URL + "mwatchlist.php" + queryStr;
                 break;
             case getAuctionItem:

@@ -20,6 +20,7 @@ public final class User {
     boolean HasSellerInvoiceDefaults;
 
     // Unsaved Session Cache
+    ArrayList<Integer> WatchlistItemIDs;
     ArrayList<String[]> Categories;
     ArrayList<String[]> Folders;
     ArrayList<String[]> Consignors;
@@ -50,11 +51,13 @@ public final class User {
         AddressId = addressId;
         HasSellerInvoiceDefaults = hasInvoiceDefaults;
 
-        ArrayList<String[]> Categories = new ArrayList<>();
-        ArrayList<String[]> Folders = new ArrayList<>();
-        ArrayList<String[]> Consignors = new ArrayList<>();
-        ArrayList<String[]> ReturnPolicies = new ArrayList<>();
-        ArrayList<String[]> PaymentPolicies = new ArrayList<>();
+        // Default null, flag if has been set
+        WatchlistItemIDs = null;
+        Categories = null;
+        Folders = null;
+        Consignors = null;
+        ReturnPolicies = null;
+        PaymentPolicies = null;
     }
 
     public String getEmail() {
@@ -83,11 +86,12 @@ public final class User {
     public boolean getHasInvoiceDefaults() {
         return HasSellerInvoiceDefaults;
     }
-    public ArrayList getCategories() { return Categories; }
-    public ArrayList getFolders() { return Folders; }
-    public ArrayList getConsignors() { return Consignors; }
-    public ArrayList getReturnPolicies() { return ReturnPolicies; }
-    public ArrayList getPaymentPolicies() { return PaymentPolicies; }
+    public ArrayList<Integer> getWatchlistItemIds() { return WatchlistItemIDs; }
+    public ArrayList<String[]> getCategories() { return Categories; }
+    public ArrayList<String[]> getFolders() { return Folders; }
+    public ArrayList<String[]> getConsignors() { return Consignors; }
+    public ArrayList<String[]> getReturnPolicies() { return ReturnPolicies; }
+    public ArrayList<String[]> getPaymentPolicies() { return PaymentPolicies; }
 
 
     public void updateFullName(String first, String last) {
@@ -108,6 +112,7 @@ public final class User {
         AddressId = addressId;
     }
 
+    public void updateWatchlistItemIds(ArrayList<Integer> itemIds) { WatchlistItemIDs = itemIds; }
     public void updateCategories(ArrayList<String[]> categories) { Categories = categories; }
     public void updateFolders(ArrayList<String[]> folders) { Folders = folders; }
     public void updateConsignors(ArrayList<String[]> consignors) { Consignors = consignors; }

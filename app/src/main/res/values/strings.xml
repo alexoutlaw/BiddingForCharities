@@ -131,7 +131,8 @@
     <string name="item_placebid_button">Place Bid</string>
     <string name="item_shipping_label">Shipping:\u0020</string>
     <string name="item_shipping_default">shipping_price</string>
-    <string name="item_watchlist_button">Add to Watchlist</string>
+    <string name="item_watchlist_add_button">Add to Watchlist</string>
+    <string name="item_watchlist_remove_button">Remove from Watchlist</string>
     <string name="item_share_button">Email a Friend</string>
     <string name="item_contact_button">Contact Seller</string>
 

@@ -23,10 +23,7 @@ import com.vie.biddingforcharities.ui.AuctionGridAdapter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class BidListActivity extends Activity {
     DrawerLayout NavLayout;
@@ -126,17 +123,10 @@ public class BidListActivity extends Activity {
                 // All items on the Bids page will have a bidder user id, works as a null item check
                 if(item.has("high_bidder_user_id") && !item.isNull("high_bidder_user_id")) {
                     int item_id = item.getInt("item_id");
-                    String end_date_str = item.getString("end_date_time_stamp_utc");
-                    Date end_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(end_date_str);
                     double current_high_bid = item.getDouble("current_high_bid");
                     String title = item.getString("title");
-                    int total_bids = item.getInt("total_bids");
-                    int high_bidder_user_id = item.getInt("high_bidder_user_id");
-                    int high_bidder_user_name_id = item.getInt("high_bidder_user_name_id");
                     final String image_url = item.getString("img");
-                    end_date_str = android.text.Html.fromHtml(item.getString("end_date_pt")).toString();
-                    int seller_id = item.getInt("seller_id");
-                    int seller_user_name_id = item.getInt("seller_user_name_id");
+                    String end_date_str = android.text.Html.fromHtml(item.getString("end_date_pt")).toString();
 
                     itemList.add(new AuctionItem (image_url, title, end_date_str, current_high_bid, item_id));
                 }

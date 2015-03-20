@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.vie.biddingforcharities.logic.AuctionItem;
 import com.vie.biddingforcharities.logic.GetBitmapTask;
 import com.vie.biddingforcharities.logic.GetInfoTask;
+import com.vie.biddingforcharities.logic.User;
 import com.vie.biddingforcharities.logic.Utilities;
 import com.vie.biddingforcharities.ui.AuctionGridAdapter;
 
@@ -87,10 +88,12 @@ public class WatchListActivity extends Activity {
         spinner.setCanceledOnTouchOutside(false);
         spinner.show();
 
-        // Get Bids
+        // Get Watchlist Items
+        User user = ((Global) getApplication()).getUser();
         String queryStr = Utilities.BuildQueryParams(
                 new String[][]{
-                        new String[]{"user_guid", ((Global) getApplication()).getUser().getUserGuid()}
+                        new String[]{"user_guid", user.getUserGuid()},
+                        new String[]{"user_id", String.valueOf(user.getUserID())},
                 });
         jsonTasks.add((GetInfoTask) new GetInfoTask(this).execute("getUserWatchList", queryStr));
     }
@@ -119,12 +122,14 @@ public class WatchListActivity extends Activity {
                     ? View.GONE
                     : View.VISIBLE);
 
+            ArrayList<Integer> itemIds = new ArrayList<>();
             for(int i = 0; i < itemArray.length(); i++) {
                 final JSONObject item = (JSONObject) itemArray.get(i);
 
                 // All items on the Bids page will have a bidder user id, works as a null item check
                 if(item.has("item_id") && !item.isNull("item_id")) {
                     int item_id = item.getInt("item_id");
+                    itemIds.add(item_id);
                     double current_high_bid = item.getDouble("current_high_bid");
                     String title = item.getString("title");
                     int total_bids = item.getInt("total_bids");
@@ -138,6 +143,9 @@ public class WatchListActivity extends Activity {
                     itemList.add(new AuctionItem (image_url, title, end_date_str, current_high_bid, item_id));
                 }
             }
+
+            // Save Cache
+            ((Global) getApplication()).getUser().updateWatchlistItemIds(itemIds);
         }
         catch(Exception e) {
             e.printStackTrace();
