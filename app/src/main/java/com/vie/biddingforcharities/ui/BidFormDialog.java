@@ -36,8 +36,8 @@ public class BidFormDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 String bidAmount = BidAmmountText.getText().toString();
-
-                activity.startBidTask(bidAmount);
+                Float bitNum = Float.parseFloat(bidAmount);
+                activity.startBidTask(bitNum);
             }
         });
 

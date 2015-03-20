@@ -45,6 +45,8 @@ public class AuctionItemActivity extends Activity {
     ProgressDialog spinner;
 
     Integer ItemID;
+    String ItemGuid;
+    Float BidAmount;
     String SellersEmail, ItemTitle;
     ArrayList<Integer> WatchlistItemIds;
     boolean FreezeWatchlistState = false;
@@ -298,8 +300,8 @@ public class AuctionItemActivity extends Activity {
                 Date end_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(end_date_pt);
                 String displayEndTime = Utilities.ConvertDateToCountdown(end_date);
                 int total_bids = json.getInt("total_bids");
-                int item_id = json.getInt("item_id");
-                String item_guid = json.getString("item_guid");
+                ItemID = json.getInt("item_id");
+                ItemGuid = json.getString("item_guid");
                 double shipping = json.getDouble("shipping");
                 double shipping_additional = json.getDouble("shipping_additional");
                 String description = json.getString("description");
@@ -328,8 +330,10 @@ public class AuctionItemActivity extends Activity {
         }
     }
 
-    public void startBidTask(String bidAmountText) {
+    public void startBidTask(Float bidAmount) {
         BidDialog.dismiss();
+
+        BidAmount = bidAmount;
 
         User user =  ((Global) getApplication()).getUser();
         String queryStr = Utilities.BuildQueryParams(
@@ -338,8 +342,9 @@ public class AuctionItemActivity extends Activity {
                         new String[]{"user_guid", user.getUserGuid()},
                         new String[]{"mode", "2"},
                         new String[]{"item_id", String.valueOf(ItemID)},
+                        new String[]{"item_guid", ItemGuid},
                         new String[]{"user_name_id", String.valueOf(user.getUserNameId())},
-                        new String[]{"bid_value",bidAmountText}
+                        new String[]{"bid_value", String.valueOf(bidAmount)}
                 });
         new GetInfoTask(AuctionItemActivity.this).execute("bidAuctionItem", queryStr);
     }
@@ -351,6 +356,8 @@ public class AuctionItemActivity extends Activity {
 
             if (json.has("return_bid_message") && !json.isNull("return_bid_message")) {
                 Toast.makeText(this, json.getString("return_bid_message"), Toast.LENGTH_LONG).show();
+
+                CurrentBidText.setText(String.valueOf(BidAmount));
             }
             else {
                 Toast.makeText(this, getResources().getString(R.string.place_bid_error), Toast.LENGTH_LONG).show();
