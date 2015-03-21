@@ -39,7 +39,7 @@ public class AuctionItemActivity extends Activity {
 
     ImageView ItemImage;
     TextView SellerNameText, ItemDescriptionText, RemainingTimeText, EndTimestampText, CurrentBidText, TotalBidsText, ShippingPrice;
-    Button BidButton, WatchlistAddButton, WatchlistRemoveButton, ShareButton, ContactButton;
+    Button EditButton, BidButton, WatchlistAddButton, WatchlistRemoveButton, ShareButton, ContactButton;
 
     BidFormDialog BidDialog;
     ProgressDialog spinner;
@@ -86,6 +86,17 @@ public class AuctionItemActivity extends Activity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        // Edit Own Item Button
+        EditButton = (Button) findViewById(R.id.edit_item_button);
+        EditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent editIntent = new Intent(AuctionItemActivity.this, AuctionFormActivity.class);
+                editIntent.putExtra("item_id", ItemID);
+                startActivity(editIntent);
             }
         });
 
@@ -173,13 +184,7 @@ public class AuctionItemActivity extends Activity {
         });
 
         // Get Item ID from caller
-        Bundle extras = getIntent().getExtras();
-        if(extras != null && extras.containsKey("item_id")) {
-            ItemID = extras.getInt("item_id");
-        }
-        else {
-            ItemID = 0;
-        }
+        ItemID = getIntent().getIntExtra("item_id", 0);
     }
 
     @Override
@@ -305,6 +310,11 @@ public class AuctionItemActivity extends Activity {
                 double shipping = json.getDouble("shipping");
                 double shipping_additional = json.getDouble("shipping_additional");
                 String description = json.getString("description");
+
+                // Set Edit Button State
+                EditButton.setVisibility(((Global) getApplication()).getUser().getUserID() == sellers_user_id
+                        ? View.VISIBLE
+                        : View.GONE);
 
                 // Set Item Image
                 new GetBitmapTask(this, ItemImage, 0, 0).execute(photo1);

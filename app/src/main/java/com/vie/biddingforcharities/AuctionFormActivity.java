@@ -32,8 +32,11 @@ import com.vie.biddingforcharities.logic.Utilities;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class AuctionFormActivity extends FragmentActivity implements OnDateSetListener, OnTimeSetListener {
     DrawerLayout NavLayout;
@@ -41,7 +44,7 @@ public class AuctionFormActivity extends FragmentActivity implements OnDateSetLi
     Button HomeButton;
     ImageButton NavDrawerButton;
 
-    ProgressDialog categorySpinner, folderSpinner, policySpinner, updateSpinner;
+    ProgressDialog editSpinner, categorySpinner, folderSpinner, policySpinner, updateSpinner;
     EditText TitleText, DescriptionText, SkuText, InvQuantityText, AucQuantityText, MinBidText, AucReserveText, ShippingText, ShippingAddText;
     TextView StartDateText, StartTimeText, EndDateText, EndTimeText;
     Button SubmitButton;
@@ -54,6 +57,7 @@ public class AuctionFormActivity extends FragmentActivity implements OnDateSetLi
     //ArrayList<Pair> Consignors = new ArrayList<>();
     //ArrayList<Pair> PaymentPolicies = new ArrayList<>();
 
+    int ItemID;
     int StartYear, StartMonth, StartDay, StartHour, StartMinute
             , EndYear, EndMonth, EndDay, EndHour, EndMinute;
     String lastTimePickerOpened;
@@ -217,6 +221,12 @@ public class AuctionFormActivity extends FragmentActivity implements OnDateSetLi
             new GetInfoTask(AuctionFormActivity.this).execute(GetInfoTask.SourceType.updateSellerReturnPolicy.toString(), queryStr);
         } else {
             checkForExistingReturnPolicy();
+        }
+
+        // Check if item passed in for edit
+        ItemID = getIntent().getIntExtra("item_id", 0);
+        if(ItemID > 0) {
+            startEditTask();
         }
 
         // not implemented
@@ -414,6 +424,56 @@ public class AuctionFormActivity extends FragmentActivity implements OnDateSetLi
         }
     }
 
+    public void startEditTask() {
+        //Show Spinner
+        editSpinner = new ProgressDialog(this);
+        editSpinner.setMessage("Loading Details...");
+        editSpinner.setCanceledOnTouchOutside(false);
+        editSpinner.show();
+
+        // Get Item Info
+        User user = ((Global) getApplication()).getUser();
+        String queryStr = Utilities.BuildQueryParams(
+                new String[][]{
+                        new String[]{"user_id", String.valueOf(user.getUserID())},
+                        new String[]{"user_guid", user.getUserGuid()},
+                        new String[]{"mode", "1"},
+                        new String[]{"item_id", String.valueOf(ItemID)}
+                });
+        new GetInfoTask(this).execute(GetInfoTask.SourceType.editAuctionItem.toString(), queryStr);
+    }
+
+    public void onEditTaskFinish(String data) {
+        try {
+            if (data.startsWith("[")) {
+                throw new Exception("Blank Request Return Value");
+            }
+
+            //Deserialize
+            JSONObject json = new JSONObject(data);
+
+            if (json.has("item_id") && !json.isNull("item_id")) {
+                TitleText.setText(json.getString("title"));
+                String end_date_pt = json.getString("end_date_pt");
+                Date end_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(end_date_pt);
+                String displayEndTime = Utilities.ConvertDateToCountdown(end_date);
+                ItemID = json.getInt("item_id");
+                ShippingText.setText(String.valueOf(json.getDouble("shipping")));
+                ShippingAddText.setText(String.valueOf(json.getDouble("shipping_additional")));
+                DescriptionText.setText(android.text.Html.fromHtml(json.getString("description")));
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+
+        //Dismiss Spinner if done
+        if(editSpinner != null && editSpinner.isShowing()) {
+            editSpinner.dismiss();
+        }
+    }
+
     public boolean startUpdateTask() {
         // Validate
         if(StartYear == 0 || StartMonth == 0 || StartDay == 0) {
@@ -462,7 +522,7 @@ public class AuctionFormActivity extends FragmentActivity implements OnDateSetLi
                 new String[][]{
                         new String[]{"seller_id", String.valueOf(user.getUserID())},
                         new String[]{"seller_guid", user.getUserGuid()},
-                        new String[]{"auction_item_id", "0"},
+                        new String[]{"auction_item_id", String.valueOf(ItemID)},
                         new String[]{"inventory_item_id", "0"},
                         new String[]{"update_all", "1"},
                         new String[]{"folder_id", String.valueOf(folderId)},

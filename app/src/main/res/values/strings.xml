@@ -119,6 +119,7 @@
     <string name="list_image_description">Auction Item</string>
     <string name="list_bidder_description">Highest Bidder</string>
 
+    <string name="edit_item_button">Edit Your Item</string>
     <string name="item_seller_label">Seller:\u0020</string>
     <string name="item_seller_default">seller_name</string>
     <string name="item_description_default">item_description</string>

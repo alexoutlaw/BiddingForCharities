@@ -44,6 +44,7 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
         getUserWatchList,
         getUserAuctions,
         getAuctionItem,
+        editAuctionItem,
         getUserCategories,
         addUserCategory,
         updateUserCategory,
@@ -211,6 +212,9 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
 //                case getSellerPaymentPolicy:
 //                    ((AuctionFormActivity) parent).onTaskFinish(data);
 //                    break;
+                case editAuctionItem:
+                    ((AuctionFormActivity) parent).onEditTaskFinish(data);
+                    break;
                 case updateSellerCategories:
                     ((AuctionFormActivity) parent).onCategoryTaskFinish(data);
                     break;
@@ -280,6 +284,7 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 break;
             case getAuctionItem:
             case bidAuctionItem:
+            case editAuctionItem:
                 str = BASE_URL + "mitem.php" + queryStr;
                 break;
             case getAllCategories:

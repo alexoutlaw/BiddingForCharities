@@ -88,6 +88,13 @@
                         android:layout_gravity="center"
                         android:src="@drawable/logo"/>
 
+                    <Button
+                        android:id="@+id/edit_item_button"
+                        style="@style/FormSubmitStyle"
+                        android:background="@drawable/highlighted_glass_button"
+                        android:text="@string/edit_item_button"
+                        android:visibility="gone"/>
+
                     <include
                         layout="@layout/horizontal_seperator" />
 
