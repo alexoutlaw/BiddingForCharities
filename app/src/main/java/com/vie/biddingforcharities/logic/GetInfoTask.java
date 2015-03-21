@@ -14,6 +14,7 @@ import com.vie.biddingforcharities.CharityRequestActivity;
 import com.vie.biddingforcharities.HomeActivity;
 import com.vie.biddingforcharities.LoginActivity;
 import com.vie.biddingforcharities.RegisterActivity;
+import com.vie.biddingforcharities.SellerCategoriesActivity;
 import com.vie.biddingforcharities.WatchListActivity;
 
 import org.apache.http.HttpEntity;
@@ -41,11 +42,19 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
         getUserWatchList,
         getUserAuctions,
         getAuctionItem,
-        getSellerCategories,
+        getUserCategories,
+        addUserCategory,
+        updateUserCategory,
+        deleteUserCategory,
         getSellerFolders,
         getSellerConsignors,
         getSellerReturnPolicy,
         getSellerPaymentPolicy,
+        updateSellerCategories,
+        updateSellerFolders,
+        updateSellerConsignors,
+        updateSellerReturnPolicy,
+        updateSellerPaymentPolicy,
         bidAuctionItem,
         addWatchlist,
         removeWatchlist,
@@ -148,19 +157,43 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 case removeWatchlist:
                     ((AuctionItemActivity) parent).onWatchlistRemoveTaskFinish(data);
                     break;
-                case getSellerCategories:
+                case getUserCategories:
+                    ((SellerCategoriesActivity) parent).onGetTaskFinish(data);
+                    break;
+                case addUserCategory:
+                    ((SellerCategoriesActivity) parent).onAddTaskFinish(data);
+                    break;
+                case updateUserCategory:
+                    ((SellerCategoriesActivity) parent).onUpdateTaskFinish(data);
+                    break;
+                case deleteUserCategory:
+                    ((SellerCategoriesActivity) parent).onDeleteTaskFinish(data);
+                    break;
+//                case getSellerFolders:
+//                    ((AuctionFormActivity) parent).onTaskFinish(data);
+//                    break;
+//                case getSellerConsignors:
+//                    ((AuctionFormActivity) parent).onTaskFinish(data);
+//                    break;
+//                case getSellerReturnPolicy:
+//                    ((AuctionFormActivity) parent).onTaskFinish(data);
+//                    break;
+//                case getSellerPaymentPolicy:
+//                    ((AuctionFormActivity) parent).onTaskFinish(data);
+//                    break;
+                case updateSellerCategories:
                     ((AuctionFormActivity) parent).onCategoryTaskFinish(data);
                     break;
-                case getSellerFolders:
+                case updateSellerFolders:
                     ((AuctionFormActivity) parent).onFolderTaskFinish(data);
                     break;
-                case getSellerConsignors:
+                case updateSellerConsignors:
                     ((AuctionFormActivity) parent).onConsignorTaskFinish(data);
                     break;
-                case getSellerReturnPolicy:
+                case updateSellerReturnPolicy:
                     ((AuctionFormActivity) parent).onReturnTaskFinish(data);
                     break;
-                case getSellerPaymentPolicy:
+                case updateSellerPaymentPolicy:
                     ((AuctionFormActivity) parent).onPaymentTaskFinish(data);
                     break;
                 case updateAuction:
@@ -220,19 +253,29 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 str = BASE_URL + "mitem.php" + queryStr;
                 break;
             case getAllCategories:
-            case getSellerCategories:
                 str = BASE_URL + "mlive_auction_categories.php" + queryStr;
                 break;
+            case getUserCategories:
+            case addUserCategory:
+            case updateUserCategory:
+            case deleteUserCategory:
+            case updateSellerCategories:
+                str = BASE_URL + "mcategories_manage.php" + queryStr;
+                break;
             case getSellerFolders:
+            case updateSellerFolders:
                 str = BASE_URL + "minventory_folder.php" + queryStr;
                 break;
             case getSellerConsignors:
+            case updateSellerConsignors:
                 str = BASE_URL + "mconsignors.php" + queryStr;
                 break;
             case getSellerReturnPolicy:
+            case updateSellerReturnPolicy:
                 str = BASE_URL + "mreturnpolicy.php" + queryStr;
                 break;
             case getSellerPaymentPolicy:
+            case updateSellerPaymentPolicy:
                 str = BASE_URL + "mpaymentpolicy.php" + queryStr;
                 break;
             case updateAuction:

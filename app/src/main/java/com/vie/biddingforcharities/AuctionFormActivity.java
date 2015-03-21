@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.vie.biddingforcharities.logic.Pair;
 import com.vie.biddingforcharities.logic.User;
 
 import org.json.JSONObject;
@@ -25,11 +26,11 @@ public class AuctionFormActivity extends Activity {
     Button HomeButton;
     ImageButton NavDrawerButton;
 
-    ArrayList<String[]> Categories = new ArrayList<>();
-    ArrayList<String[]> Folders = new ArrayList<>();
-    ArrayList<String[]> Consignors = new ArrayList<>();
-    ArrayList<String[]> ReturnPolicies = new ArrayList<>();
-    ArrayList<String[]> PaymentPolicies = new ArrayList<>();
+    ArrayList<Pair> Categories = new ArrayList<>();
+    ArrayList<Pair> Folders = new ArrayList<>();
+    ArrayList<Pair> Consignors = new ArrayList<>();
+    ArrayList<Pair> ReturnPolicies = new ArrayList<>();
+    ArrayList<Pair> PaymentPolicies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,18 +69,27 @@ public class AuctionFormActivity extends Activity {
 
         // Get Cache
         User user = ((Global) getApplication()).getUser();
-        Categories = user.getCategories();
+        Categories = null;//user.getCategories();
         Folders = user.getFolders();
         Consignors = user.getConsignors();
         ReturnPolicies = user.getReturnPolicies();
         PaymentPolicies = user.getPaymentPolicies();
 
         // If no Cache, grab from mobile call
-
+        if(Categories == null) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Missing Category")
+                    .setMessage("You must add a category before creating auctions")
+                    .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(AuctionFormActivity.this, SellerCategoriesActivity.class));
+                        }
+                    })
+                    .show();
+        }
     }
 
-    //Adds a second button click to fully exit the app
-    //prevents accidental sign outs
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)

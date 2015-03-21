@@ -21,11 +21,11 @@ public final class User {
 
     // Unsaved Session Cache
     ArrayList<Integer> WatchlistItemIDs;
-    ArrayList<String[]> Categories;
-    ArrayList<String[]> Folders;
-    ArrayList<String[]> Consignors;
-    ArrayList<String[]> ReturnPolicies;
-    ArrayList<String[]> PaymentPolicies;
+    ArrayList<Pair> Categories;
+    ArrayList<Pair> Folders;
+    ArrayList<Pair> Consignors;
+    ArrayList<Pair> ReturnPolicies;
+    ArrayList<Pair> PaymentPolicies;
 
     public User(String email, int userId, String userGuid, int type, int nameId, String name, int addressId, boolean hasInvoiceDefaults) throws Exception {
         Email = email;
@@ -87,11 +87,11 @@ public final class User {
         return HasSellerInvoiceDefaults;
     }
     public ArrayList<Integer> getWatchlistItemIds() { return WatchlistItemIDs; }
-    public ArrayList<String[]> getCategories() { return Categories; }
-    public ArrayList<String[]> getFolders() { return Folders; }
-    public ArrayList<String[]> getConsignors() { return Consignors; }
-    public ArrayList<String[]> getReturnPolicies() { return ReturnPolicies; }
-    public ArrayList<String[]> getPaymentPolicies() { return PaymentPolicies; }
+    public ArrayList<Pair> getCategories() { return Categories; }
+    public ArrayList<Pair> getFolders() { return Folders; }
+    public ArrayList<Pair> getConsignors() { return Consignors; }
+    public ArrayList<Pair> getReturnPolicies() { return ReturnPolicies; }
+    public ArrayList<Pair> getPaymentPolicies() { return PaymentPolicies; }
 
 
     public void updateFullName(String first, String last) {
@@ -113,9 +113,9 @@ public final class User {
     }
 
     public void updateWatchlistItemIds(ArrayList<Integer> itemIds) { WatchlistItemIDs = itemIds; }
-    public void updateCategories(ArrayList<String[]> categories) { Categories = categories; }
-    public void updateFolders(ArrayList<String[]> folders) { Folders = folders; }
-    public void updateConsignors(ArrayList<String[]> consignors) { Consignors = consignors; }
-    public void updateReturnPolicies(ArrayList<String[]> returnPolicies) { ReturnPolicies = returnPolicies; }
-    public void updatePaymentPolcies(ArrayList<String[]> paymentPolicies) { PaymentPolicies = paymentPolicies; }
+    public void updateCategories(ArrayList<Pair> categories) { Categories = categories; }
+    public void updateFolders(ArrayList<Pair> folders) { Folders = folders; }
+    public void updateConsignors(ArrayList<Pair> consignors) { Consignors = consignors; }
+    public void updateReturnPolicies(ArrayList<Pair> returnPolicies) { ReturnPolicies = returnPolicies; }
+    public void updatePaymentPolcies(ArrayList<Pair> paymentPolicies) { PaymentPolicies = paymentPolicies; }
 }

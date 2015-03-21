@@ -9,6 +9,7 @@
     <string name="bids_text">My Bids</string>
     <string name="auctions_text">My Auctions</string>
     <string name="create_text">New Auction</string>
+    <string name="categories_text">Seller Categories</string>
     <string name="search_text">Search Auctions</string>
     <string name="request_text">Request Charity</string>
     <string name="action_settings">Settings</string>
@@ -136,6 +137,13 @@
     <string name="item_share_button">Email a Friend</string>
     <string name="item_contact_button">Contact Seller</string>
 
+    <string name="setting_edit_button">Edit</string>
+    <string name="setting_delete_button">Delete</string>
+    <string name="setting_dialog_label">Name</string>
+    <string name="setting_dialog_button">Submit</string>
+
+    <string name="category_add_button">Add Category</string>
+
     <string name="request_description">Application to run charity auctions</string>
     <string name="request_email_label">Email Address:</string>
     <string name="request_name_label">Your Name:</string>
@@ -148,7 +156,7 @@
     <string name="request_button">Send Request</string>
 
     <string name="background">Background Image</string>
-    <string name="generic_error">Error Receiving Data</string>
+    <string name="generic_error">Error Retrieving Data</string>
     <string name="unimplemented_error">Feature Coming Soon!</string>
     <string name="place_bid_error">Could not place bid</string>
     <string name="empty_return_error">No Items Found</string>

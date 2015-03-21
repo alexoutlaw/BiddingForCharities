@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="2dp">
+
+    <TextView
+        android:id="@+id/setting_label"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toLeftOf="@+id/setting_edit_button"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:gravity="center"
+        android:background="@color/glass_background"
+        android:typeface="serif"/>
+
+    <Button
+        android:id="@+id/setting_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_toLeftOf="@+id/setting_delete_button"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:background="@drawable/highlighted_glass_button"
+        android:text="@string/setting_edit_button"/>
+
+    <Button
+        android:id="@+id/setting_delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:background="@drawable/tinted_glass_button"
+        android:text="@string/setting_delete_button"/>
+
+</RelativeLayout>

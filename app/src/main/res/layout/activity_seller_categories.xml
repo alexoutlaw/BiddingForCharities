@@ -38,7 +38,7 @@
             <TextView
                 android:id="@+id/banner"
                 style="@style/CustomTitleTextStyle"
-                android:text="@string/create_text" />
+                android:text="@string/categories_text" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -51,7 +51,7 @@
                 <Button
                     android:id="@+id/home_button"
                     style="@style/CustomTitleTextStyle"
-                    android:text="@string/home_text" />
+                    android:text="@string/home_text"/>
 
             </LinearLayout>
 
@@ -64,27 +64,25 @@
             android:layout_height="match_parent">
 
             <!-- Main Content -->
-            <ScrollView
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="5dp">
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerInParent="true"
+                <Button
+                    android:id="@+id/add_category_button"
+                    style="@style/FormInputStyle"
                     android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:orientation="vertical" >
+                    android:text="@string/category_add_button" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Account Form Activity"/>
+                <ListView
+                    android:id="@+id/category_list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
 
-                </LinearLayout>
-
-            </ScrollView>
+            </LinearLayout>
 
             <!-- Side Navigation Drawer -->
             <include
@@ -95,4 +93,3 @@
     </LinearLayout>
 
 </RelativeLayout>
-
