@@ -56,6 +56,14 @@
             android:label="@string/app_name" />
 
         <activity
+            android:name=".SellerFolderActivity"
+            android:label="@string/app_name" />
+
+        <activity
+            android:name=".SellerReturnPolicyActivity"
+            android:label="@string/app_name" />
+
+        <activity
             android:name=".AuctionItemActivity"
             android:label="@string/app_name" />
 

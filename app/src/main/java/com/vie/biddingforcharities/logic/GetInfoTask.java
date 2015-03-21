@@ -15,6 +15,7 @@ import com.vie.biddingforcharities.HomeActivity;
 import com.vie.biddingforcharities.LoginActivity;
 import com.vie.biddingforcharities.RegisterActivity;
 import com.vie.biddingforcharities.SellerCategoriesActivity;
+import com.vie.biddingforcharities.SellerFolderActivity;
 import com.vie.biddingforcharities.WatchListActivity;
 
 import org.apache.http.HttpEntity;
@@ -46,7 +47,10 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
         addUserCategory,
         updateUserCategory,
         deleteUserCategory,
-        getSellerFolders,
+        getUserFolders,
+        addUserFolder,
+        updateUserFolder,
+        deleteUserFolder,
         getSellerConsignors,
         getSellerReturnPolicy,
         getSellerPaymentPolicy,
@@ -169,9 +173,18 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 case deleteUserCategory:
                     ((SellerCategoriesActivity) parent).onDeleteTaskFinish(data);
                     break;
-//                case getSellerFolders:
-//                    ((AuctionFormActivity) parent).onTaskFinish(data);
-//                    break;
+                case getUserFolders:
+                    ((SellerFolderActivity) parent).onGetTaskFinish(data);
+                    break;
+                case addUserFolder:
+                    ((SellerFolderActivity) parent).onAddTaskFinish(data);
+                    break;
+                case updateUserFolder:
+                    ((SellerFolderActivity) parent).onUpdateTaskFinish(data);
+                    break;
+                case deleteUserFolder:
+                    ((SellerFolderActivity) parent).onDeleteTaskFinish(data);
+                    break;
 //                case getSellerConsignors:
 //                    ((AuctionFormActivity) parent).onTaskFinish(data);
 //                    break;
@@ -262,7 +275,10 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
             case updateSellerCategories:
                 str = BASE_URL + "mcategories_manage.php" + queryStr;
                 break;
-            case getSellerFolders:
+            case getUserFolders:
+            case addUserFolder:
+            case updateUserFolder:
+            case deleteUserFolder:
             case updateSellerFolders:
                 str = BASE_URL + "minventory_folder.php" + queryStr;
                 break;

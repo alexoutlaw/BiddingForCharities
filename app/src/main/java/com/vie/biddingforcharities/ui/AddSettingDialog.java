@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import com.vie.biddingforcharities.R;
 import com.vie.biddingforcharities.SellerCategoriesActivity;
+import com.vie.biddingforcharities.SellerFolderActivity;
 
 public class AddSettingDialog extends DialogFragment {
     public enum FormType {
@@ -70,10 +71,14 @@ public class AddSettingDialog extends DialogFragment {
         if(Type == FormType.Create) {
             if(Context instanceof SellerCategoriesActivity) {
                 ((SellerCategoriesActivity) Context).startAddTask(input);
+            } else if(Context instanceof SellerFolderActivity) {
+                ((SellerFolderActivity) Context).startAddTask(input);
             }
         } else if (Type == FormType.Edit) {
             if(Context instanceof SellerCategoriesActivity) {
                 ((SellerCategoriesActivity) Context).startUpdateTask(input);
+            } else if(Context instanceof SellerFolderActivity) {
+                ((SellerFolderActivity) Context).startUpdateTask(input);
             }
         }
     }

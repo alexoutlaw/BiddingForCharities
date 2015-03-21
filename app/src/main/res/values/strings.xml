@@ -10,6 +10,8 @@
     <string name="auctions_text">My Auctions</string>
     <string name="create_text">New Auction</string>
     <string name="categories_text">Seller Categories</string>
+    <string name="folder_text">Seller Folders</string>
+    <string name="returnpolicy_text">Seller Return Policies</string>
     <string name="search_text">Search Auctions</string>
     <string name="request_text">Request Charity</string>
     <string name="action_settings">Settings</string>
@@ -143,6 +145,8 @@
     <string name="setting_dialog_button">Submit</string>
 
     <string name="category_add_button">Add Category</string>
+    <string name="folder_add_button">Add Folder</string>
+    <string name="returnpolicy_add_button">Add Return Policy</string>
 
     <string name="request_description">Application to run charity auctions</string>
     <string name="request_email_label">Email Address:</string>

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.vie.biddingforcharities.R;
 import com.vie.biddingforcharities.SellerCategoriesActivity;
+import com.vie.biddingforcharities.SellerFolderActivity;
 import com.vie.biddingforcharities.logic.Pair;
 
 import java.util.ArrayList;
@@ -59,12 +60,16 @@ public class SettingsListAdapter extends ArrayAdapter<Pair> {
     private void EditClick(int rowID) {
         if(context instanceof SellerCategoriesActivity) {
             ((SellerCategoriesActivity) context).startUpdateDialog(rowID);
+        } else if(context instanceof SellerFolderActivity) {
+            ((SellerFolderActivity) context).startUpdateDialog(rowID);
         }
     }
 
     private void DeleteClick(int rowID) {
         if(context instanceof SellerCategoriesActivity) {
             ((SellerCategoriesActivity) context).startDeleteDialog(rowID);
+        } else if(context instanceof SellerFolderActivity) {
+            ((SellerFolderActivity) context).startDeleteDialog(rowID);
         }
     }
 }

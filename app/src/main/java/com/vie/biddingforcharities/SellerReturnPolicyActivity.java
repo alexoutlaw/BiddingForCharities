@@ -28,7 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SellerCategoriesActivity extends Activity {
+public class SellerReturnPolicyActivity extends Activity {
     DrawerLayout NavLayout;
     ListView NavList;
     Button HomeButton;
@@ -45,7 +45,7 @@ public class SellerCategoriesActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seller_categories);
+        setContentView(R.layout.activity_seller_returnpolicy);
 
         NavLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavList = (ListView) findViewById(R.id.navList);
@@ -79,7 +79,7 @@ public class SellerCategoriesActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // Build Dialog
-                SettingDialog = new AddSettingDialog(SellerCategoriesActivity.this, AddSettingDialog.FormType.Create);
+                SettingDialog = new AddSettingDialog(SellerReturnPolicyActivity.this, AddSettingDialog.FormType.Create);
                 SettingDialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
                 SettingDialog.show(getFragmentManager(), "add");
             }
@@ -88,7 +88,7 @@ public class SellerCategoriesActivity extends Activity {
         SavedCategory = new Pair("", 0);
 
         // Show Spinner
-        spinner = new ProgressDialog(SellerCategoriesActivity.this);
+        spinner = new ProgressDialog(SellerReturnPolicyActivity.this);
         spinner.setMessage("Getting Categories...");
         spinner.setCanceledOnTouchOutside(false);
         spinner.show();
@@ -101,7 +101,7 @@ public class SellerCategoriesActivity extends Activity {
                         new String[]{"user_id", String.valueOf(user.getUserID())},
                         new String[]{"mode", "0"}
                 });
-        new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
+        new GetInfoTask(SellerReturnPolicyActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
     }
 
     public void onGetTaskFinish(String data) {
@@ -144,12 +144,12 @@ public class SellerCategoriesActivity extends Activity {
         SettingDialog.dismiss();
 
         // Show Spinner
-        spinner = new ProgressDialog(SellerCategoriesActivity.this);
+        spinner = new ProgressDialog(SellerReturnPolicyActivity.this);
         spinner.setMessage("Adding Category...");
         spinner.setCanceledOnTouchOutside(false);
         spinner.show();
 
-        // Add Task
+        // Load Categories
         User user = ((Global) getApplication()).getUser();
         String queryStr = Utilities.BuildQueryParams(
                 new String[][]{
@@ -159,7 +159,7 @@ public class SellerCategoriesActivity extends Activity {
                         new String[]{"parent_cat_id", "0"},
                         new String[]{"cat_name", categoryName}
                 });
-        new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.addUserCategory.toString(), queryStr);
+        new GetInfoTask(SellerReturnPolicyActivity.this).execute(GetInfoTask.SourceType.addUserCategory.toString(), queryStr);
     }
 
     public void onAddTaskFinish(String data) {
@@ -177,12 +177,12 @@ public class SellerCategoriesActivity extends Activity {
                                 new String[]{"user_id", String.valueOf(user.getUserID())},
                                 new String[]{"mode", "0"}
                         });
-                new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
+                new GetInfoTask(SellerReturnPolicyActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
 
-                Toast.makeText(this, "Successfully Added Category " + SavedCategory.Label, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Added Category " + SavedCategory.Label, Toast.LENGTH_LONG).show();
             }
             else {
-                Toast.makeText(this, "Error Adding Category", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "There was an error saving your category", Toast.LENGTH_LONG).show();
             }
         }
         catch(Exception e) {
@@ -222,7 +222,7 @@ public class SellerCategoriesActivity extends Activity {
         SettingDialog.dismiss();
 
         // Show Spinner
-        spinner = new ProgressDialog(SellerCategoriesActivity.this);
+        spinner = new ProgressDialog(SellerReturnPolicyActivity.this);
         spinner.setMessage("Updating Category...");
         spinner.setCanceledOnTouchOutside(false);
         spinner.show();
@@ -237,7 +237,7 @@ public class SellerCategoriesActivity extends Activity {
                         new String[]{"cat_id", String.valueOf(SavedCategory.ID)},
                         new String[]{"cat_name", categoryName}
                 });
-        new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.updateUserCategory.toString(), queryStr);
+        new GetInfoTask(SellerReturnPolicyActivity.this).execute(GetInfoTask.SourceType.updateUserCategory.toString(), queryStr);
     }
 
     public void onUpdateTaskFinish(String data) {
@@ -255,7 +255,7 @@ public class SellerCategoriesActivity extends Activity {
                                 new String[]{"user_id", String.valueOf(user.getUserID())},
                                 new String[]{"mode", "0"}
                         });
-                new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
+                new GetInfoTask(SellerReturnPolicyActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
 
                 Toast.makeText(this, "Successfully Updated Category " + SavedCategory.Label, Toast.LENGTH_LONG).show();
             }
@@ -294,21 +294,21 @@ public class SellerCategoriesActivity extends Activity {
 
     public void startDeleteTask() {
         // Show Spinner
-        spinner = new ProgressDialog(SellerCategoriesActivity.this);
-        spinner.setMessage("Deleting Category...");
+        spinner = new ProgressDialog(SellerReturnPolicyActivity.this);
+        spinner.setMessage("Updating Category...");
         spinner.setCanceledOnTouchOutside(false);
         spinner.show();
 
         // Delete Task
         User user = ((Global) getApplication()).getUser();
         String queryStr = Utilities.BuildQueryParams(
-                new String[][] {
+                new String[][]{
                         new String[]{"user_guid", user.getUserGuid()},
                         new String[]{"user_id", String.valueOf(user.getUserID())},
                         new String[]{"mode", "3"},
                         new String[]{"cat_id", String.valueOf(SavedCategory.ID)},
                 });
-        new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.deleteUserCategory.toString(), queryStr);
+        new GetInfoTask(SellerReturnPolicyActivity.this).execute(GetInfoTask.SourceType.deleteUserCategory.toString(), queryStr);
     }
 
     public void onDeleteTaskFinish(String data) {
@@ -335,7 +335,7 @@ public class SellerCategoriesActivity extends Activity {
                                 new String[]{"user_id", String.valueOf(user.getUserID())},
                                 new String[]{"mode", "0"}
                         });
-                new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
+                new GetInfoTask(SellerReturnPolicyActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
 
                 Toast.makeText(this, "Successfully Deleted Category", Toast.LENGTH_LONG).show();
             }

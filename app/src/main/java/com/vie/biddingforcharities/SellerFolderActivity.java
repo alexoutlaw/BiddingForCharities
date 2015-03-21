@@ -28,29 +28,29 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SellerCategoriesActivity extends Activity {
+public class SellerFolderActivity extends Activity {
     DrawerLayout NavLayout;
     ListView NavList;
     Button HomeButton;
     ImageButton NavDrawerButton;
 
-    ListView CategoryList;
+    ListView FolderList;
     AddSettingDialog SettingDialog;
     ProgressDialog spinner;
-    Button AddCategoryButton;
+    Button AddFolderButton;
 
-    ArrayList<Pair> Categories;
-    Pair SavedCategory;
+    ArrayList<Pair> Folders;
+    Pair SavedFolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seller_categories);
+        setContentView(R.layout.activity_seller_folder);
 
         NavLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavList = (ListView) findViewById(R.id.navList);
         NavDrawerButton = (ImageButton) findViewById(R.id.nav_drawer_expand);
-        CategoryList = (ListView) findViewById(R.id.category_list);
+        FolderList = (ListView) findViewById(R.id.folder_list);
 
         // Build Side Nav Menu
         ((Global) getApplication()).BuildNavigationMenu(NavList);
@@ -73,27 +73,27 @@ public class SellerCategoriesActivity extends Activity {
             }
         });
 
-        // Add Category
-        AddCategoryButton = (Button) findViewById(R.id.add_category_button);
-        AddCategoryButton.setOnClickListener(new View.OnClickListener() {
+        // Add Folder
+        AddFolderButton = (Button) findViewById(R.id.add_folder_button);
+        AddFolderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Build Dialog
-                SettingDialog = new AddSettingDialog(SellerCategoriesActivity.this, AddSettingDialog.FormType.Create);
+                SettingDialog = new AddSettingDialog(SellerFolderActivity.this, AddSettingDialog.FormType.Create);
                 SettingDialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
                 SettingDialog.show(getFragmentManager(), "add");
             }
         });
 
-        SavedCategory = new Pair("", 0);
+        SavedFolder = new Pair("", 0);
 
         // Show Spinner
-        spinner = new ProgressDialog(SellerCategoriesActivity.this);
-        spinner.setMessage("Getting Categories...");
+        spinner = new ProgressDialog(SellerFolderActivity.this);
+        spinner.setMessage("Getting Folders...");
         spinner.setCanceledOnTouchOutside(false);
         spinner.show();
 
-        // Load Categories
+        // Load Folders
         User user = ((Global) getApplication()).getUser();
         String queryStr = Utilities.BuildQueryParams(
                 new String[][]{
@@ -101,30 +101,32 @@ public class SellerCategoriesActivity extends Activity {
                         new String[]{"user_id", String.valueOf(user.getUserID())},
                         new String[]{"mode", "0"}
                 });
-        new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
+        new GetInfoTask(SellerFolderActivity.this).execute(GetInfoTask.SourceType.getUserFolders.toString(), queryStr);
     }
 
     public void onGetTaskFinish(String data) {
         try {
             //Deserialize
             JSONObject json = new JSONObject(data);
-            JSONArray cats = (JSONArray) json.get("cats");
+            JSONArray folders = (JSONArray) json.get("folders");
 
-            Categories = new ArrayList<>();
-            for(int i = 0; i < cats.length(); i++) {
-                final JSONObject cat = (JSONObject) cats.get(i);
-                int cat_id = cat.getInt("cat_id");
-                String cat_name = cat.getString("cat_name");
+            Folders = new ArrayList<>();
+            for(int i = 0; i < folders.length(); i++) {
+                final JSONObject folder = (JSONObject) folders.get(i);
+                int folder_id = folder.getInt("folder_id");
+                String crumb = folder.getString("crumb");
+                //indent characters messes up query string
+                crumb = crumb.replace(">", "").trim();
 
-                Categories.add(new Pair(cat_name, cat_id));
+                Folders.add(new Pair(crumb, folder_id));
             }
 
             // Add to UI
-            final ListAdapter adapter = new SettingsListAdapter(this, Categories);
-            CategoryList.setAdapter(adapter);
+            final ListAdapter adapter = new SettingsListAdapter(this, Folders);
+            FolderList.setAdapter(adapter);
 
             // Update Cache
-            ((Global) getApplication()).getUser().updateCategories(Categories);
+            ((Global) getApplication()).getUser().updateFolders(Folders);
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -137,15 +139,15 @@ public class SellerCategoriesActivity extends Activity {
         }
     }
 
-    public void startAddTask(String categoryName) {
-        SavedCategory.Label = categoryName;
+    public void startAddTask(String folderName) {
+        SavedFolder.Label = folderName;
 
         // Dismiss Dialog
         SettingDialog.dismiss();
 
         // Show Spinner
-        spinner = new ProgressDialog(SellerCategoriesActivity.this);
-        spinner.setMessage("Adding Category...");
+        spinner = new ProgressDialog(SellerFolderActivity.this);
+        spinner.setMessage("Adding Folder...");
         spinner.setCanceledOnTouchOutside(false);
         spinner.show();
 
@@ -156,20 +158,20 @@ public class SellerCategoriesActivity extends Activity {
                         new String[]{"user_guid", user.getUserGuid()},
                         new String[]{"user_id", String.valueOf(user.getUserID())},
                         new String[]{"mode", "1"},
-                        new String[]{"parent_cat_id", "0"},
-                        new String[]{"cat_name", categoryName}
+                        new String[]{"parent_folder_id", "0"},
+                        new String[]{"new_folder_name", folderName}
                 });
-        new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.addUserCategory.toString(), queryStr);
+        new GetInfoTask(SellerFolderActivity.this).execute(GetInfoTask.SourceType.addUserFolder.toString(), queryStr);
     }
 
     public void onAddTaskFinish(String data) {
         try {
             //Deserialize
             JSONObject json = new JSONObject(data);
-            int success = json.getInt("success");
+            int was_inserted = json.getInt("was_inserted");
 
-            if(success > 0) {
-                // ReLoad Categories
+            if(was_inserted > 0) {
+                // ReLoad Folders
                 User user = ((Global) getApplication()).getUser();
                 String queryStr = Utilities.BuildQueryParams(
                         new String[][]{
@@ -177,12 +179,12 @@ public class SellerCategoriesActivity extends Activity {
                                 new String[]{"user_id", String.valueOf(user.getUserID())},
                                 new String[]{"mode", "0"}
                         });
-                new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
+                new GetInfoTask(SellerFolderActivity.this).execute(GetInfoTask.SourceType.getUserFolders.toString(), queryStr);
 
-                Toast.makeText(this, "Successfully Added Category " + SavedCategory.Label, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Successfully Added Folder " + SavedFolder.Label, Toast.LENGTH_LONG).show();
             }
             else {
-                Toast.makeText(this, "Error Adding Category", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error Adding Folder", Toast.LENGTH_LONG).show();
             }
         }
         catch(Exception e) {
@@ -196,34 +198,34 @@ public class SellerCategoriesActivity extends Activity {
         }
     }
 
-    public void startUpdateDialog(int categoryId) {
+    public void startUpdateDialog(int folderId) {
         // Save ID
-        SavedCategory.ID = categoryId;
+        SavedFolder.ID = folderId;
 
         // Get Label
-        String categoryName = "";
-        for(Pair category : Categories) {
-            if(category.ID.equals(categoryId)) {
-                categoryName = category.Label;
+        String folderName = "";
+        for(Pair folder : Folders) {
+            if(folder.ID.equals(folderId)) {
+                folderName = folder.Label;
                 break;
             }
         }
 
         // Build Dialog
-        SettingDialog = new AddSettingDialog(this, AddSettingDialog.FormType.Edit, categoryName);
+        SettingDialog = new AddSettingDialog(this, AddSettingDialog.FormType.Edit, folderName);
         SettingDialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
         SettingDialog.show(getFragmentManager(), "edit");
     }
 
-    public void startUpdateTask(String categoryName) {
-        SavedCategory.Label = categoryName;
+    public void startUpdateTask(String folderName) {
+        SavedFolder.Label = folderName;
 
         // Dismiss Dialog
         SettingDialog.dismiss();
 
         // Show Spinner
-        spinner = new ProgressDialog(SellerCategoriesActivity.this);
-        spinner.setMessage("Updating Category...");
+        spinner = new ProgressDialog(SellerFolderActivity.this);
+        spinner.setMessage("Updating Folder...");
         spinner.setCanceledOnTouchOutside(false);
         spinner.show();
 
@@ -234,10 +236,10 @@ public class SellerCategoriesActivity extends Activity {
                         new String[]{"user_guid", user.getUserGuid()},
                         new String[]{"user_id", String.valueOf(user.getUserID())},
                         new String[]{"mode", "2"},
-                        new String[]{"cat_id", String.valueOf(SavedCategory.ID)},
-                        new String[]{"cat_name", categoryName}
+                        new String[]{"update_folder_id", String.valueOf(SavedFolder.ID)},
+                        new String[]{"new_folder_name", folderName}
                 });
-        new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.updateUserCategory.toString(), queryStr);
+        new GetInfoTask(SellerFolderActivity.this).execute(GetInfoTask.SourceType.updateUserFolder.toString(), queryStr);
     }
 
     public void onUpdateTaskFinish(String data) {
@@ -247,7 +249,7 @@ public class SellerCategoriesActivity extends Activity {
             int was_updated = json.getInt("was_updated");
 
             if(was_updated > 0) {
-                // ReLoad Categories
+                // ReLoad Folders
                 User user = ((Global) getApplication()).getUser();
                 String queryStr = Utilities.BuildQueryParams(
                         new String[][]{
@@ -255,12 +257,12 @@ public class SellerCategoriesActivity extends Activity {
                                 new String[]{"user_id", String.valueOf(user.getUserID())},
                                 new String[]{"mode", "0"}
                         });
-                new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
+                new GetInfoTask(SellerFolderActivity.this).execute(GetInfoTask.SourceType.getUserFolders.toString(), queryStr);
 
-                Toast.makeText(this, "Successfully Updated Category " + SavedCategory.Label, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Successfully Updated Folder " + SavedFolder.Label, Toast.LENGTH_LONG).show();
             }
             else {
-                Toast.makeText(this, "Error Updating Category " + SavedCategory.Label, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error Updating Folder " + SavedFolder.Label, Toast.LENGTH_LONG).show();
             }
         }
         catch(Exception e) {
@@ -274,14 +276,14 @@ public class SellerCategoriesActivity extends Activity {
         }
     }
 
-    public void startDeleteDialog(int categoryId) {
+    public void startDeleteDialog(int folderId) {
         // Save ID
-        SavedCategory.ID = categoryId;
+        SavedFolder.ID = folderId;
 
         // Confirm Choice
         new AlertDialog.Builder(this)
-                .setTitle("Delete Category?")
-                .setMessage("Do You Want To Delete This Category?")
+                .setTitle("Delete Folder?")
+                .setMessage("Do You Want To Delete This Folder?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -294,8 +296,8 @@ public class SellerCategoriesActivity extends Activity {
 
     public void startDeleteTask() {
         // Show Spinner
-        spinner = new ProgressDialog(SellerCategoriesActivity.this);
-        spinner.setMessage("Deleting Category...");
+        spinner = new ProgressDialog(SellerFolderActivity.this);
+        spinner.setMessage("Deleting Folder...");
         spinner.setCanceledOnTouchOutside(false);
         spinner.show();
 
@@ -306,9 +308,9 @@ public class SellerCategoriesActivity extends Activity {
                         new String[]{"user_guid", user.getUserGuid()},
                         new String[]{"user_id", String.valueOf(user.getUserID())},
                         new String[]{"mode", "3"},
-                        new String[]{"cat_id", String.valueOf(SavedCategory.ID)},
+                        new String[]{"delete_folder_id", String.valueOf(SavedFolder.ID)},
                 });
-        new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.deleteUserCategory.toString(), queryStr);
+        new GetInfoTask(SellerFolderActivity.this).execute(GetInfoTask.SourceType.deleteUserFolder.toString(), queryStr);
     }
 
     public void onDeleteTaskFinish(String data) {
@@ -316,18 +318,15 @@ public class SellerCategoriesActivity extends Activity {
             //Deserialize
             JSONObject json = new JSONObject(data);
             int was_deleted = json.getInt("was_deleted");
-            int has_auction_items = json.getInt("has_auction_items");
             int has_inventory_items = json.getInt("has_inventory_items");
             int has_children = json.getInt("has_children");
 
-            if (has_auction_items > 0) {
-                Toast.makeText(this, "Could not delete category, auction items are attached", Toast.LENGTH_LONG).show();
-            } else if(has_inventory_items > 0) {
-                Toast.makeText(this, "Could not delete category, inventory items are attached", Toast.LENGTH_LONG).show();
+            if(has_inventory_items > 0) {
+                Toast.makeText(this, "Could not delete folder, inventory items are attached", Toast.LENGTH_LONG).show();
             } else if(has_children > 0) {
-                Toast.makeText(this, "Could not delete category, contains child categories", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Could not delete folder, contains child folders", Toast.LENGTH_LONG).show();
             } else if(was_deleted > 0) {
-                // ReLoad Categories
+                // ReLoad Folders
                 User user = ((Global) getApplication()).getUser();
                 String queryStr = Utilities.BuildQueryParams(
                         new String[][]{
@@ -335,12 +334,12 @@ public class SellerCategoriesActivity extends Activity {
                                 new String[]{"user_id", String.valueOf(user.getUserID())},
                                 new String[]{"mode", "0"}
                         });
-                new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
+                new GetInfoTask(SellerFolderActivity.this).execute(GetInfoTask.SourceType.getUserFolders.toString(), queryStr);
 
-                Toast.makeText(this, "Successfully Deleted Category", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Successfully Deleted Folder", Toast.LENGTH_LONG).show();
             }
             else {
-                Toast.makeText(this, "Error Deleting Category", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error Deleting Folder", Toast.LENGTH_LONG).show();
             }
         }
         catch(Exception e) {
