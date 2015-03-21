@@ -21,39 +21,41 @@ public class AddSettingDialog extends DialogFragment {
     }
     FormType Type;
 
-    EditText SettingInput;
-    Button FormSubmitButton;
-
     Context Context;
-    String DefaultText;
 
-    public AddSettingDialog() {
-    }
-
-    public AddSettingDialog(Context context, FormType type) {
-        Context = context;
-        Type = type;
-        DefaultText = "";
-    }
-
-    public AddSettingDialog(Context context, FormType type, String defaultValue) {
-        Context = context;
-        Type = type;
-        DefaultText = defaultValue;
-    }
+    public AddSettingDialog() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
+        Context = getActivity();
+
+        Bundle args = getArguments();
+        String type = args.getString("type");
+        String DefaultText = args.getString("default_text", "");
+
+        switch(type) {
+            case "add":
+            case "create":
+                Type = FormType.Create;
+                break;
+            case "edit":
+            case "update":
+                Type = FormType.Edit;
+                break;
+            default:
+                Type = FormType.Create;
+        }
+
         View DialogView = inflater.inflate(R.layout.dialog_addsetting, container);
 
         // Input
-        SettingInput = (EditText) DialogView.findViewById(R.id.dialog_setting_input);
+        final EditText SettingInput = (EditText) DialogView.findViewById(R.id.dialog_setting_input);
         SettingInput.setText(DefaultText);
 
         // Submit Button
-        FormSubmitButton = (Button) DialogView.findViewById(R.id.dialog_bid_button);
+        Button FormSubmitButton = (Button) DialogView.findViewById(R.id.dialog_bid_button);
         FormSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

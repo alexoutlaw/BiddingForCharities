@@ -87,7 +87,10 @@ public class SellerReturnPolicyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // Build Dialog
-                SettingDialog = new AddSettingExtraDialog(SellerReturnPolicyActivity.this, AddSettingExtraDialog.FormType.Create);
+                SettingDialog = new AddSettingExtraDialog();
+                Bundle args = new Bundle();
+                args.putString("type", "create");
+                SettingDialog.setArguments(args);
                 SettingDialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
                 SettingDialog.show(getFragmentManager(), "add");
             }
@@ -287,7 +290,12 @@ public class SellerReturnPolicyActivity extends Activity {
         }
 
         // Build Dialog
-        SettingDialog = new AddSettingExtraDialog(this, AddSettingExtraDialog.FormType.Edit, policyName, policyExtra);
+        SettingDialog = new AddSettingExtraDialog();
+        Bundle args = new Bundle();
+        args.putString("type", "edit");
+        args.putString("default_name", policyName);
+        args.putString("default_extra", policyExtra);
+        SettingDialog.setArguments(args);
         SettingDialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
         SettingDialog.show(getFragmentManager(), "edit");
     }

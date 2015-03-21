@@ -26,7 +26,11 @@
         <EditText
             android:id="@+id/dialog_setting_input_extra"
             style="@style/FormInputStyle"
-            android:inputType="textAutoCorrect" />
+            android:lines="8"
+            android:gravity="left|top"
+            android:scrollbars="vertical"
+            android:inputType="textAutoCorrect|textMultiLine"
+            android:singleLine="false"/>
 
         <Button
             android:id="@+id/dialog_bid_button"

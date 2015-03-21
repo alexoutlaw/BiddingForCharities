@@ -20,45 +20,46 @@ public class AddSettingExtraDialog extends DialogFragment {
      }
      FormType Type;
 
-     EditText NameInput, ExtraInput;
-     Button FormSubmitButton;
-
      Context Context;
-     String DefaultName, DefaultExtra;
 
-     public AddSettingExtraDialog() {
-     }
-
-     public AddSettingExtraDialog(Context context, FormType type) {
-         Context = context;
-         Type = type;
-         DefaultName = "";
-         DefaultExtra = "";
-     }
-
-     public AddSettingExtraDialog(Context context, FormType type, String defaultName, String detaultExtra) {
-         Context = context;
-         Type = type;
-         DefaultName = defaultName;
-         DefaultExtra = detaultExtra;
-     }
+     public AddSettingExtraDialog() {}
 
      @Override
      public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          super.onCreateView(inflater, container, savedInstanceState);
 
+         Context = getActivity();
+
+         Bundle args = getArguments();
+         String type = args.getString("type");
+         String DefaultName = args.getString("default_name", "");
+         String DefaultExtra = args.getString("default_extra", "");
+
+         switch(type) {
+             case "add":
+             case "create":
+                 Type = FormType.Create;
+                 break;
+             case "edit":
+             case "update":
+                 Type = FormType.Edit;
+                 break;
+             default:
+                 Type = FormType.Create;
+         }
+
          View DialogView = inflater.inflate(R.layout.dialog_addsettingextra, container);
 
          // Name
-         NameInput = (EditText) DialogView.findViewById(R.id.dialog_setting_input);
+         final EditText NameInput = (EditText) DialogView.findViewById(R.id.dialog_setting_input);
          NameInput.setText(DefaultName);
 
          // Name
-         ExtraInput = (EditText) DialogView.findViewById(R.id.dialog_setting_input_extra);
+         final EditText ExtraInput = (EditText) DialogView.findViewById(R.id.dialog_setting_input_extra);
          ExtraInput.setText(DefaultExtra);
 
          // Submit Button
-         FormSubmitButton = (Button) DialogView.findViewById(R.id.dialog_bid_button);
+         Button FormSubmitButton = (Button) DialogView.findViewById(R.id.dialog_bid_button);
          FormSubmitButton.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {

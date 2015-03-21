@@ -86,7 +86,10 @@ public class SellerFolderActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // Build Dialog
-                SettingDialog = new AddSettingDialog(SellerFolderActivity.this, AddSettingDialog.FormType.Create);
+                SettingDialog = new AddSettingDialog();
+                Bundle args = new Bundle();
+                args.putString("type", "create");
+                SettingDialog.setArguments(args);
                 SettingDialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
                 SettingDialog.show(getFragmentManager(), "add");
             }
@@ -221,7 +224,11 @@ public class SellerFolderActivity extends Activity {
         }
 
         // Build Dialog
-        SettingDialog = new AddSettingDialog(this, AddSettingDialog.FormType.Edit, folderName);
+        SettingDialog = new AddSettingDialog();
+        Bundle args = new Bundle();
+        args.putString("type", "edit");
+        args.putString("default_text", folderName);
+        SettingDialog.setArguments(args);
         SettingDialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
         SettingDialog.show(getFragmentManager(), "edit");
     }
