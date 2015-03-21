@@ -2,9 +2,6 @@ package com.vie.biddingforcharities.logic;
 
 import java.util.ArrayList;
 
-/**
- * Created by Alex Outlaw on 2/19/2015.
- */
 public final class User {
     public enum UserTypes { STANDARD, SELLER, SELLER_COSIGNOR }
 
@@ -118,4 +115,17 @@ public final class User {
     public void updateConsignors(ArrayList<Pair> consignors) { Consignors = consignors; }
     public void updateReturnPolicies(ArrayList<Trio> returnPolicies) { ReturnPolicies = returnPolicies; }
     public void updatePaymentPolcies(ArrayList<Pair> paymentPolicies) { PaymentPolicies = paymentPolicies; }
+
+    public boolean HasPermission(User.UserTypes permission) {
+        switch (UserType) {
+            case STANDARD:
+                return !(permission == UserTypes.SELLER || permission == UserTypes.SELLER_COSIGNOR);
+            case SELLER:
+                return permission != UserTypes.SELLER_COSIGNOR;
+            case SELLER_COSIGNOR:
+                return true;
+            default:
+                return false;
+        }
+    }
 }

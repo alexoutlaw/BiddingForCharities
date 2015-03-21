@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.TypedArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 public class Global extends Application {
     public static final String PREFS_NAME = "General_Prefs";
     private User user;
+
+    NavDrawerListAdapter navAdapter;
 
     @Override
     public void onCreate() {
@@ -98,55 +99,52 @@ public class Global extends Application {
     public String getPrefsName() { return PREFS_NAME; }
 
     public void BuildNavigationMenu(ListView mDrawerList) {
-        String[] navTitles = getResources().getStringArray(R.array.nav_menu_items);
-        TypedArray navIcons = getResources().obtainTypedArray(R.array.nav_menu_icons);
+        ArrayList<NavDrawerItem> navRows = new ArrayList<>();
 
-        ArrayList<NavDrawerItem> navItems = new ArrayList<>();
-        for(int i = 0; i < navTitles.length; i++) {
-            navItems.add(new NavDrawerItem(navTitles[i], navIcons.getResourceId(i, -1)));
+        if(user.HasPermission(User.UserTypes.STANDARD)) {
+            navRows.add(new NavDrawerItem(getString(R.string.account_text),R.drawable.ic_action_user, User.UserTypes.STANDARD, AccountActivity.class));
+            navRows.add(new NavDrawerItem(getString(R.string.watchlist_text),R.drawable.ic_visibility_white_48dp, User.UserTypes.STANDARD, WatchListActivity.class));
+            navRows.add(new NavDrawerItem(getString(R.string.bids_text),R.drawable.ic_shopping_cart_white_48dp, User.UserTypes.STANDARD, BidListActivity.class));
+
+            navRows.add(new NavDrawerItem(getString(R.string.search_text),R.drawable.ic_search_white_48dp, User.UserTypes.STANDARD, AuctionSearchActivity.class));
         }
 
-        navIcons.recycle();
+        if(user.HasPermission(User.UserTypes.SELLER)) {
+            navRows.add(new NavDrawerItem(getString(R.string.create_text),R.drawable.ic_note_add_white_48dp, User.UserTypes.SELLER, AuctionFormActivity.class));
+            navRows.add(new NavDrawerItem(getString(R.string.auctions_text),R.drawable.ic_description_white_48dp, User.UserTypes.SELLER, AuctionListActivity.class));
+            navRows.add(new NavDrawerItem(getString(R.string.categories_text),R.drawable.ic_label_outline_white_48dp, User.UserTypes.SELLER, SellerCategoriesActivity.class));
+            navRows.add(new NavDrawerItem(getString(R.string.folder_text),R.drawable.ic_perm_media_white_48dp, User.UserTypes.SELLER, SellerFolderActivity.class));
+            navRows.add(new NavDrawerItem(getString(R.string.returnpolicy_text),R.drawable.ic_assignment_late_white_48dp, User.UserTypes.SELLER, SellerReturnPolicyActivity.class));
+        }
 
-        mDrawerList.setAdapter(new NavDrawerListAdapter(this, navItems));
+        if(!user.HasPermission(User.UserTypes.SELLER)) {
+            navRows.add(new NavDrawerItem(getString(R.string.request_text), R.drawable.ic_action_mail, User.UserTypes.STANDARD, CharityRequestActivity.class));
+        }
+
+        navAdapter = new NavDrawerListAdapter(this, navRows);
+        mDrawerList.setAdapter(navAdapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Navigate(parent.getContext(), position);
+            Navigate(parent.getContext(), (NavDrawerItem)navAdapter.getItem(position));
         }
     }
 
-    private void Navigate(Context cxt, int position) {
-        switch(position) {
-            case 0:
-                cxt.startActivity(new Intent(cxt, AccountActivity.class));
-                break;
-            case 1:
-                cxt.startActivity(new Intent(cxt, WatchListActivity.class));
-                break;
-            case 2:
-                cxt.startActivity(new Intent(cxt, BidListActivity.class));
-                break;
-            case 3:
-                cxt.startActivity(new Intent(cxt, AuctionListActivity.class));
-                break;
-            case 4:
-                cxt.startActivity(new Intent(cxt, AuctionFormActivity.class));
-                break;
-            case 5:
-                cxt.startActivity(new Intent(cxt, AuctionSearchActivity.class));
-                break;
-            case 6:
-                cxt.startActivity(new Intent(cxt, CharityRequestActivity.class));
-                break;
+    private void Navigate(Context cxt, NavDrawerItem item) {
+        if(user.HasPermission(item.PermissionLevel)) {
+            Class navigateTo = item.getLinkedActivity();
+            cxt.startActivity(new Intent(cxt, navigateTo));
+
+            if(!(cxt instanceof HomeActivity)) {
+                ((Activity)cxt).finish();
+            }
+        } else {
+            Toast.makeText(this, getString(R.string.permission_error), Toast.LENGTH_LONG).show();
         }
 
-        if(!(cxt instanceof HomeActivity)) {
-            ((Activity)cxt).finish();
-        }
     }
 }
 

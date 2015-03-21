@@ -8,10 +8,10 @@
     <string name="watchlist_text">My Watchlist</string>
     <string name="bids_text">My Bids</string>
     <string name="auctions_text">My Auctions</string>
-    <string name="create_text">New Auction</string>
+    <string name="create_text">Submit Auction</string>
     <string name="categories_text">Seller Categories</string>
     <string name="folder_text">Seller Folders</string>
-    <string name="returnpolicy_text">Seller Return Policies</string>
+    <string name="returnpolicy_text">Seller Policies</string>
     <string name="search_text">Search Auctions</string>
     <string name="request_text">Request Charity</string>
     <string name="action_settings">Settings</string>
@@ -30,26 +30,6 @@
     <string name="register_first">First Name</string>
     <string name="register_last">Last Name</string>
     <string name="register_code">Enter security code</string>
-
-    <string-array name="nav_menu_items">
-        <item>@string/account_text</item>
-        <item>@string/watchlist_text</item>
-        <item>@string/bids_text</item>
-        <item>@string/auctions_text</item>
-        <item>@string/create_text</item>
-        <item>@string/search_text</item>
-        <item>@string/request_text</item>
-    </string-array>
-
-    <string-array name="nav_menu_icons">
-        <item>@drawable/ic_action_user</item>
-        <item>@drawable/ic_visibility_white_48dp</item>
-        <item>@drawable/ic_shopping_cart_white_48dp</item>
-        <item>@drawable/ic_description_white_48dp</item>
-        <item>@drawable/ic_note_add_white_48dp</item>
-        <item>@drawable/ic_search_white_48dp</item>
-        <item>@drawable/ic_action_mail</item>
-    </string-array>
 
     <string name="desc_list_item_icon">Item Icon</string>
 
@@ -187,6 +167,7 @@
 
     <string name="background">Background Image</string>
     <string name="generic_error">Error Retrieving Data</string>
+    <string name="permission_error">You Do Not The Correct Permissions To View This Item</string>
     <string name="unimplemented_error">Feature Coming Soon!</string>
     <string name="place_bid_error">Could not place bid</string>
     <string name="empty_return_error">No Items Found</string>

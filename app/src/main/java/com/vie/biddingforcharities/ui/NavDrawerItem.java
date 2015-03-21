@@ -1,30 +1,45 @@
 package com.vie.biddingforcharities.ui;
 
+import com.vie.biddingforcharities.logic.User;
+
 public class NavDrawerItem {
 
-    private String title;
-    private int icon;
+    private String Title;
+    private int Icon;
+    public User.UserTypes PermissionLevel;
+    Class LinkedActivity;
 
     public NavDrawerItem(){}
 
-    public NavDrawerItem(String title, int icon){
-        this.title = title;
-        this.icon = icon;
+    public NavDrawerItem(String title, int icon, User.UserTypes permissionLevel, Class linkedActivity){
+        Title = title;
+        Icon = icon;
+        PermissionLevel = permissionLevel;
+        LinkedActivity = linkedActivity;
     }
 
     public String getTitle(){
-        return this.title;
+        return Title;
     }
 
     public int getIcon(){
-        return this.icon;
+        return Icon;
+    }
+
+    public Class getLinkedActivity() {
+        return LinkedActivity;
     }
 
     public void setTitle(String title){
-        this.title = title;
+        Title = title;
     }
 
     public void setIcon(int icon){
-        this.icon = icon;
+        Icon = icon;
+    }
+
+    @Override
+    public String toString() {
+        return Title;
     }
 }
