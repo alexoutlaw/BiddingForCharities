@@ -47,6 +47,13 @@ public class SellerCategoriesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_categories);
 
+        // RESTRICTED: seller only
+        if(((Global) getApplication()).getUser().getUserType() == User.UserTypes.STANDARD) {
+            Toast.makeText(this, "Access Restricted to Sellers only, please submit a request to become a Seller.", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, CharityRequestActivity.class));
+            finish();
+        }
+
         NavLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavList = (ListView) findViewById(R.id.navList);
         NavDrawerButton = (ImageButton) findViewById(R.id.nav_drawer_expand);

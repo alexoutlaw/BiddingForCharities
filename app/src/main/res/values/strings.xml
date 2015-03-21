@@ -149,6 +149,30 @@
     <string name="folder_add_button">Add Folder</string>
     <string name="returnpolicy_add_button">Add Return Policy</string>
 
+    <string name="create_title">Title</string>
+    <string name="create_description">Description</string>
+    <string name="create_folder">Folder</string>
+    <string name="create_sku">SKU</string>
+    <string name="create_inventory_quantity">Inventory Qty</string>
+    <string name="create_category_one">Category 1</string>
+    <string name="create_category_two">Category 2</string>
+    <string name="create_auction_quantity">Auction Qty</string>
+    <string name="create_min_bid">Min Bid</string>
+    <string name="create_auction_reserve">Auction Reserve</string>
+    <string name="create_shipping">Shipping</string>
+    <string name="create_shipping_add">Additional Shipping</string>
+    <string name="create_return_policy">Return Policy</string>
+    <string name="create_start_date">Start Auction Date</string>
+    <string name="create_start_time">Start Auction Time</string>
+    <string name="create_end_date">End Auction Date</string>
+    <string name="create_end_time">End Auction Time</string>
+
+    <string name="create_inventory_default">1</string>
+    <string name="create_date_default">Set Date</string>
+    <string name="create_time_default">Set Time</string>
+
+    <string name="create_button">Save Item</string>
+
     <string name="request_description">Application to run charity auctions</string>
     <string name="request_email_label">Email Address:</string>
     <string name="request_name_label">Your Name:</string>

@@ -8,4 +8,9 @@ public class Pair {
         Label = label;
         ID = id;
     }
+
+    @Override
+    public String toString() {
+        return Label;
+    }
 }
