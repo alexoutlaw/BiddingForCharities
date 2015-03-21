@@ -105,13 +105,12 @@ public class Global extends Application {
             navRows.add(new NavDrawerItem(getString(R.string.account_text),R.drawable.ic_action_user, User.UserTypes.STANDARD, AccountActivity.class));
             navRows.add(new NavDrawerItem(getString(R.string.watchlist_text),R.drawable.ic_visibility_white_48dp, User.UserTypes.STANDARD, WatchListActivity.class));
             navRows.add(new NavDrawerItem(getString(R.string.bids_text),R.drawable.ic_shopping_cart_white_48dp, User.UserTypes.STANDARD, BidListActivity.class));
-
             navRows.add(new NavDrawerItem(getString(R.string.search_text),R.drawable.ic_search_white_48dp, User.UserTypes.STANDARD, AuctionSearchActivity.class));
         }
 
         if(user.HasPermission(User.UserTypes.SELLER)) {
-            navRows.add(new NavDrawerItem(getString(R.string.create_text),R.drawable.ic_note_add_white_48dp, User.UserTypes.SELLER, AuctionFormActivity.class));
             navRows.add(new NavDrawerItem(getString(R.string.auctions_text),R.drawable.ic_description_white_48dp, User.UserTypes.SELLER, AuctionListActivity.class));
+            navRows.add(new NavDrawerItem(getString(R.string.create_text),R.drawable.ic_note_add_white_48dp, User.UserTypes.SELLER, AuctionFormActivity.class));
             navRows.add(new NavDrawerItem(getString(R.string.categories_text),R.drawable.ic_label_outline_white_48dp, User.UserTypes.SELLER, SellerCategoriesActivity.class));
             navRows.add(new NavDrawerItem(getString(R.string.folder_text),R.drawable.ic_perm_media_white_48dp, User.UserTypes.SELLER, SellerFolderActivity.class));
             navRows.add(new NavDrawerItem(getString(R.string.returnpolicy_text),R.drawable.ic_assignment_late_white_48dp, User.UserTypes.SELLER, SellerReturnPolicyActivity.class));

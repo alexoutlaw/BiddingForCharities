@@ -89,7 +89,7 @@ public class AuctionListActivity extends Activity {
         spinner.show();
 
         // Get Bids
-        int userID = ((Global) getApplication()).getUser().getUserNameId();
+        int userID = ((Global) getApplication()).getUser().getUserID();
         String queryStr = Utilities.BuildQueryParams(
                 new String[][]{
                         new String[]{"search_seller_id", String.valueOf(userID)},

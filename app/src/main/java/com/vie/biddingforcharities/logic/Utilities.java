@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import java.net.URLEncoder;
 import java.util.Date;
 
 /**
@@ -22,9 +21,9 @@ public final class Utilities {
                 str += "&";
             }
 
-            str += URLEncoder.encode(jsonTerms[i][0]);
+            str += jsonTerms[i][0];
             str += "=";
-            str += URLEncoder.encode(jsonTerms[i][1]);
+            str += jsonTerms[i][1];
         }
 
         return str;
