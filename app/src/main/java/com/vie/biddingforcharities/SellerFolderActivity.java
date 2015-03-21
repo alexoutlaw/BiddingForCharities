@@ -36,7 +36,7 @@ public class SellerFolderActivity extends Activity {
 
     ListView FolderList;
     AddSettingDialog SettingDialog;
-    ProgressDialog spinner;
+    ProgressDialog spinner, getSpinner;
     Button AddFolderButton;
 
     ArrayList<Pair> Folders;
@@ -86,12 +86,23 @@ public class SellerFolderActivity extends Activity {
         });
 
         SavedFolder = new Pair("", 0);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startGetTask();
+    }
+
+    public void startGetTask() {
+        if (getSpinner != null && getSpinner.isShowing()) {
+            getSpinner.dismiss();
+        }
         // Show Spinner
-        spinner = new ProgressDialog(SellerFolderActivity.this);
-        spinner.setMessage("Getting Folders...");
-        spinner.setCanceledOnTouchOutside(false);
-        spinner.show();
+        getSpinner = new ProgressDialog(SellerFolderActivity.this);
+        getSpinner.setMessage("Getting Folders...");
+        getSpinner.setCanceledOnTouchOutside(false);
+        getSpinner.show();
 
         // Load Folders
         User user = ((Global) getApplication()).getUser();
@@ -134,8 +145,8 @@ public class SellerFolderActivity extends Activity {
         }
 
         //Dismiss Spinner
-        if(spinner != null && spinner.isShowing()) {
-            spinner.dismiss();
+        if(getSpinner != null && getSpinner.isShowing()) {
+            getSpinner.dismiss();
         }
     }
 
@@ -171,16 +182,7 @@ public class SellerFolderActivity extends Activity {
             int was_inserted = json.getInt("was_inserted");
 
             if(was_inserted > 0) {
-                // ReLoad Folders
-                User user = ((Global) getApplication()).getUser();
-                String queryStr = Utilities.BuildQueryParams(
-                        new String[][]{
-                                new String[]{"user_guid", user.getUserGuid()},
-                                new String[]{"user_id", String.valueOf(user.getUserID())},
-                                new String[]{"mode", "0"}
-                        });
-                new GetInfoTask(SellerFolderActivity.this).execute(GetInfoTask.SourceType.getUserFolders.toString(), queryStr);
-
+                startGetTask();
                 Toast.makeText(this, "Successfully Added Folder " + SavedFolder.Label, Toast.LENGTH_LONG).show();
             }
             else {
@@ -249,16 +251,7 @@ public class SellerFolderActivity extends Activity {
             int was_updated = json.getInt("was_updated");
 
             if(was_updated > 0) {
-                // ReLoad Folders
-                User user = ((Global) getApplication()).getUser();
-                String queryStr = Utilities.BuildQueryParams(
-                        new String[][]{
-                                new String[]{"user_guid", user.getUserGuid()},
-                                new String[]{"user_id", String.valueOf(user.getUserID())},
-                                new String[]{"mode", "0"}
-                        });
-                new GetInfoTask(SellerFolderActivity.this).execute(GetInfoTask.SourceType.getUserFolders.toString(), queryStr);
-
+                startGetTask();
                 Toast.makeText(this, "Successfully Updated Folder " + SavedFolder.Label, Toast.LENGTH_LONG).show();
             }
             else {
@@ -276,10 +269,7 @@ public class SellerFolderActivity extends Activity {
         }
     }
 
-    public void startDeleteDialog(int folderId) {
-        // Save ID
-        SavedFolder.ID = folderId;
-
+    public void startDeleteDialog(final int folderId) {
         // Confirm Choice
         new AlertDialog.Builder(this)
                 .setTitle("Delete Folder?")
@@ -287,14 +277,17 @@ public class SellerFolderActivity extends Activity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startDeleteTask();
+                        startDeleteTask(folderId);
                     }
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
     }
 
-    public void startDeleteTask() {
+    public void startDeleteTask(int folderId) {
+        // Save ID
+        SavedFolder.ID = folderId;
+
         // Show Spinner
         spinner = new ProgressDialog(SellerFolderActivity.this);
         spinner.setMessage("Deleting Folder...");
@@ -326,16 +319,7 @@ public class SellerFolderActivity extends Activity {
             } else if(has_children > 0) {
                 Toast.makeText(this, "Could not delete folder, contains child folders", Toast.LENGTH_LONG).show();
             } else if(was_deleted > 0) {
-                // ReLoad Folders
-                User user = ((Global) getApplication()).getUser();
-                String queryStr = Utilities.BuildQueryParams(
-                        new String[][]{
-                                new String[]{"user_guid", user.getUserGuid()},
-                                new String[]{"user_id", String.valueOf(user.getUserID())},
-                                new String[]{"mode", "0"}
-                        });
-                new GetInfoTask(SellerFolderActivity.this).execute(GetInfoTask.SourceType.getUserFolders.toString(), queryStr);
-
+                startGetTask();
                 Toast.makeText(this, "Successfully Deleted Folder", Toast.LENGTH_LONG).show();
             }
             else {

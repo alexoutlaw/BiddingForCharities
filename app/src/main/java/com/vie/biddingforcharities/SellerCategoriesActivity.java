@@ -36,7 +36,7 @@ public class SellerCategoriesActivity extends Activity {
 
     ListView CategoryList;
     AddSettingDialog SettingDialog;
-    ProgressDialog spinner;
+    ProgressDialog spinner, getSpinner;
     Button AddCategoryButton;
 
     ArrayList<Pair> Categories;
@@ -87,11 +87,24 @@ public class SellerCategoriesActivity extends Activity {
 
         SavedCategory = new Pair("", 0);
 
+        startGetTask();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startGetTask();
+    }
+
+    public void startGetTask() {
+        if (getSpinner != null && getSpinner.isShowing()) {
+            getSpinner.dismiss();
+        }
         // Show Spinner
-        spinner = new ProgressDialog(SellerCategoriesActivity.this);
-        spinner.setMessage("Getting Categories...");
-        spinner.setCanceledOnTouchOutside(false);
-        spinner.show();
+        getSpinner = new ProgressDialog(SellerCategoriesActivity.this);
+        getSpinner.setMessage("Getting Categories...");
+        getSpinner.setCanceledOnTouchOutside(false);
+        getSpinner.show();
 
         // Load Categories
         User user = ((Global) getApplication()).getUser();
@@ -111,7 +124,7 @@ public class SellerCategoriesActivity extends Activity {
             JSONArray cats = (JSONArray) json.get("cats");
 
             Categories = new ArrayList<>();
-            for(int i = 0; i < cats.length(); i++) {
+            for (int i = 0; i < cats.length(); i++) {
                 final JSONObject cat = (JSONObject) cats.get(i);
                 int cat_id = cat.getInt("cat_id");
                 String cat_name = cat.getString("cat_name");
@@ -125,15 +138,14 @@ public class SellerCategoriesActivity extends Activity {
 
             // Update Cache
             ((Global) getApplication()).getUser().updateCategories(Categories);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
         }
 
         //Dismiss Spinner
-        if(spinner != null && spinner.isShowing()) {
-            spinner.dismiss();
+        if (getSpinner != null && getSpinner.isShowing()) {
+            getSpinner.dismiss();
         }
     }
 
@@ -169,16 +181,7 @@ public class SellerCategoriesActivity extends Activity {
             int success = json.getInt("success");
 
             if(success > 0) {
-                // ReLoad Categories
-                User user = ((Global) getApplication()).getUser();
-                String queryStr = Utilities.BuildQueryParams(
-                        new String[][]{
-                                new String[]{"user_guid", user.getUserGuid()},
-                                new String[]{"user_id", String.valueOf(user.getUserID())},
-                                new String[]{"mode", "0"}
-                        });
-                new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
-
+                startGetTask();
                 Toast.makeText(this, "Successfully Added Category " + SavedCategory.Label, Toast.LENGTH_LONG).show();
             }
             else {
@@ -247,16 +250,7 @@ public class SellerCategoriesActivity extends Activity {
             int was_updated = json.getInt("was_updated");
 
             if(was_updated > 0) {
-                // ReLoad Categories
-                User user = ((Global) getApplication()).getUser();
-                String queryStr = Utilities.BuildQueryParams(
-                        new String[][]{
-                                new String[]{"user_guid", user.getUserGuid()},
-                                new String[]{"user_id", String.valueOf(user.getUserID())},
-                                new String[]{"mode", "0"}
-                        });
-                new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
-
+                startGetTask();
                 Toast.makeText(this, "Successfully Updated Category " + SavedCategory.Label, Toast.LENGTH_LONG).show();
             }
             else {
@@ -274,10 +268,7 @@ public class SellerCategoriesActivity extends Activity {
         }
     }
 
-    public void startDeleteDialog(int categoryId) {
-        // Save ID
-        SavedCategory.ID = categoryId;
-
+    public void startDeleteDialog(final int categoryId) {
         // Confirm Choice
         new AlertDialog.Builder(this)
                 .setTitle("Delete Category?")
@@ -285,14 +276,17 @@ public class SellerCategoriesActivity extends Activity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startDeleteTask();
+                        startDeleteTask(categoryId);
                     }
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
     }
 
-    public void startDeleteTask() {
+    public void startDeleteTask(int categoryId) {
+        // Save ID
+        SavedCategory.ID = categoryId;
+
         // Show Spinner
         spinner = new ProgressDialog(SellerCategoriesActivity.this);
         spinner.setMessage("Deleting Category...");
@@ -327,16 +321,7 @@ public class SellerCategoriesActivity extends Activity {
             } else if(has_children > 0) {
                 Toast.makeText(this, "Could not delete category, contains child categories", Toast.LENGTH_LONG).show();
             } else if(was_deleted > 0) {
-                // ReLoad Categories
-                User user = ((Global) getApplication()).getUser();
-                String queryStr = Utilities.BuildQueryParams(
-                        new String[][]{
-                                new String[]{"user_guid", user.getUserGuid()},
-                                new String[]{"user_id", String.valueOf(user.getUserID())},
-                                new String[]{"mode", "0"}
-                        });
-                new GetInfoTask(SellerCategoriesActivity.this).execute(GetInfoTask.SourceType.getUserCategories.toString(), queryStr);
-
+                startGetTask();
                 Toast.makeText(this, "Successfully Deleted Category", Toast.LENGTH_LONG).show();
             }
             else {

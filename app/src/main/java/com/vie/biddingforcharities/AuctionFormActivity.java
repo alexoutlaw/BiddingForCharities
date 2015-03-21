@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.vie.biddingforcharities.logic.GetInfoTask;
 import com.vie.biddingforcharities.logic.Pair;
+import com.vie.biddingforcharities.logic.Trio;
 import com.vie.biddingforcharities.logic.User;
 import com.vie.biddingforcharities.logic.Utilities;
 
@@ -30,12 +31,12 @@ public class AuctionFormActivity extends Activity {
     Button HomeButton;
     ImageButton NavDrawerButton;
 
-    ProgressDialog spinner;
+    ProgressDialog categorySpinner, folderSpinner, policySpinner, updateSpinner;
 
     ArrayList<Pair> Categories = new ArrayList<>();
     ArrayList<Pair> Folders = new ArrayList<>();
     ArrayList<Pair> Consignors = new ArrayList<>();
-    ArrayList<Pair> ReturnPolicies = new ArrayList<>();
+    ArrayList<Trio> ReturnPolicies = new ArrayList<>();
     ArrayList<Pair> PaymentPolicies = new ArrayList<>();
 
     @Override
@@ -76,22 +77,22 @@ public class AuctionFormActivity extends Activity {
         // Get Cache, if not cached, go pull
         // Any missing items must be handled by the user immediately
         User user = ((Global) getApplication()).getUser();
+        String queryStr = Utilities.BuildQueryParams(
+                new String[][]{
+                        new String[]{"user_guid", user.getUserGuid()},
+                        new String[]{"user_id", String.valueOf(user.getUserID())},
+                        new String[]{"mode", "0"}
+                });
 
         Categories = user.getCategories();
         if (Categories == null) {
             // Show Spinner
-            spinner = new ProgressDialog(AuctionFormActivity.this);
-            spinner.setMessage("Getting Categories...");
-            spinner.setCanceledOnTouchOutside(false);
-            spinner.show();
+            categorySpinner = new ProgressDialog(AuctionFormActivity.this);
+            categorySpinner.setMessage("Getting Categories...");
+            categorySpinner.setCanceledOnTouchOutside(false);
+            categorySpinner.show();
 
             // Load Categories
-            String queryStr = Utilities.BuildQueryParams(
-                    new String[][]{
-                            new String[]{"user_guid", user.getUserGuid()},
-                            new String[]{"user_id", String.valueOf(user.getUserID())},
-                            new String[]{"mode", "0"}
-                    });
             new GetInfoTask(AuctionFormActivity.this).execute(GetInfoTask.SourceType.updateSellerCategories.toString(), queryStr);
         } else {
             checkForExistingCategory();
@@ -100,18 +101,12 @@ public class AuctionFormActivity extends Activity {
         Folders = user.getFolders();
         if (Folders == null) {
             // Show Spinner
-            spinner = new ProgressDialog(AuctionFormActivity.this);
-            spinner.setMessage("Getting Folders...");
-            spinner.setCanceledOnTouchOutside(false);
-            spinner.show();
+            folderSpinner = new ProgressDialog(AuctionFormActivity.this);
+            folderSpinner.setMessage("Getting Folders...");
+            folderSpinner.setCanceledOnTouchOutside(false);
+            folderSpinner.show();
 
             // Load Folders
-            String queryStr = Utilities.BuildQueryParams(
-                    new String[][]{
-                            new String[]{"user_guid", user.getUserGuid()},
-                            new String[]{"user_id", String.valueOf(user.getUserID())},
-                            new String[]{"mode", "0"}
-                    });
             new GetInfoTask(AuctionFormActivity.this).execute(GetInfoTask.SourceType.updateSellerFolders.toString(), queryStr);
         } else {
             checkForExistingFolder();
@@ -119,7 +114,14 @@ public class AuctionFormActivity extends Activity {
 
         ReturnPolicies = user.getReturnPolicies();
         if (ReturnPolicies == null) {
-            //TODO
+            // Show Spinner
+            policySpinner = new ProgressDialog(AuctionFormActivity.this);
+            policySpinner.setMessage("Getting Return Policies...");
+            policySpinner.setCanceledOnTouchOutside(false);
+            policySpinner.show();
+
+            // Load Return Policies
+            new GetInfoTask(AuctionFormActivity.this).execute(GetInfoTask.SourceType.updateSellerReturnPolicy.toString(), queryStr);
         } else {
             checkForExistingReturnPolicy();
         }
@@ -186,8 +188,8 @@ public class AuctionFormActivity extends Activity {
         }
 
         //Dismiss Spinner
-        if (spinner != null && spinner.isShowing()) {
-            spinner.dismiss();
+        if (categorySpinner != null && categorySpinner.isShowing()) {
+            categorySpinner.dismiss();
         }
     }
 
@@ -232,13 +234,13 @@ public class AuctionFormActivity extends Activity {
         }
 
         //Dismiss Spinner
-        if (spinner != null && spinner.isShowing()) {
-            spinner.dismiss();
+        if (folderSpinner != null && folderSpinner.isShowing()) {
+            folderSpinner.dismiss();
         }
     }
 
     public void checkForExistingReturnPolicy() {
-        if (ReturnPolicies == null) {
+        if (ReturnPolicies == null || ReturnPolicies.size() < 1) {
             new AlertDialog.Builder(this)
                     .setCancelable(false)
                     .setTitle("Missing Return Policy")
@@ -257,36 +259,58 @@ public class AuctionFormActivity extends Activity {
         try {
             //Deserialize
             JSONObject json = new JSONObject(data);
+            JSONArray return_policy_list = (JSONArray) json.get("return_policy_list");
+
+            ReturnPolicies = new ArrayList<>();
+            for(int i = 0; i < return_policy_list.length(); i++) {
+                final JSONObject policy = (JSONObject) return_policy_list.get(i);
+                int policy_id = policy.getInt("policy_id");
+                String policy_name = policy.getString("policy_name");
+
+                ReturnPolicies.add(new Trio(policy_name, policy_id, ""));
+            }
+
+            // Update Cache
+            ((Global) getApplication()).getUser().updateReturnPolicies(ReturnPolicies);
+
+            checkForExistingReturnPolicy();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+        }
+
+        //Dismiss Spinner
+        if (policySpinner != null && policySpinner.isShowing()) {
+            policySpinner.dismiss();
         }
     }
 
     public void onConsignorTaskFinish(String data) {
-        try {
-            //Deserialize
-            JSONObject json = new JSONObject(data);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
-        }
-    }
+             try {
+                 Toast.makeText(this, getResources().getString(R.string.unimplemented_error), Toast.LENGTH_LONG).show();
+             } catch (Exception e) {
+                 e.printStackTrace();
+                 Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+             }
+         }
 
     public void onPaymentTaskFinish(String data) {
-        try {
-            //Deserialize
-            JSONObject json = new JSONObject(data);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
-        }
+             try {
+                 Toast.makeText(this, getResources().getString(R.string.unimplemented_error), Toast.LENGTH_LONG).show();
+             } catch (Exception e) {
+                 e.printStackTrace();
+                 Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();
+             }
+         }
+
+    public void startUpdateTask() {
+        //TODO: pull form
+        Toast.makeText(this, getResources().getString(R.string.unimplemented_error), Toast.LENGTH_LONG).show();
     }
 
     public void onUpdateTaskFinish(String data) {
         try {
-            //Deserialize
-            JSONObject json = new JSONObject(data);
+            Toast.makeText(this, getResources().getString(R.string.unimplemented_error), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, getResources().getString(R.string.generic_error), Toast.LENGTH_LONG).show();

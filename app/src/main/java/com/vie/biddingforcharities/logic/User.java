@@ -24,7 +24,7 @@ public final class User {
     ArrayList<Pair> Categories;
     ArrayList<Pair> Folders;
     ArrayList<Pair> Consignors;
-    ArrayList<Pair> ReturnPolicies;
+    ArrayList<Trio> ReturnPolicies;
     ArrayList<Pair> PaymentPolicies;
 
     public User(String email, int userId, String userGuid, int type, int nameId, String name, int addressId, boolean hasInvoiceDefaults) throws Exception {
@@ -90,7 +90,7 @@ public final class User {
     public ArrayList<Pair> getCategories() { return Categories; }
     public ArrayList<Pair> getFolders() { return Folders; }
     public ArrayList<Pair> getConsignors() { return Consignors; }
-    public ArrayList<Pair> getReturnPolicies() { return ReturnPolicies; }
+    public ArrayList<Trio> getReturnPolicies() { return ReturnPolicies; }
     public ArrayList<Pair> getPaymentPolicies() { return PaymentPolicies; }
 
 
@@ -116,6 +116,6 @@ public final class User {
     public void updateCategories(ArrayList<Pair> categories) { Categories = categories; }
     public void updateFolders(ArrayList<Pair> folders) { Folders = folders; }
     public void updateConsignors(ArrayList<Pair> consignors) { Consignors = consignors; }
-    public void updateReturnPolicies(ArrayList<Pair> returnPolicies) { ReturnPolicies = returnPolicies; }
+    public void updateReturnPolicies(ArrayList<Trio> returnPolicies) { ReturnPolicies = returnPolicies; }
     public void updatePaymentPolcies(ArrayList<Pair> paymentPolicies) { PaymentPolicies = paymentPolicies; }
 }

@@ -16,6 +16,7 @@ import com.vie.biddingforcharities.LoginActivity;
 import com.vie.biddingforcharities.RegisterActivity;
 import com.vie.biddingforcharities.SellerCategoriesActivity;
 import com.vie.biddingforcharities.SellerFolderActivity;
+import com.vie.biddingforcharities.SellerReturnPolicyActivity;
 import com.vie.biddingforcharities.WatchListActivity;
 
 import org.apache.http.HttpEntity;
@@ -51,8 +52,12 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
         addUserFolder,
         updateUserFolder,
         deleteUserFolder,
+        getUserReturnPolicies,
+        getUserReturnPolicyDetails,
+        addUserReturnPolicy,
+        updateUserReturnPolicy,
+        deleteUserReturnPolicy,
         getSellerConsignors,
-        getSellerReturnPolicy,
         getSellerPaymentPolicy,
         updateSellerCategories,
         updateSellerFolders,
@@ -185,10 +190,22 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
                 case deleteUserFolder:
                     ((SellerFolderActivity) parent).onDeleteTaskFinish(data);
                     break;
+                case getUserReturnPolicies:
+                    ((SellerReturnPolicyActivity) parent).onGetTaskFinish(data);
+                    break;
+                case getUserReturnPolicyDetails:
+                    ((SellerReturnPolicyActivity) parent).onDetailsTaskFinish(this, data);
+                    break;
+                case addUserReturnPolicy:
+                    ((SellerReturnPolicyActivity) parent).onAddTaskFinish(data);
+                    break;
+                case updateUserReturnPolicy:
+                    ((SellerReturnPolicyActivity) parent).onUpdateTaskFinish(data);
+                    break;
+                case deleteUserReturnPolicy:
+                    ((SellerReturnPolicyActivity) parent).onDeleteTaskFinish(data);
+                    break;
 //                case getSellerConsignors:
-//                    ((AuctionFormActivity) parent).onTaskFinish(data);
-//                    break;
-//                case getSellerReturnPolicy:
 //                    ((AuctionFormActivity) parent).onTaskFinish(data);
 //                    break;
 //                case getSellerPaymentPolicy:
@@ -286,7 +303,11 @@ public class GetInfoTask extends AsyncTask<String, Void, String>{
             case updateSellerConsignors:
                 str = BASE_URL + "mconsignors.php" + queryStr;
                 break;
-            case getSellerReturnPolicy:
+            case getUserReturnPolicies:
+            case getUserReturnPolicyDetails:
+            case addUserReturnPolicy:
+            case updateUserReturnPolicy:
+            case deleteUserReturnPolicy:
             case updateSellerReturnPolicy:
                 str = BASE_URL + "mreturnpolicy.php" + queryStr;
                 break;

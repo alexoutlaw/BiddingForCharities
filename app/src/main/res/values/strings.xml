@@ -142,6 +142,7 @@
     <string name="setting_edit_button">Edit</string>
     <string name="setting_delete_button">Delete</string>
     <string name="setting_dialog_label">Name</string>
+    <string name="setting_dialog_extralabel">Details</string>
     <string name="setting_dialog_button">Submit</string>
 
     <string name="category_add_button">Add Category</string>
