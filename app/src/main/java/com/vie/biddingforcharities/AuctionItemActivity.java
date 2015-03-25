@@ -317,7 +317,9 @@ public class AuctionItemActivity extends Activity {
                         : View.GONE);
 
                 // Set Item Image
-                new GetBitmapTask(this, ItemImage, 0, 0).execute(photo1);
+                if(photo1 != null && !(photo1.trim().isEmpty()) && !(photo1.equals("\"\""))) {
+                    new GetBitmapTask(this, ItemImage, 0, 0).execute(photo1);
+                }
 
                 // Set Item Text
                 SellerNameText.setText(sellers_user_name);

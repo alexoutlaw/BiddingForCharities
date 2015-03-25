@@ -86,7 +86,7 @@
                         android:scaleType="fitXY"
                         android:adjustViewBounds="true"
                         android:layout_gravity="center"
-                        android:src="@drawable/logo"/>
+                        android:src="@drawable/bfc_icon"/>
 
                     <Button
                         android:id="@+id/edit_item_button"
