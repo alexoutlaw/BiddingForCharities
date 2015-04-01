@@ -262,9 +262,9 @@ public class SellerCategoriesActivity extends Activity {
         try {
             //Deserialize
             JSONObject json = new JSONObject(data);
-            int was_updated = json.getInt("was_updated");
+            int rows_updated = json.getInt("rows_updated");
 
-            if(was_updated > 0) {
+            if(rows_updated > 0) {
                 startGetTask();
                 Toast.makeText(this, "Successfully Updated Category " + SavedCategory.Label, Toast.LENGTH_LONG).show();
             }
